@@ -1,0 +1,36 @@
+03-09-2025
+______
+
+I want this project to be a recipe portal, where users can share and view recipes on line. This is the backend, which will be completely in PHP with laravel, and it will serve as an API engine. The frontend will be a completely different project, using NextJS and consuming the exposed APIs by this backend. The models I have considered so far, are based on the operations that the users can do with the recipes. The operations that users are capable of doing are:
+    - See recipes list
+        - and be able to sort by:
+            - posted date (oldest - newest)
+            - popularity (by comments added)
+            - rating (by stars given to it)
+    - see individual recipes
+    - Search for recipes
+    - Flag favorite recipes
+    - Provide feedback to recipes
+    - Ask questions about recipes
+    - answer questions about recipes
+what are the models that should be created to meet those requirements?
+
+______
+
+I want now to create resource controllers and migrations for the given models
+
+./vendor/bin/sail artisan make:migration create_users_table
+./vendor/bin/sail artisan make:migration create_recipes_table
+./vendor/bin/sail artisan make:migration create_comments_table
+./vendor/bin/sail artisan make:migration create_ratings_table
+./vendor/bin/sail artisan make:migration create_favorites_table
+./vendor/bin/sail artisan make:migration create_questions_table
+./vendor/bin/sail artisan make:migration create_answers_table
+
+./vendor/bin/sail artisan make:controller UserController --resource
+./vendor/bin/sail artisan make:controller RecipeController --resource
+./vendor/bin/sail artisan make:controller CommentController --resource
+./vendor/bin/sail artisan make:controller RatingController --resource
+./vendor/bin/sail artisan make:controller FavoriteController --resource
+./vendor/bin/sail artisan make:controller QuestionController --resource
+./vendor/bin/sail artisan make:controller AnswerController --resource
