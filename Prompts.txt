@@ -38,3 +38,8 @@ I want now to create resource controllers and migrations for the given models
 _____
 
 I want now to expose the functionality for this via REST APIs so the frontend can reach them
+
+_____
+03-11-2025
+
+I want the recipes to have association with categories, the categories are a single way to categorize where the recipes belong to, examples of categories: Mexican, Italian, Vegan, Low carb. One recipe can belong to multiple categories and one category can have multiple recipes.

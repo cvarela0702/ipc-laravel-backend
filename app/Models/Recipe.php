@@ -38,4 +38,10 @@ class Recipe extends Model
     {
         return $this->hasMany(Question::class);
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
 }
