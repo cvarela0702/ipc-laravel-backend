@@ -22,6 +22,11 @@ return Application::configure(basePath: dirname(__DIR__))
 
         //
     })
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->prependToGroup('api', [
+            \App\Http\Middleware\ForceJsonResponse::class,
+        ]);
+    })
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
