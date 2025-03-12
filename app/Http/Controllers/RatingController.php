@@ -12,7 +12,7 @@ class RatingController extends Controller
      */
     public function index()
     {
-        Rating::all();
+        return Rating::all();
     }
 
     /**

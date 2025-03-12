@@ -43,3 +43,20 @@ _____
 03-11-2025
 
 I want the recipes to have association with categories, the categories are a single way to categorize where the recipes belong to, examples of categories: Mexican, Italian, Vegan, Low carb. One recipe can belong to multiple categories and one category can have multiple recipes.
+
+------
+
+I want to test what I have so far, to make sure that all operations are working as expected
+
+------
+
+I got this error while running test: Class "Database\Factories\CategoryFactory" not found
+
+-------
+
+give me the code to generate factories for all other models, and from now on, all command lines that consider "artisan", generate them as this instead:
+"./vendor/bin/sail artisan"
+
+------
+
+help me define the tests for all controllers except user and also ignore the ones that have tests already

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RecipeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,3 +20,4 @@ Route::apiResource('ratings', RatingController::class);
 Route::apiResource('favorites', FavoriteController::class);
 Route::apiResource('questions', QuestionController::class);
 Route::apiResource('answers', AnswerController::class);
+Route::apiResource('categories', CategoryController::class);
