@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favorite;
 use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
@@ -11,7 +12,7 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-        //
+        Favorite::all();
     }
 
     /**
@@ -27,7 +28,8 @@ class FavoriteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $favorite = Favorite::create($request->all());
+        return response()->json($favorite, 201);
     }
 
     /**
@@ -35,7 +37,7 @@ class FavoriteController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Favorite::findorFail($id);
     }
 
     /**
@@ -51,7 +53,9 @@ class FavoriteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $favorite = Favorite::findorFail($id);
+        $favorite->update($request->all());
+        return response()->json($favorite, 200);
     }
 
     /**
@@ -59,6 +63,7 @@ class FavoriteController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Favorite::destroy($id);
+        return response()->json(null, 204);
     }
 }

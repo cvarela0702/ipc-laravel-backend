@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Recipe;
 use Illuminate\Http\Request;
 
 class RecipeController extends Controller
@@ -11,7 +12,7 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        //
+        return Recipe::all();
     }
 
     /**
@@ -27,7 +28,8 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $recipe = Recipe::create($request->all());
+        return response()->json($recipe, 201);
     }
 
     /**
@@ -35,7 +37,7 @@ class RecipeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Recipe::findorFail($id);
     }
 
     /**
@@ -51,7 +53,9 @@ class RecipeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $recipe = Recipe::findOrFail($id);
+        $recipe->update($request->all());
+        return response()->json($recipe, 200);
     }
 
     /**
@@ -59,6 +63,7 @@ class RecipeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Recipe::destroy($id);
+        return response()->json(null, 204);
     }
 }

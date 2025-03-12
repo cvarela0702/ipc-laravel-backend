@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use Illuminate\Http\Request;
 
 class AnswerController extends Controller
@@ -11,7 +12,7 @@ class AnswerController extends Controller
      */
     public function index()
     {
-        //
+        return Answer::all();
     }
 
     /**
@@ -27,7 +28,8 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $answer = Answer::create($request->all());
+        return response()->json($answer, 201);
     }
 
     /**
@@ -35,7 +37,7 @@ class AnswerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Answer::findorFail($id);
     }
 
     /**
@@ -51,7 +53,9 @@ class AnswerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $answer = Answer::findorFail($id);
+        $answer->update($request->all());
+        return response()->json($answer, 200);
     }
 
     /**
@@ -59,6 +63,7 @@ class AnswerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Answer::destroy($id);
+        return response()->json(null, 204);
     }
 }

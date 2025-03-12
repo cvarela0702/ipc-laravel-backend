@@ -34,3 +34,7 @@ I want now to create resource controllers and migrations for the given models
 ./vendor/bin/sail artisan make:controller FavoriteController --resource
 ./vendor/bin/sail artisan make:controller QuestionController --resource
 ./vendor/bin/sail artisan make:controller AnswerController --resource
+
+_____
+
+I want now to expose the functionality for this via REST APIs so the frontend can reach them

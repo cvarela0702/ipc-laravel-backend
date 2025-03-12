@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rating;
 use Illuminate\Http\Request;
 
 class RatingController extends Controller
@@ -11,7 +12,7 @@ class RatingController extends Controller
      */
     public function index()
     {
-        //
+        Rating::all();
     }
 
     /**
@@ -27,7 +28,8 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rating = Rating::create($request->all());
+        return response()->json($rating, 201);
     }
 
     /**
@@ -35,7 +37,7 @@ class RatingController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Rating::findorFail($id);
     }
 
     /**
@@ -51,7 +53,9 @@ class RatingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $rating = Rating::findorFail($id);
+        $rating->update($request->all());
+        return response()->json($rating, 200);
     }
 
     /**
@@ -59,6 +63,7 @@ class RatingController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Rating::destroy($id);
+        return response()->json(null, 204);
     }
 }
