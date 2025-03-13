@@ -15,6 +15,13 @@ class RecipeController extends Controller
         return Recipe::all();
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+        $recipes = Recipe::search($query)->get();
+        return response()->json($recipes);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

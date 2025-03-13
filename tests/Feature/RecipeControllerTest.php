@@ -73,4 +73,17 @@ class RecipeControllerTest extends TestCase
 
         $this->assertDatabaseMissing('recipes', ['id' => $recipe->id]);
     }
+
+    public function test_it_can_search_recipes(): void
+    {
+        Recipe::factory()->create(['title' => 'Test Recipe']);
+        Recipe::factory()->create(['title' => 'Another Recipe']);
+
+        $response = $this->getJson('/api/recipes/search?query=test');
+
+        $response->assertStatus(200)
+            ->assertJsonCount(1)
+            ->assertJsonFragment(['title' => 'Test Recipe'])
+            ->assertJsonMissing(['title' => 'Another Recipe']);
+    }
 }

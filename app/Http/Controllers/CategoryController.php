@@ -23,6 +23,13 @@ class CategoryController extends Controller
         //
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+        $categories = Category::search($query)->get();
+        return response()->json($categories);
+    }
+
     /**
      * Store a newly created resource in storage.
      */

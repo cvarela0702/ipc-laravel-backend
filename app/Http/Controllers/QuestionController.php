@@ -15,6 +15,13 @@ class QuestionController extends Controller
         return Question::all();
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+        $questions = Question::search($query)->get();
+        return response()->json($questions);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

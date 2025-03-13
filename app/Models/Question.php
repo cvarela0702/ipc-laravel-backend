@@ -4,14 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Question extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
     protected $fillable = [
         'user_id', 'recipe_id', 'question',
     ];
+
+    public function toSearchableArray()
+    {
+        return [
+            'question' => $this->question,
+        ];
+    }
 
     public function user()
     {

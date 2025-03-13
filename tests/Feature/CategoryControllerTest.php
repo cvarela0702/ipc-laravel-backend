@@ -65,4 +65,19 @@ class CategoryControllerTest extends TestCase
 
         $this->assertDatabaseMissing('categories', ['id' => $category->id]);
     }
+
+    public function test_it_can_search_categories(): void
+    {
+        Category::factory()->create(['name' => 'Mexican']);
+        Category::factory()->create(['name' => 'Italian']);
+        Category::factory()->create(['name' => 'Chinese']);
+
+        $response = $this->getJson('/api/categories/search?query=Italian');
+
+        $response->assertStatus(200)
+            ->assertJsonCount(1)
+            ->assertJsonFragment(['name' => 'Italian'])
+            ->assertJsonMissing(['name' => 'Mexican'])
+            ->assertJsonMissing(['name' => 'Chinese']);
+    }
 }

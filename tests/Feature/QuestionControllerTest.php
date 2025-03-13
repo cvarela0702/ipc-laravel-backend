@@ -74,4 +74,17 @@ class QuestionControllerTest extends TestCase
 
         $this->assertDatabaseMissing('questions', ['id' => $question->id]);
     }
+
+    public function test_it_can_search_questions()
+    {
+        Question::factory()->create(['question' => 'Test Question']);
+        Question::factory()->create(['question' => 'Another Question']);
+
+        $response = $this->getJson('/api/questions/search?query=Test');
+
+        $response->assertStatus(200)
+            ->assertJsonCount(1)
+            ->assertJsonFragment(['question' => 'Test Question'])
+            ->assertJsonMissing(['question' => 'Another Question']);
+    }
 }

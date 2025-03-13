@@ -14,6 +14,10 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('recipes/search', [RecipeController::class, 'search']);
+Route::get('questions/search', [QuestionController::class, 'search']);
+Route::get('categories/search', [CategoryController::class, 'search']);
+
 Route::apiResource('recipes', RecipeController::class);
 Route::apiResource('comments', CommentController::class);
 Route::apiResource('ratings', RatingController::class);
