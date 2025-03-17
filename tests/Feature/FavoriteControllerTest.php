@@ -17,7 +17,7 @@ class FavoriteControllerTest extends TestCase
     {
         Favorite::factory()->count(3)->create();
 
-        $response = $this->getJson('/api/favorites');
+        $response = $this->actingAs(User::factory()->create())->getJson('/api/favorites');
 
         $response->assertStatus(200)
             ->assertJsonCount(3);
@@ -32,7 +32,7 @@ class FavoriteControllerTest extends TestCase
             'recipe_id' => $recipe->id,
         ];
 
-        $response = $this->postJson('/api/favorites', $data);
+        $response = $this->actingAs($user)->postJson('/api/favorites', $data);
 
         $response->assertStatus(201)
             ->assertJsonFragment($data);
@@ -44,20 +44,31 @@ class FavoriteControllerTest extends TestCase
     {
         $favorite = Favorite::factory()->create();
 
-        $response = $this->getJson("/api/favorites/{$favorite->id}");
+        $response = $this->actingAs(User::factory()->create())->getJson("/api/favorites/{$favorite->id}");
 
         $response->assertStatus(200)
             ->assertJsonFragment(['user_id' => $favorite->user_id]);
     }
 
-    public function test_it_can_delete_a_favorite()
+    public function test_user_can_delete_own_favorite()
     {
-        $favorite = Favorite::factory()->create();
+        $user = User::factory()->create();
+        $favorite = Favorite::factory()->create(['user_id' => $user->id]);
 
-        $response = $this->deleteJson("/api/favorites/{$favorite->id}");
+        $response = $this->actingAs($user)->deleteJson("/api/favorites/{$favorite->id}");
 
         $response->assertStatus(204);
 
         $this->assertDatabaseMissing('favorites', ['id' => $favorite->id]);
+    }
+
+    public function test_user_cannot_delete_other_favorite()
+    {
+        $user = User::factory()->create();
+        $favorite = Favorite::factory()->create();
+
+        $response = $this->actingAs($user)->deleteJson("/api/favorites/{$favorite->id}");
+
+        $response->assertStatus(403);
     }
 }

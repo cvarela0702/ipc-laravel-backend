@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Recipe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RecipeController extends Controller
 {
@@ -12,11 +13,13 @@ class RecipeController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Recipe::class);
         return Recipe::all();
     }
 
     public function search(Request $request)
     {
+        Gate::authorize('viewAny', Recipe::class);
         $query = $request->get('query');
         $recipes = Recipe::search($query)->get();
         return response()->json($recipes);
@@ -35,6 +38,7 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Recipe::class);
         $recipe = Recipe::create($request->all());
         return response()->json($recipe, 201);
     }
@@ -44,7 +48,9 @@ class RecipeController extends Controller
      */
     public function show(string $id)
     {
-        return Recipe::findorFail($id);
+        $recipe = Recipe::findorFail($id);
+        Gate::authorize('view', $recipe);
+        return $recipe;
     }
 
     /**
@@ -61,6 +67,7 @@ class RecipeController extends Controller
     public function update(Request $request, string $id)
     {
         $recipe = Recipe::findOrFail($id);
+        Gate::authorize('update', $recipe);
         $recipe->update($request->all());
         return response()->json($recipe, 200);
     }
@@ -70,7 +77,9 @@ class RecipeController extends Controller
      */
     public function destroy(string $id)
     {
-        Recipe::destroy($id);
+        $recipe = Recipe::findOrFail($id);
+        Gate::authorize('delete', $recipe);
+        Recipe::destroy($recipe->id);
         return response()->json(null, 204);
     }
 }

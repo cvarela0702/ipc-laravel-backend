@@ -17,7 +17,7 @@ class AnswerControllerTest extends TestCase
     {
         Answer::factory()->count(3)->create();
 
-        $response = $this->getJson('/api/answers');
+        $response = $this->actingAs(User::factory()->create())->getJson('/api/answers');
 
         $response->assertStatus(200)
             ->assertJsonCount(3);
@@ -33,7 +33,7 @@ class AnswerControllerTest extends TestCase
             'answer' => 'Test Answer',
         ];
 
-        $response = $this->postJson('/api/answers', $data);
+        $response = $this->actingAs($user)->postJson('/api/answers', $data);
 
         $response->assertStatus(201)
             ->assertJsonFragment($data);
@@ -45,18 +45,43 @@ class AnswerControllerTest extends TestCase
     {
         $answer = Answer::factory()->create();
 
-        $response = $this->getJson("/api/answers/{$answer->id}");
+        $response = $this->actingAs(User::factory()->create())->getJson("/api/answers/{$answer->id}");
 
         $response->assertStatus(200)
             ->assertJsonFragment(['answer' => $answer->answer]);
     }
 
-    public function test_it_can_update_an_answer()
+    public function test_user_can_delete_own_answer()
     {
+        $user = User::factory()->create();
+        $answer = Answer::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->actingAs($user)->deleteJson("/api/answers/{$answer->id}");
+
+        $response->assertStatus(204);
+
+        $this->assertDatabaseMissing('answers', ['id' => $answer->id]);
+    }
+
+    public function test_user_cannot_delete_other_answer()
+    {
+        $user = User::factory()->create();
         $answer = Answer::factory()->create();
+
+        $response = $this->actingAs($user)->deleteJson("/api/answers/{$answer->id}");
+
+        $response->assertStatus(403);
+
+    }
+
+    public function test_user_can_update_own_answer()
+    {
+        $user = User::factory()->create();
+        $answer = Answer::factory()->create(['user_id' => $user->id]);
+
         $data = ['answer' => 'Updated Answer'];
 
-        $response = $this->putJson("/api/answers/{$answer->id}", $data);
+        $response = $this->actingAs($user)->putJson("/api/answers/{$answer->id}", $data);
 
         $response->assertStatus(200)
             ->assertJsonFragment($data);
@@ -64,14 +89,15 @@ class AnswerControllerTest extends TestCase
         $this->assertDatabaseHas('answers', $data);
     }
 
-    public function test_it_can_delete_an_answer()
+    public function test_user_cannot_update_another_answer()
     {
+        $user = User::factory()->create();
         $answer = Answer::factory()->create();
 
-        $response = $this->deleteJson("/api/answers/{$answer->id}");
+        $data = ['answer' => 'Updated Answer'];
 
-        $response->assertStatus(204);
+        $response = $this->actingAs($user)->putJson("/api/answers/{$answer->id}", $data);
 
-        $this->assertDatabaseMissing('answers', ['id' => $answer->id]);
+        $response->assertStatus(403);
     }
 }

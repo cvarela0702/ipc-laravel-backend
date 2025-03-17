@@ -67,3 +67,8 @@ help me define the tests for all controllers except user and also ignore the one
 I want to implement now the ability to search so the application can have the ability to expose search capabilities
 
 I'd like to implement this with laravel scout and meilisearch support instead
+
+------
+03-15-2025
+
+now I want to add authorization to edit and delete operations, so it happens that only the users who created a particular record can edit it or delete it. No other user should be able to edit or delete records that were not created by that user.

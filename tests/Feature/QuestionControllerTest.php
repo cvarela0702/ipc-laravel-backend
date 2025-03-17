@@ -17,7 +17,7 @@ class QuestionControllerTest extends TestCase
     {
         Question::factory()->count(3)->create();
 
-        $response = $this->getJson('/api/questions');
+        $response = $this->actingAs(User::factory()->create())->getJson('/api/questions');
 
         $response->assertStatus(200)
             ->assertJsonCount(3);
@@ -33,7 +33,7 @@ class QuestionControllerTest extends TestCase
             'question' => 'Test Question',
         ];
 
-        $response = $this->postJson('/api/questions', $data);
+        $response = $this->actingAs($user)->postJson('/api/questions', $data);
 
         $response->assertStatus(201)
             ->assertJsonFragment($data);
@@ -45,18 +45,19 @@ class QuestionControllerTest extends TestCase
     {
         $question = Question::factory()->create();
 
-        $response = $this->getJson("/api/questions/{$question->id}");
+        $response = $this->actingAs(User::factory()->create())->getJson("/api/questions/{$question->id}");
 
         $response->assertStatus(200)
             ->assertJsonFragment(['question' => $question->question]);
     }
 
-    public function test_it_can_update_a_question()
+    public function test_user_can_update_own_question()
     {
-        $question = Question::factory()->create();
+        $user = User::factory()->create();
+        $question = Question::factory()->create(['user_id' => $user->id]);
         $data = ['question' => 'Updated Question'];
 
-        $response = $this->putJson("/api/questions/{$question->id}", $data);
+        $response = $this->actingAs($user)->putJson("/api/questions/{$question->id}", $data);
 
         $response->assertStatus(200)
             ->assertJsonFragment($data);
@@ -64,23 +65,46 @@ class QuestionControllerTest extends TestCase
         $this->assertDatabaseHas('questions', $data);
     }
 
-    public function test_it_can_delete_a_question()
+    public function test_user_cannot_update_other_question()
     {
+        $user = User::factory()->create();
         $question = Question::factory()->create();
+        $data = ['question' => 'Updated Question'];
 
-        $response = $this->deleteJson("/api/questions/{$question->id}");
+        $response = $this->actingAs($user)->putJson("/api/questions/{$question->id}", $data);
+
+        $response->assertStatus(403);
+    }
+
+    public function test_user_can_delete_own_question()
+    {
+        $user = User::factory()->create();
+        $question = Question::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->actingAs($user)->deleteJson("/api/questions/{$question->id}");
 
         $response->assertStatus(204);
 
         $this->assertDatabaseMissing('questions', ['id' => $question->id]);
     }
 
+    public function test_user_cannot_delete_other_question()
+    {
+        $user = User::factory()->create();
+        $question = Question::factory()->create();
+
+        $response = $this->actingAs($user)->deleteJson("/api/questions/{$question->id}");
+
+        $response->assertStatus(403);
+    }
+
     public function test_it_can_search_questions()
     {
-        Question::factory()->create(['question' => 'Test Question']);
-        Question::factory()->create(['question' => 'Another Question']);
+        $user = User::factory()->create();
+        Question::factory()->create(['question' => 'Test Question', 'user_id' => $user->id]);
+        Question::factory()->create(['question' => 'Another Question', 'user_id' => $user->id]);
 
-        $response = $this->getJson('/api/questions/search?query=Test');
+        $response = $this->actingAs($user)->getJson('/api/questions/search?query=Test');
 
         $response->assertStatus(200)
             ->assertJsonCount(1)

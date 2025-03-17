@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class QuestionController extends Controller
 {
@@ -12,11 +13,13 @@ class QuestionController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Question::class);
         return Question::all();
     }
 
     public function search(Request $request)
     {
+        Gate::authorize('viewAny', Question::class);
         $query = $request->get('query');
         $questions = Question::search($query)->get();
         return response()->json($questions);
@@ -35,6 +38,7 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Question::class);
         $question = Question::create($request->all());
         return response()->json($question, 201);
     }
@@ -44,7 +48,9 @@ class QuestionController extends Controller
      */
     public function show(string $id)
     {
-        return Question::findorFail($id);
+        $question = Question::findorFail($id);
+        Gate::authorize('view', $question);
+        return $question;
     }
 
     /**
@@ -61,6 +67,7 @@ class QuestionController extends Controller
     public function update(Request $request, string $id)
     {
         $question = Question::findorFail($id);
+        Gate::authorize('update', $question);
         $question->update($request->all());
         return response()->json($question, 200);
     }
@@ -70,6 +77,8 @@ class QuestionController extends Controller
      */
     public function destroy(string $id)
     {
+        $question = Question::findorFail($id);
+        Gate::authorize('delete', $question);
         Question::destroy($id);
         return response()->json(null, 204);
     }

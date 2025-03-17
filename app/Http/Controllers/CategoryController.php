@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class CategoryController extends Controller
 {
@@ -12,6 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Category::class);
         return Category::all();
     }
 
@@ -25,6 +27,7 @@ class CategoryController extends Controller
 
     public function search(Request $request)
     {
+        Gate::authorize('viewAny', Category::class);
         $query = $request->get('query');
         $categories = Category::search($query)->get();
         return response()->json($categories);
@@ -35,6 +38,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Category::class);
         $category = Category::create($request->all());
         return response()->json($category, 201);
     }
@@ -44,7 +48,9 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        return Category::findorFail($id);
+        $category = Category::findorFail($id);
+        Gate::authorize('view', $category);
+        return $category;
     }
 
     /**
@@ -61,6 +67,7 @@ class CategoryController extends Controller
     public function update(Request $request, string $id)
     {
         $category = Category::findorFail($id);
+        Gate::authorize('update', $category);
         $category->update($request->all());
         return response()->json($category, 200);
     }
@@ -70,7 +77,9 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        Category::destroy($id);
+        $category = Category::findorFail($id);
+        Gate::authorize('delete', $category);
+        Category::destroy($category->id);
         return response()->json(null, 204);
     }
 }

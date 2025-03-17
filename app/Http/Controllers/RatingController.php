@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Rating;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RatingController extends Controller
 {
@@ -12,6 +13,7 @@ class RatingController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Rating::class);
         return Rating::all();
     }
 
@@ -28,6 +30,7 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Rating::class);
         $rating = Rating::create($request->all());
         return response()->json($rating, 201);
     }
@@ -37,7 +40,9 @@ class RatingController extends Controller
      */
     public function show(string $id)
     {
-        return Rating::findorFail($id);
+        $rating = Rating::findorFail($id);
+        Gate::authorize('view', $rating);
+        return $rating;
     }
 
     /**
@@ -54,6 +59,7 @@ class RatingController extends Controller
     public function update(Request $request, string $id)
     {
         $rating = Rating::findorFail($id);
+        Gate::authorize('update', $rating);
         $rating->update($request->all());
         return response()->json($rating, 200);
     }
@@ -63,6 +69,8 @@ class RatingController extends Controller
      */
     public function destroy(string $id)
     {
+        $rating = Rating::findorFail($id);
+        Gate::authorize('delete', $rating);
         Rating::destroy($id);
         return response()->json(null, 204);
     }

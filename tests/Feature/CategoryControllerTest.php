@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -14,65 +15,58 @@ class CategoryControllerTest extends TestCase
     {
         Category::factory()->count(3)->create();
 
-        $response = $this->getJson('/api/categories');
+        $response = $this->actingAs(User::factory()->create())->getJson('/api/categories');
 
         $response->assertStatus(200)
             ->assertJsonCount(3);
     }
 
-    public function test_it_can_create_a_category(): void
+    public function test_regular_user_cannot_create_a_category(): void
     {
         $data = ['name' => 'Mexican'];
 
-        $response = $this->postJson('/api/categories', $data);
+        $response = $this->actingAs(User::factory()->create())->postJson('/api/categories', $data);
 
-        $response->assertStatus(201)
-            ->assertJsonFragment($data);
-
-        $this->assertDatabaseHas('categories', $data);
+        $response->assertStatus(403);
     }
 
     public function test_it_can_show_a_category(): void
     {
         $category = Category::factory()->create();
 
-        $response = $this->getJson("/api/categories/{$category->id}");
+        $response = $this->actingAs(User::factory()->create())->getJson("/api/categories/{$category->id}");
 
         $response->assertStatus(200)
             ->assertJsonFragment(['name' => $category->name]);
     }
 
-    public function test_it_can_update_a_category(): void
+    public function test_regular_user_cannot_update_a_category(): void
     {
         $category = Category::factory()->create();
         $data = ['name' => 'Updated Category'];
 
-        $response = $this->putJson("/api/categories/{$category->id}", $data);
+        $response = $this->actingAs(User::factory()->create())->putJson("/api/categories/{$category->id}", $data);
 
-        $response->assertStatus(200)
-            ->assertJsonFragment($data);
-
-        $this->assertDatabaseHas('categories', $data);
+        $response->assertStatus(403);
     }
 
-    public function test_it_can_delete_a_category(): void
+    public function test_regular_user_cannot_delete_a_category(): void
     {
         $category = Category::factory()->create();
 
-        $response = $this->deleteJson("/api/categories/{$category->id}");
+        $response = $this->actingAs(User::factory()->create())->deleteJson("/api/categories/{$category->id}");
 
-        $response->assertStatus(204);
-
-        $this->assertDatabaseMissing('categories', ['id' => $category->id]);
+        $response->assertStatus(403);
     }
 
     public function test_it_can_search_categories(): void
     {
+        $user = User::factory()->create();
         Category::factory()->create(['name' => 'Mexican']);
         Category::factory()->create(['name' => 'Italian']);
         Category::factory()->create(['name' => 'Chinese']);
 
-        $response = $this->getJson('/api/categories/search?query=Italian');
+        $response = $this->actingAs($user)->getJson('/api/categories/search?query=Italian');
 
         $response->assertStatus(200)
             ->assertJsonCount(1)

@@ -17,7 +17,7 @@ class RatingControllerTest extends TestCase
     {
         Rating::factory()->count(3)->create();
 
-        $response = $this->getJson('/api/ratings');
+        $response = $this->actingAs(User::factory()->create())->getJson('/api/ratings');
 
         $response->assertStatus(200)
             ->assertJsonCount(3);
@@ -33,7 +33,7 @@ class RatingControllerTest extends TestCase
             'stars' => 5,
         ];
 
-        $response = $this->postJson('/api/ratings', $data);
+        $response = $this->actingAs($user)->postJson('/api/ratings', $data);
 
         $response->assertStatus(201)
             ->assertJsonFragment($data);
@@ -45,18 +45,19 @@ class RatingControllerTest extends TestCase
     {
         $rating = Rating::factory()->create();
 
-        $response = $this->getJson("/api/ratings/{$rating->id}");
+        $response = $this->actingAs(User::factory()->create())->getJson("/api/ratings/{$rating->id}");
 
         $response->assertStatus(200)
             ->assertJsonFragment(['stars' => $rating->stars]);
     }
 
-    public function test_it_can_update_a_rating()
+    public function test_user_can_update_own_rating()
     {
-        $rating = Rating::factory()->create();
+        $user = User::factory()->create();
+        $rating = Rating::factory()->create(['user_id' => $user->id]);
         $data = ['stars' => 4];
 
-        $response = $this->putJson("/api/ratings/{$rating->id}", $data);
+        $response = $this->actingAs($user)->putJson("/api/ratings/{$rating->id}", $data);
 
         $response->assertStatus(200)
             ->assertJsonFragment($data);
@@ -64,14 +65,36 @@ class RatingControllerTest extends TestCase
         $this->assertDatabaseHas('ratings', $data);
     }
 
-    public function test_it_can_delete_a_rating()
+    public function test_user_cannot_update_other_rating()
     {
+        $user = User::factory()->create();
         $rating = Rating::factory()->create();
+        $data = ['stars' => 4];
 
-        $response = $this->deleteJson("/api/ratings/{$rating->id}");
+        $response = $this->actingAs($user)->putJson("/api/ratings/{$rating->id}", $data);
+
+        $response->assertStatus(403);
+    }
+
+    public function test_user_can_delete_own_rating()
+    {
+        $user = User::factory()->create();
+        $rating = Rating::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->actingAs($user)->deleteJson("/api/ratings/{$rating->id}");
 
         $response->assertStatus(204);
 
         $this->assertDatabaseMissing('ratings', ['id' => $rating->id]);
+    }
+
+    public function test_user_cannot_delete_other_rating()
+    {
+        $user = User::factory()->create();
+        $rating = Rating::factory()->create();
+
+        $response = $this->actingAs($user)->deleteJson("/api/ratings/{$rating->id}");
+
+        $response->assertStatus(403);
     }
 }

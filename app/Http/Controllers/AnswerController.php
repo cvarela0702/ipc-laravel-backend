@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Answer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AnswerController extends Controller
 {
@@ -12,6 +13,7 @@ class AnswerController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Answer::class);
         return Answer::all();
     }
 
@@ -28,6 +30,7 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Answer::class);
         $answer = Answer::create($request->all());
         return response()->json($answer, 201);
     }
@@ -37,7 +40,9 @@ class AnswerController extends Controller
      */
     public function show(string $id)
     {
-        return Answer::findorFail($id);
+        $answer = Answer::findorFail($id);
+        Gate::authorize('view', $answer);
+        return $answer;
     }
 
     /**
@@ -54,6 +59,7 @@ class AnswerController extends Controller
     public function update(Request $request, string $id)
     {
         $answer = Answer::findorFail($id);
+        Gate::authorize('update', $answer);
         $answer->update($request->all());
         return response()->json($answer, 200);
     }
@@ -63,7 +69,9 @@ class AnswerController extends Controller
      */
     public function destroy(string $id)
     {
-        Answer::destroy($id);
+        $answer = Answer::findorFail($id);
+        Gate::authorize('delete', $answer);
+        Answer::destroy($answer->id);
         return response()->json(null, 204);
     }
 }

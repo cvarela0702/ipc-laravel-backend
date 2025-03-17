@@ -15,7 +15,7 @@ class RecipeControllerTest extends TestCase
     {
         Recipe::factory()->count(3)->create();
 
-        $response = $this->getJson('/api/recipes');
+        $response = $this->actingAs(User::factory()->create())->getJson('/api/recipes');
 
         $response->assertStatus(200)
             ->assertJsonCount(3);
@@ -32,7 +32,7 @@ class RecipeControllerTest extends TestCase
             'instructions' => 'Test Instructions',
         ];
 
-        $response = $this->postJson('/api/recipes', $data);
+        $response = $this->actingAs($user)->postJson('/api/recipes', $data);
 
         $response->assertStatus(201)
             ->assertJsonFragment($data);
@@ -44,46 +44,66 @@ class RecipeControllerTest extends TestCase
     {
         $recipe = Recipe::factory()->create();
 
-        $response = $this->getJson("/api/recipes/{$recipe->id}");
+        $response = $this->actingAs(User::factory()->create())->getJson("/api/recipes/{$recipe->id}");
 
         $response->assertStatus(200)
             ->assertJsonFragment(['title' => $recipe->title]);
     }
 
-    public function test_it_can_update_a_recipe(): void
+    public function test_user_can_delete_own_recipe(): void
     {
-        $recipe = Recipe::factory()->create();
-        $data = ['title' => 'Updated Recipe'];
+        $user = User::factory()->create();
+        $recipe = Recipe::factory()->create(['user_id' => $user->id]);
 
-        $response = $this->putJson("/api/recipes/{$recipe->id}", $data);
-
-        $response->assertStatus(200)
-            ->assertJsonFragment($data);
-
-        $this->assertDatabaseHas('recipes', $data);
-    }
-
-    public function test_it_can_delete_a_recipe(): void
-    {
-        $recipe = Recipe::factory()->create();
-
-        $response = $this->deleteJson("/api/recipes/{$recipe->id}");
+        $response = $this->actingAs($user)->deleteJson("/api/recipes/{$recipe->id}");
 
         $response->assertStatus(204);
 
         $this->assertDatabaseMissing('recipes', ['id' => $recipe->id]);
     }
 
+    public function test_user_cannot_delete_others_recipe(): void
+    {
+        $user = User::factory()->create();
+        $recipe = Recipe::factory()->create();
+
+        $response = $this->actingAs($user)->deleteJson("/api/recipes/{$recipe->id}");
+
+        $response->assertStatus(403);
+    }
+
     public function test_it_can_search_recipes(): void
     {
-        Recipe::factory()->create(['title' => 'Test Recipe']);
-        Recipe::factory()->create(['title' => 'Another Recipe']);
+        $user = User::factory()->create();
+        Recipe::factory()->create(['title' => 'Test Recipe', 'user_id' => $user->id]);
+        Recipe::factory()->create(['title' => 'Another Recipe', 'user_id' => $user->id]);
 
-        $response = $this->getJson('/api/recipes/search?query=test');
+        $response = $this->actingAs($user)->getJson('/api/recipes/search?query=test');
 
         $response->assertStatus(200)
             ->assertJsonCount(1)
             ->assertJsonFragment(['title' => 'Test Recipe'])
             ->assertJsonMissing(['title' => 'Another Recipe']);
     }
+
+    public function test_user_can_update_own_recipe()
+    {
+        $user = User::factory()->create();
+        $recipe = Recipe::factory()->create(['user_id' => $user->id]);
+
+        $this->actingAs($user)
+            ->putJson("/api/recipes/{$recipe->id}", ['title' => 'Updated Title'])
+            ->assertStatus(200);
+    }
+
+    public function test_user_cannot_update_others_recipe()
+    {
+        $user = User::factory()->create();
+        $recipe = Recipe::factory()->create();
+
+        $this->actingAs($user)
+            ->putJson("/api/recipes/{$recipe->id}", ['title' => 'Updated Title'])
+            ->assertStatus(403);
+    }
+
 }

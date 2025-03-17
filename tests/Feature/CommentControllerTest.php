@@ -17,7 +17,7 @@ class CommentControllerTest extends TestCase
     {
         Comment::factory()->count(3)->create();
 
-        $response = $this->getJson('/api/comments');
+        $response = $this->actingAs(User::factory()->create())->getJson('/api/comments');
 
         $response->assertStatus(200)
             ->assertJsonCount(3);
@@ -33,7 +33,7 @@ class CommentControllerTest extends TestCase
             'content' => 'Test Comment',
         ];
 
-        $response = $this->postJson('/api/comments', $data);
+        $response = $this->actingAs(User::factory()->create())->postJson('/api/comments', $data);
 
         $response->assertStatus(201)
             ->assertJsonFragment($data);
@@ -45,18 +45,19 @@ class CommentControllerTest extends TestCase
     {
         $comment = Comment::factory()->create();
 
-        $response = $this->getJson("/api/comments/{$comment->id}");
+        $response = $this->actingAs(User::factory()->create())->getJson("/api/comments/{$comment->id}");
 
         $response->assertStatus(200)
             ->assertJsonFragment(['content' => $comment->content]);
     }
 
-    public function test_it_can_update_a_comment()
+    public function test_user_can_update_own_comment()
     {
-        $comment = Comment::factory()->create();
+        $user = User::factory()->create();
+        $comment = Comment::factory()->create(['user_id' => $user->id]);
         $data = ['content' => 'Updated Comment'];
 
-        $response = $this->putJson("/api/comments/{$comment->id}", $data);
+        $response = $this->actingAs($user)->putJson("/api/comments/{$comment->id}", $data);
 
         $response->assertStatus(200)
             ->assertJsonFragment($data);
@@ -64,14 +65,36 @@ class CommentControllerTest extends TestCase
         $this->assertDatabaseHas('comments', $data);
     }
 
-    public function test_it_can_delete_a_comment()
+    public function test_user_cannot_update_other_comment()
     {
+        $user = User::factory()->create();
         $comment = Comment::factory()->create();
+        $data = ['content' => 'Updated Comment'];
 
-        $response = $this->deleteJson("/api/comments/{$comment->id}");
+        $response = $this->actingAs($user)->putJson("/api/comments/{$comment->id}", $data);
+
+        $response->assertStatus(403);
+    }
+
+    public function test_user_can_delete_own_comment()
+    {
+        $user = User::factory()->create();
+        $comment = Comment::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->actingAs($user)->deleteJson("/api/comments/{$comment->id}");
 
         $response->assertStatus(204);
 
         $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
+    }
+
+    public function test_user_cannot_delete_own_comment()
+    {
+        $user = User::factory()->create();
+        $comment = Comment::factory()->create();
+
+        $response = $this->actingAs($user)->deleteJson("/api/comments/{$comment->id}");
+
+        $response->assertStatus(403);
     }
 }

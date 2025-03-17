@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Favorite;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class FavoriteController extends Controller
 {
@@ -12,6 +13,7 @@ class FavoriteController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Favorite::class);
         return Favorite::all();
     }
 
@@ -28,6 +30,7 @@ class FavoriteController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Favorite::class);
         $favorite = Favorite::create($request->all());
         return response()->json($favorite, 201);
     }
@@ -37,7 +40,9 @@ class FavoriteController extends Controller
      */
     public function show(string $id)
     {
-        return Favorite::findorFail($id);
+        $favorite = Favorite::findorFail($id);
+        Gate::authorize('view', $favorite);
+        return $favorite;
     }
 
     /**
@@ -54,6 +59,7 @@ class FavoriteController extends Controller
     public function update(Request $request, string $id)
     {
         $favorite = Favorite::findorFail($id);
+        Gate::authorize('update', $favorite);
         $favorite->update($request->all());
         return response()->json($favorite, 200);
     }
@@ -63,6 +69,8 @@ class FavoriteController extends Controller
      */
     public function destroy(string $id)
     {
+        $favorite = Favorite::findorFail($id);
+        Gate::authorize('delete', $favorite);
         Favorite::destroy($id);
         return response()->json(null, 204);
     }
