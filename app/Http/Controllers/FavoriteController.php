@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreFavoriteRequest;
+use App\Http\Requests\UpdateFavoriteRequest;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -28,10 +30,10 @@ class FavoriteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreFavoriteRequest $request)
     {
-        Gate::authorize('create', Favorite::class);
-        $favorite = Favorite::create($request->all());
+        $validated = $request->validated();
+        $favorite = Favorite::create($validated);
         return response()->json($favorite, 201);
     }
 
@@ -56,11 +58,11 @@ class FavoriteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateFavoriteRequest $request, string $id)
     {
+        $validated = $request->validated();
         $favorite = Favorite::findorFail($id);
-        Gate::authorize('update', $favorite);
-        $favorite->update($request->all());
+        $favorite->update($validated);
         return response()->json($favorite, 200);
     }
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCommentRequest;
+use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -28,10 +30,10 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCommentRequest $request)
     {
-        Gate::authorize('create', Comment::class);
-        $comment = Comment::create($request->all());
+        $validated = $request->validated();
+        $comment = Comment::create($validated);
         return response()->json($comment, 201);
     }
 
@@ -56,11 +58,11 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCommentRequest $request, string $id)
     {
+        $validated = $request->validated();
         $comment = Comment::findorFail($id);
-        Gate::authorize('update', $comment);
-        $comment->update($request->all());
+        $comment->update($validated);
         return response()->json($comment, 200);
     }
 

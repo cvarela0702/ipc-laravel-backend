@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRatingRequest;
+use App\Http\Requests\UpdateRatingRequest;
 use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -28,10 +30,10 @@ class RatingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRatingRequest $request)
     {
-        Gate::authorize('create', Rating::class);
-        $rating = Rating::create($request->all());
+        $validated = $request->validated();
+        $rating = Rating::create($validated);
         return response()->json($rating, 201);
     }
 
@@ -56,11 +58,11 @@ class RatingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRatingRequest $request, string $id)
     {
+        $validated = $request->validated();
         $rating = Rating::findorFail($id);
-        Gate::authorize('update', $rating);
-        $rating->update($request->all());
+        $rating->update($validated);
         return response()->json($rating, 200);
     }
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAnswerRequest;
+use App\Http\Requests\UpdateAnswerRequest;
 use App\Models\Answer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -28,10 +30,10 @@ class AnswerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAnswerRequest $request)
     {
-        Gate::authorize('create', Answer::class);
-        $answer = Answer::create($request->all());
+        $validated = $request->validated();
+        $answer = Answer::create($validated);
         return response()->json($answer, 201);
     }
 
@@ -56,11 +58,12 @@ class AnswerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateAnswerRequest $request, string $id)
     {
+        $validated = $request->validated();
         $answer = Answer::findorFail($id);
         Gate::authorize('update', $answer);
-        $answer->update($request->all());
+        $answer->update($validated);
         return response()->json($answer, 200);
     }
 

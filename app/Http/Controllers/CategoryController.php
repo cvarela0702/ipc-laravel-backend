@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -36,10 +38,10 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        Gate::authorize('create', Category::class);
-        $category = Category::create($request->all());
+        $validated = $request->validated();
+        $category = Category::create($validated);
         return response()->json($category, 201);
     }
 
@@ -64,11 +66,11 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCategoryRequest $request, string $id)
     {
+        $validated = $request->validated();
         $category = Category::findorFail($id);
-        Gate::authorize('update', $category);
-        $category->update($request->all());
+        $category->update($validated);
         return response()->json($category, 200);
     }
 

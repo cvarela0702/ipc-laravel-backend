@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreQuestionRequest;
+use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -36,10 +38,10 @@ class QuestionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreQuestionRequest $request)
     {
-        Gate::authorize('create', Question::class);
-        $question = Question::create($request->all());
+        $validated = $request->validated();
+        $question = Question::create($validated);
         return response()->json($question, 201);
     }
 
@@ -64,11 +66,11 @@ class QuestionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateQuestionRequest $request, string $id)
     {
+        $validated = $request->validated();
         $question = Question::findorFail($id);
-        Gate::authorize('update', $question);
-        $question->update($request->all());
+        $question->update($validated);
         return response()->json($question, 200);
     }
 

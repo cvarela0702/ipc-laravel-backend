@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRecipeRequest;
+use App\Http\Requests\UpdateRecipeRequest;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -36,10 +38,10 @@ class RecipeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRecipeRequest $request)
     {
-        Gate::authorize('create', Recipe::class);
-        $recipe = Recipe::create($request->all());
+        $validated = $request->validated();
+        $recipe = Recipe::create($validated);
         return response()->json($recipe, 201);
     }
 
@@ -64,12 +66,12 @@ class RecipeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRecipeRequest $request, string $id)
     {
+        $validated = $request->validated();
         $recipe = Recipe::findOrFail($id);
-        Gate::authorize('update', $recipe);
-        $recipe->update($request->all());
-        return response()->json($recipe, 200);
+        $recipe->update($validated);
+        return response()->json($validated, 200);
     }
 
     /**

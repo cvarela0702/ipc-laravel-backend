@@ -72,3 +72,8 @@ I'd like to implement this with laravel scout and meilisearch support instead
 03-15-2025
 
 now I want to add authorization to edit and delete operations, so it happens that only the users who created a particular record can edit it or delete it. No other user should be able to edit or delete records that were not created by that user.
+
+------
+03-17-2025
+
+I want to add validation to the operations of the controllers for all the models now
