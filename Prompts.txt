@@ -84,3 +84,5 @@ I want to add validation to the operations of the controllers for all the models
 
 I want to add an attribute to the categories, an image, that is required. I want to consider any other attributes that I need for the category.
 
+-----
+I want now to create a seeder for categories, but something that has real potential values for recipe categories, I want the seeder to generate real records based on those real values for recipes categories and fill the fields for name, slug and description, and leave image out.
