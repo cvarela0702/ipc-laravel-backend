@@ -77,3 +77,10 @@ now I want to add authorization to edit and delete operations, so it happens tha
 03-17-2025
 
 I want to add validation to the operations of the controllers for all the models now
+
+-----
+
+03-20-2025
+
+I want to add an attribute to the categories, an image, that is required. I want to consider any other attributes that I need for the category.
+

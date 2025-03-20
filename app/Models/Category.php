@@ -10,12 +10,13 @@ class Category extends Model
 {
     use HasFactory, Searchable;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'slug', 'description', 'image'];
 
     public function toSearchableArray()
     {
         return [
             'name' => $this->name,
+            'description' => $this->description,
         ];
     }
 

@@ -150,7 +150,7 @@ return [
                 'sortableAttributes' => ['title', 'description', 'created_at'],
             ],
             'categories' => [
-                'filterableAttributes' => ['id', 'name'],
+                'filterableAttributes' => ['id', 'name', 'description'],
                 'sortableAttributes' => ['name', 'created_at'],
             ],
             'questions' => [

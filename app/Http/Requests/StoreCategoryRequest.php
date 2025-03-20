@@ -13,7 +13,7 @@ class StoreCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        Gate::authorize('crete', Category::class);
+        Gate::authorize('create', Category::class);
         return true;
     }
 
@@ -26,6 +26,9 @@ class StoreCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
+            'description' => 'sometimes|string',
+            'image' => 'required|image',
+            'slug' => 'required|string|unique:categories,slug',
         ];
     }
 }
