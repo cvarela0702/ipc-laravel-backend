@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -30,7 +29,7 @@ class CategorySeeder extends Seeder
                 'name' => $category['name'],
                 'slug' => Str::slug($category['name']),
                 'description' => $category['description'],
-                'image' => 'http://localhost:3000/images/categories/' . Str::slug($category['name']) . '.svg',
+                'image' => 'http://localhost:3000/images/categories/'.Str::slug($category['name']).'.svg',
             ]);
         }
     }

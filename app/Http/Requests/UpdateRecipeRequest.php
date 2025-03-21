@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-
 use App\Models\Recipe;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -17,6 +16,7 @@ class UpdateRecipeRequest extends FormRequest
     {
         $recipe = Recipe::findOrFail($this->route('recipe'));
         Gate::authorize('update', $recipe);
+
         return true;
     }
 
@@ -34,6 +34,15 @@ class UpdateRecipeRequest extends FormRequest
             'instructions' => 'sometimes|string',
             'user_id' => 'sometimes|exists:users,id',
             // 'category_ids' => 'required|array|exists:categories,id',
+            'image_url' => 'sometimes|image',
+            'slug' => 'sometimes|string|unique:recipes,slug',
+            'servings' => 'sometimes|integer',
+            'prep_time_hours' => 'sometimes|integer',
+            'prep_time_minutes' => 'sometimes|integer',
+            'cook_time_hours' => 'sometimes|integer',
+            'cook_time_minutes' => 'sometimes|integer',
+            'video_url' => 'sometimes|string',
+            'calories' => 'sometimes|integer',
         ];
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 // Recipe.php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,7 +13,20 @@ class Recipe extends Model
     use HasFactory, Searchable;
 
     protected $fillable = [
-        'user_id', 'title', 'description', 'ingredients', 'instructions',
+        'user_id',
+        'title',
+        'description',
+        'ingredients',
+        'instructions',
+        'image_url',
+        'prep_time_hours',
+        'cook_time_hours',
+        'servings',
+        'calories',
+        'prep_time_minutes',
+        'cook_time_minutes',
+        'video_url',
+        'slug',
     ];
 
     public function toSearchableArray()
@@ -54,5 +68,4 @@ class Recipe extends Model
     {
         return $this->belongsToMany(Category::class);
     }
-
 }

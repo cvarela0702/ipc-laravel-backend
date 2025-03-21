@@ -23,6 +23,15 @@ class RecipeFactory extends Factory
             'description' => $this->faker->paragraph,
             'ingredients' => $this->faker->paragraph,
             'instructions' => $this->faker->paragraph,
+            'image_url' => $this->faker->imageUrl(),
+            'prep_time_hours' => $this->faker->randomDigit,
+            'cook_time_hours' => $this->faker->randomDigit,
+            'servings' => $this->faker->randomDigit,
+            'calories' => $this->faker->randomDigit,
+            'prep_time_minutes' => $this->faker->randomDigit,
+            'cook_time_minutes' => $this->faker->randomDigit,
+            'video_url' => $this->faker->url,
+            'slug' => $this->faker->slug,
         ];
     }
 }

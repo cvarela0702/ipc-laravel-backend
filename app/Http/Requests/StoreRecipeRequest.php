@@ -32,6 +32,15 @@ class StoreRecipeRequest extends FormRequest
             'instructions' => 'required|string',
             'user_id' => 'required|exists:users,id',
             // 'category_ids' => 'required|array|exists:categories,id',
+            'image_url' => 'required|string',
+            'slug' => 'required|string|unique:recipes,slug',
+            'servings' => 'required|integer',
+            'prep_time_hours' => 'required|integer',
+            'prep_time_minutes' => 'required|integer',
+            'cook_time_hours' => 'required|integer',
+            'cook_time_minutes' => 'required|integer',
+            'video_url' => 'sometimes|string',
+            'calories' => 'required|integer',
         ];
     }
 }

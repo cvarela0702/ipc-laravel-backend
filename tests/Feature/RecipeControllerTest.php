@@ -5,12 +5,12 @@ namespace Tests\Feature;
 use App\Models\Recipe;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class RecipeControllerTest extends TestCase
 {
     use RefreshDatabase;
+
     public function test_it_can_list_all_recipes(): void
     {
         Recipe::factory()->count(3)->create();
@@ -30,6 +30,15 @@ class RecipeControllerTest extends TestCase
             'description' => 'Test Description',
             'ingredients' => 'Test Ingredients',
             'instructions' => 'Test Instructions',
+            'image_url' => 'https://example.com/image.jpg',
+            'prep_time_hours' => 1,
+            'cook_time_hours' => 1,
+            'servings' => 4,
+            'calories' => 400,
+            'prep_time_minutes' => 30,
+            'cook_time_minutes' => 30,
+            'video_url' => 'https://example.com/video.mp4',
+            'slug' => 'test-recipe',
         ];
 
         $response = $this->actingAs($user)->postJson('/api/recipes', $data);
@@ -105,5 +114,4 @@ class RecipeControllerTest extends TestCase
             ->putJson("/api/recipes/{$recipe->id}", ['title' => 'Updated Title'])
             ->assertStatus(403);
     }
-
 }
