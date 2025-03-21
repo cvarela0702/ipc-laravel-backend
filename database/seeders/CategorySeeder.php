@@ -30,7 +30,7 @@ class CategorySeeder extends Seeder
                 'name' => $category['name'],
                 'slug' => Str::slug($category['name']),
                 'description' => $category['description'],
-                'image' => 'http://localhost:3000/images/' . Str::slug($category['name']) . '.jpg',
+                'image' => 'http://localhost:3000/images/categories/' . Str::slug($category['name']) . '.svg',
             ]);
         }
     }

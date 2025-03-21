@@ -86,3 +86,30 @@ I want to add an attribute to the categories, an image, that is required. I want
 
 -----
 I want now to create a seeder for categories, but something that has real potential values for recipe categories, I want the seeder to generate real records based on those real values for recipes categories and fill the fields for name, slug and description, and leave image out.
+
+----- from chatGPT
+
+is it possible for you to read a postman collection exported file, then take a look at one of the folders (recipes), then duplicate that folder into categories, and replace all instances and references from recipe(s) to category(ies), then put the result in a postman collection file that could be imported into postman?
+
+----- from chatGPT
+I have the following category values:
+$categories = [
+            ['name' => 'Mexican', 'description' => 'Traditional Mexican cuisine'],
+            ['name' => 'Italian', 'description' => 'Authentic Italian dishes'],
+            ['name' => 'Vegan', 'description' => 'Plant-based recipes'],
+            ['name' => 'Low Carb', 'description' => 'Low carbohydrate meals'],
+            ['name' => 'Desserts', 'description' => 'Sweet treats and desserts'],
+            ['name' => 'Seafood', 'description' => 'Delicious seafood recipes'],
+            ['name' => 'BBQ', 'description' => 'Barbecue and grilling recipes'],
+            ['name' => 'Breakfast', 'description' => 'Breakfast and brunch ideas'],
+        ];
+Please generate an image for each that will be shown in the frontend as a navigation icon / image. Don't include any texts, just an icon / image, with no background (use transparent background if possible)
+
+----- from chatGPT
+
+still waiting for the other images
+
+----- from chatGPT
+
+then, instead of generating the images, search for them on the internet, and download them or give me the links, so I can use free royalty images from internet.
+Follow the same criteria to search for those images, that represent recipe categories, etc.
