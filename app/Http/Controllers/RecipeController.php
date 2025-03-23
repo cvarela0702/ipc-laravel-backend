@@ -16,6 +16,7 @@ class RecipeController extends Controller
     public function index()
     {
         Gate::authorize('viewAny', Recipe::class);
+
         return Recipe::all();
     }
 
@@ -24,6 +25,7 @@ class RecipeController extends Controller
         Gate::authorize('viewAny', Recipe::class);
         $query = $request->get('query');
         $recipes = Recipe::search($query)->get();
+
         return response()->json($recipes);
     }
 
@@ -42,6 +44,7 @@ class RecipeController extends Controller
     {
         $validated = $request->validated();
         $recipe = Recipe::create($validated);
+
         return response()->json($recipe, 201);
     }
 
@@ -52,6 +55,15 @@ class RecipeController extends Controller
     {
         $recipe = Recipe::findorFail($id);
         Gate::authorize('view', $recipe);
+
+        return $recipe;
+    }
+
+    public function showBySlug(string $slug)
+    {
+        $recipe = Recipe::where('slug', $slug)->firstOrFail();
+        Gate::authorize('view', $recipe);
+
         return $recipe;
     }
 
@@ -71,6 +83,7 @@ class RecipeController extends Controller
         $validated = $request->validated();
         $recipe = Recipe::findOrFail($id);
         $recipe->update($validated);
+
         return response()->json($validated, 200);
     }
 
@@ -82,6 +95,7 @@ class RecipeController extends Controller
         $recipe = Recipe::findOrFail($id);
         Gate::authorize('delete', $recipe);
         Recipe::destroy($recipe->id);
+
         return response()->json(null, 204);
     }
 }

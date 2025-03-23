@@ -114,4 +114,14 @@ class RecipeControllerTest extends TestCase
             ->putJson("/api/recipes/{$recipe->id}", ['title' => 'Updated Title'])
             ->assertStatus(403);
     }
+
+    public function test_it_can_show_recipe_by_slug(): void
+    {
+        $recipe = Recipe::factory()->create();
+
+        $response = $this->actingAs(User::factory()->create())->getJson("/api/recipes/slug/{$recipe->slug}");
+
+        $response->assertStatus(200)
+            ->assertJsonFragment(['title' => $recipe->title]);
+    }
 }

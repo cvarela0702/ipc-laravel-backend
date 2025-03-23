@@ -124,4 +124,5 @@ I want now to create a seeder for recipes, but something that has real potential
 
 what are the best practices to handle and show ratings at item level in a list of items?. Let's say for example the list of recipes in the frontend that I have. should I have additional fields at record level that have the sum for the ratings and the average for the stars?, or is that something that could / should be calculated on the fly?
 
-
+-----
+I want now to have the ability to search by slug for the recipe, given the fact that the slug is unique and the frontend would request categories by slug rather than by id
