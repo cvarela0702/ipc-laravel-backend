@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreFavoriteRequest;
 use App\Http\Requests\UpdateFavoriteRequest;
 use App\Models\Favorite;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class FavoriteController extends Controller
@@ -16,6 +15,7 @@ class FavoriteController extends Controller
     public function index()
     {
         Gate::authorize('viewAny', Favorite::class);
+
         return Favorite::all();
     }
 
@@ -34,6 +34,10 @@ class FavoriteController extends Controller
     {
         $validated = $request->validated();
         $favorite = Favorite::create($validated);
+        $favorite->recipe->update([
+            'favorites_count' => $favorite->recipe->favorites_count + 1,
+        ]);
+
         return response()->json($favorite, 201);
     }
 
@@ -44,6 +48,7 @@ class FavoriteController extends Controller
     {
         $favorite = Favorite::findorFail($id);
         Gate::authorize('view', $favorite);
+
         return $favorite;
     }
 
@@ -60,10 +65,10 @@ class FavoriteController extends Controller
      */
     public function update(UpdateFavoriteRequest $request, string $id)
     {
-        $validated = $request->validated();
-        $favorite = Favorite::findorFail($id);
-        $favorite->update($validated);
-        return response()->json($favorite, 200);
+        //        $validated = $request->validated();
+        //        $favorite = Favorite::findorFail($id);
+        //        $favorite->update($validated);
+        //        return response()->json($favorite, 200);
     }
 
     /**
@@ -73,7 +78,11 @@ class FavoriteController extends Controller
     {
         $favorite = Favorite::findorFail($id);
         Gate::authorize('delete', $favorite);
+        $favorite->recipe->update([
+            'favorites_count' => $favorite->recipe->favorites_count - 1,
+        ]);
         Favorite::destroy($id);
+
         return response()->json(null, 204);
     }
 }

@@ -118,3 +118,10 @@ Follow the same criteria to search for those images, that represent recipe categ
 03-21-2025
 
 I want now to create a seeder for recipes, but something that has real potential values for recipes, I want the seeder to generate real records based on those real values for recipes and fill their fields. For image and video URL fields, fill them with something like the following: "http://localhost/images/recipes/{slug}.svg" for image and "http://localhost/videos/recipes/{slug}.mp4"
+
+-----
+03-22-2025
+
+what are the best practices to handle and show ratings at item level in a list of items?. Let's say for example the list of recipes in the frontend that I have. should I have additional fields at record level that have the sum for the ratings and the average for the stars?, or is that something that could / should be calculated on the fly?
+
+

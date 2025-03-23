@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreRatingRequest;
 use App\Http\Requests\UpdateRatingRequest;
 use App\Models\Rating;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class RatingController extends Controller
@@ -16,6 +15,7 @@ class RatingController extends Controller
     public function index()
     {
         Gate::authorize('viewAny', Rating::class);
+
         return Rating::all();
     }
 
@@ -34,6 +34,11 @@ class RatingController extends Controller
     {
         $validated = $request->validated();
         $rating = Rating::create($validated);
+        $rating->recipe
+            ->update(['ratings_count' => $rating->recipe->ratings_count + 1,
+                'ratings_sum' => $rating->recipe->ratings_sum + $rating->stars,
+                'ratings_avg' => ($rating->recipe->ratings_sum + $rating->stars) / ($rating->recipe->ratings_count + 1)]);
+
         return response()->json($rating, 201);
     }
 
@@ -44,6 +49,7 @@ class RatingController extends Controller
     {
         $rating = Rating::findorFail($id);
         Gate::authorize('view', $rating);
+
         return $rating;
     }
 
@@ -63,6 +69,12 @@ class RatingController extends Controller
         $validated = $request->validated();
         $rating = Rating::findorFail($id);
         $rating->update($validated);
+        $ratingAvg = $rating->recipe->ratings_count !== 0 ? ($rating->recipe->ratings_sum - $rating->stars + $validated['stars']) / $rating->recipe->ratings_count : 0;
+        $rating->recipe->update([
+            'ratings_sum' => $rating->recipe->ratings_sum - $rating->stars + $validated['stars'],
+            'ratings_avg' => $ratingAvg,
+        ]);
+
         return response()->json($rating, 200);
     }
 
@@ -74,6 +86,12 @@ class RatingController extends Controller
         $rating = Rating::findorFail($id);
         Gate::authorize('delete', $rating);
         Rating::destroy($id);
+        $rating->recipe->update([
+            'ratings_count' => $rating->recipe->ratings_count - 1,
+            'ratings_sum' => $rating->recipe->ratings_sum - $rating->stars,
+            'ratings_avg' => ($rating->recipe->ratings_sum - $rating->stars) / ($rating->recipe->ratings_count - 1),
+        ]);
+
         return response()->json(null, 204);
     }
 }
