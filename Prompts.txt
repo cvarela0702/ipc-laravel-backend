@@ -113,3 +113,8 @@ still waiting for the other images
 
 then, instead of generating the images, search for them on the internet, and download them or give me the links, so I can use free royalty images from internet.
 Follow the same criteria to search for those images, that represent recipe categories, etc.
+
+-----
+03-21-2025
+
+I want now to create a seeder for recipes, but something that has real potential values for recipes, I want the seeder to generate real records based on those real values for recipes and fill their fields. For image and video URL fields, fill them with something like the following: "http://localhost/images/recipes/{slug}.svg" for image and "http://localhost/videos/recipes/{slug}.mp4"
