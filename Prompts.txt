@@ -126,3 +126,10 @@ what are the best practices to handle and show ratings at item level in a list o
 
 -----
 I want now to have the ability to search by slug for the recipe, given the fact that the slug is unique and the frontend would request categories by slug rather than by id
+
+-----
+03-23-2025
+
+I want to have the association for the recipes to their different categories from the recipe seeder, how can I achieve that?
+
+associations are not being persisted in the DB when using attach method

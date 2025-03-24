@@ -22,7 +22,7 @@ class Category extends Model
 
     public function recipes()
     {
-        return $this->belongsToMany(Recipe::class);
+        return $this->belongsToMany(Recipe::class, 'category_recipe', 'category_id', 'recipe_id');
     }
 
 }

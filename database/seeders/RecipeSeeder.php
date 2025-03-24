@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Recipe;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -26,6 +27,7 @@ class RecipeSeeder extends Seeder
                 'cook_time_hours' => 0,
                 'cook_time_minutes' => 20,
                 'calories' => 500,
+                'category_ids' => [2],
             ],
             [
                 'title' => 'Chicken Tikka Masala',
@@ -38,6 +40,7 @@ class RecipeSeeder extends Seeder
                 'cook_time_hours' => 1,
                 'cook_time_minutes' => 0,
                 'calories' => 600,
+                'category_ids' => [4],
             ],
             [
                 'title' => 'Beef Stroganoff',
@@ -50,6 +53,7 @@ class RecipeSeeder extends Seeder
                 'cook_time_hours' => 0,
                 'cook_time_minutes' => 30,
                 'calories' => 700,
+                'category_ids' => [4],
             ],
             [
                 'title' => 'Chicken Alfredo',
@@ -62,6 +66,7 @@ class RecipeSeeder extends Seeder
                 'cook_time_hours' => 0,
                 'cook_time_minutes' => 20,
                 'calories' => 800,
+                'category_ids' => [2],
             ],
             [
                 'title' => 'Beef Wellington',
@@ -74,6 +79,7 @@ class RecipeSeeder extends Seeder
                 'cook_time_hours' => 1,
                 'cook_time_minutes' => 0,
                 'calories' => 900,
+                'category_ids' => [4],
             ],
             [
                 'title' => 'Chicken Parmesan',
@@ -86,6 +92,7 @@ class RecipeSeeder extends Seeder
                 'cook_time_hours' => 0,
                 'cook_time_minutes' => 30,
                 'calories' => 1000,
+                'category_ids' => [2],
             ],
             [
                 'title' => 'Lasagna',
@@ -98,6 +105,7 @@ class RecipeSeeder extends Seeder
                 'cook_time_hours' => 1,
                 'cook_time_minutes' => 0,
                 'calories' => 1100,
+                'category_ids' => [2],
             ],
             [
                 'title' => 'Chicken Curry',
@@ -110,6 +118,7 @@ class RecipeSeeder extends Seeder
                 'cook_time_hours' => 0,
                 'cook_time_minutes' => 30,
                 'calories' => 1200,
+                'category_ids' => [4],
             ],
             [
                 'title' => 'Chicken Noodle Soup',
@@ -122,6 +131,7 @@ class RecipeSeeder extends Seeder
                 'cook_time_hours' => 0,
                 'cook_time_minutes' => 30,
                 'calories' => 1300,
+                'category_ids' => [4],
             ],
             [
                 'title' => 'Chicken Fajitas',
@@ -134,6 +144,7 @@ class RecipeSeeder extends Seeder
                 'cook_time_hours' => 0,
                 'cook_time_minutes' => 20,
                 'calories' => 1400,
+                'category_ids' => [1],
             ],
         ];
 
@@ -154,7 +165,7 @@ class RecipeSeeder extends Seeder
                 'cook_time_hours' => $recipe['cook_time_hours'],
                 'cook_time_minutes' => $recipe['cook_time_minutes'],
                 'calories' => $recipe['calories'],
-            ]);
+            ])->categories()->attach($recipe['category_ids']);
         }
     }
 }
