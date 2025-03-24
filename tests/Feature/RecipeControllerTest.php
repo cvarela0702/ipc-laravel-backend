@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Category;
 use App\Models\Recipe;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -120,6 +121,18 @@ class RecipeControllerTest extends TestCase
         $recipe = Recipe::factory()->create();
 
         $response = $this->actingAs(User::factory()->create())->getJson("/api/recipes/slug/{$recipe->slug}");
+
+        $response->assertStatus(200)
+            ->assertJsonFragment(['title' => $recipe->title]);
+    }
+
+    public function test_it_can_show_recipes_by_category_slug(): void
+    {
+        $category = Category::factory()->create(['slug' => 'italian']);
+        $recipe = Recipe::factory()->create();
+        $recipe->categories()->attach($category);
+
+        $response = $this->actingAs(User::factory()->create())->getJson('/api/recipes/category-slug/italian');
 
         $response->assertStatus(200)
             ->assertJsonFragment(['title' => $recipe->title]);

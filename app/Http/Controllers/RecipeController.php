@@ -67,6 +67,15 @@ class RecipeController extends Controller
         return $recipe;
     }
 
+    public function showByCategorySlug(string $categorySlug)
+    {
+        $recipes = Recipe::whereHas('categories', function ($query) use ($categorySlug) {
+            $query->where('slug', $categorySlug);
+        })->get();
+
+        return response()->json($recipes);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
