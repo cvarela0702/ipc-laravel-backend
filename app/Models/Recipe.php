@@ -31,11 +31,27 @@ class Recipe extends Model
 
     public function toSearchableArray()
     {
+
+        // Ensure the categories relationship is loaded
+        if (! $this->relationLoaded('categories')) {
+            $this->load('categories');
+        }
+
         return [
             'title' => $this->title,
             'description' => $this->description,
             'ingredients' => $this->ingredients,
             'instructions' => $this->instructions,
+            'image_url' => $this->image_url,
+            'preparation_time' => $this->prep_time_hours.':'.$this->prep_time_minutes,
+            'cooking_time' => $this->cook_time_hours.':'.$this->cook_time_minutes,
+            'favorites_count' => $this->favorites_count,
+            'ratings_count' => $this->ratings_count,
+            'ratings_average' => $this->ratings_avg,
+            'servings' => $this->servings,
+            'calories' => $this->calories,
+            'created_at' => $this->created_at,
+            'categories' => $this->categories->pluck('name')->toArray(),
         ];
     }
 

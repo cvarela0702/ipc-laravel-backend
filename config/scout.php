@@ -146,8 +146,9 @@ return [
             //     'filterableAttributes'=> ['id', 'name', 'email'],
             // ],
             Recipe::class => [
-                'filterableAttributes' => ['id', 'title', 'description'],
-                'sortableAttributes' => ['title', 'description', 'created_at'],
+                'searchableAttributes' => ['title', 'description', 'ingredients', 'instructions', 'categories'],
+                'filterableAttributes' => ['preparation_time', 'cooking_time', 'favorite_count', 'ratings_count', 'ratings_average', 'servings', 'calories', 'categories'],
+                'sortableAttributes' => ['title', 'created_at', 'favorite_count', 'ratings_count', 'ratings_average'],
             ],
             'categories' => [
                 'filterableAttributes' => ['id', 'name', 'description'],

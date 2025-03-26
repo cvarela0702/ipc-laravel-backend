@@ -27,7 +27,7 @@ class RecipeSeeder extends Seeder
                 'cook_time_hours' => 0,
                 'cook_time_minutes' => 20,
                 'calories' => 500,
-                'category_ids' => [2],
+                'category_ids' => [2, 4],
             ],
             [
                 'title' => 'Chicken Tikka Masala',
@@ -66,7 +66,7 @@ class RecipeSeeder extends Seeder
                 'cook_time_hours' => 0,
                 'cook_time_minutes' => 20,
                 'calories' => 800,
-                'category_ids' => [2],
+                'category_ids' => [2, 4],
             ],
             [
                 'title' => 'Beef Wellington',
