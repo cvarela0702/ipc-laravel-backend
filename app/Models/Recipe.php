@@ -39,6 +39,7 @@ class Recipe extends Model
 
         return [
             'title' => $this->title,
+            'slug' => $this->slug,
             'description' => $this->description,
             'ingredients' => $this->ingredients,
             'instructions' => $this->instructions,
@@ -50,7 +51,7 @@ class Recipe extends Model
             'ratings_average' => $this->ratings_avg,
             'servings' => $this->servings,
             'calories' => $this->calories,
-            'created_at' => $this->created_at,
+            'created_at' => $this->created_at->timestamp,
             'categories' => $this->categories->pluck('name')->toArray(),
         ];
     }
