@@ -147,8 +147,8 @@ return [
             // ],
             Recipe::class => [
                 'searchableAttributes' => ['title', 'description', 'ingredients', 'instructions', 'categories'],
-                'filterableAttributes' => ['preparation_time', 'cooking_time', 'favorite_count', 'ratings_count', 'ratings_average', 'servings', 'calories', 'categories'],
-                'sortableAttributes' => ['title', 'created_at', 'favorite_count', 'ratings_count', 'ratings_average'],
+                'filterableAttributes' => ['preparation_time', 'cooking_time', 'favorites_count', 'ratings_count', 'ratings_avg', 'servings', 'calories', 'categories'],
+                'sortableAttributes' => ['title', 'created_at', 'favorites_count', 'ratings_count', 'ratings_avg'],
             ],
             'categories' => [
                 'filterableAttributes' => ['id', 'name', 'description'],
