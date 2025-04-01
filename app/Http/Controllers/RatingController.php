@@ -69,10 +69,11 @@ class RatingController extends Controller
     {
         $validated = $request->validated();
         $rating = Rating::findorFail($id);
+        $ratingSum = $rating->recipe->ratings_sum - $rating->stars + $validated['stars'];
+        $ratingAvg = $rating->recipe->ratings_count !== 0 ? $ratingSum / $rating->recipe->ratings_count : 0;
         $rating->update($validated);
-        $ratingAvg = $rating->recipe->ratings_count !== 0 ? ($rating->recipe->ratings_sum - $rating->stars + $validated['stars']) / $rating->recipe->ratings_count : 0;
         $rating->recipe->update([
-            'ratings_sum' => $rating->recipe->ratings_sum - $rating->stars + $validated['stars'],
+            'ratings_sum' => $ratingSum,
             'ratings_avg' => $ratingAvg,
         ]);
 
@@ -89,9 +90,10 @@ class RatingController extends Controller
         Rating::destroy($id);
         $ratingsAvg = ($rating->recipe->ratings_count - 1) === 0 ? 0 : ($rating->recipe->ratings_sum - $rating->stars) / ($rating->recipe->ratings_count - 1);
         $ratingsCount = ($rating->recipe->ratings_count - 1) < 0 ? 0 : $rating->recipe->ratings_count - 1;
+        $ratingsSum = ($rating->recipe->ratings_sum - $rating->stars) < 0 ? 0 : $rating->recipe->ratings_sum - $rating->stars;
         $rating->recipe->update([
             'ratings_count' => $ratingsCount,
-            'ratings_sum' => $rating->recipe->ratings_sum - $rating->stars,
+            'ratings_sum' => $ratingsSum,
             'ratings_avg' => $ratingsAvg,
         ]);
 

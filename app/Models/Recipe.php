@@ -28,6 +28,7 @@ class Recipe extends Model
         'video_url',
         'slug',
         'ratings_count',
+        'ratings_sum',
         'ratings_avg',
         'favorites_count',
     ];
