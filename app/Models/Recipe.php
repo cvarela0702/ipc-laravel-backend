@@ -27,6 +27,9 @@ class Recipe extends Model
         'cook_time_minutes',
         'video_url',
         'slug',
+        'ratings_count',
+        'ratings_avg',
+        'favorites_count',
     ];
 
     public function toSearchableArray()
@@ -48,7 +51,7 @@ class Recipe extends Model
             'cooking_time' => $this->cook_time_hours.':'.$this->cook_time_minutes,
             'favorites_count' => $this->favorites_count,
             'ratings_count' => $this->ratings_count,
-            'ratings_average' => $this->ratings_avg,
+            'ratings_avg' => $this->ratings_avg,
             'servings' => $this->servings,
             'calories' => $this->calories,
             'created_at' => $this->created_at->timestamp,
@@ -68,17 +71,17 @@ class Recipe extends Model
 
     public function ratings()
     {
-        return $this->hasMany(Rating::class);
+        return $this->hasMany(Rating::class)->where('user_id', auth()->id());
     }
 
     public function favorites()
     {
-        return $this->hasMany(Favorite::class);
+        return $this->hasMany(Favorite::class)->where('user_id', auth()->id());
     }
 
     public function questions()
     {
-        return $this->hasMany(Question::class);
+        return $this->hasMany(Question::class)->where('user_id', auth()->id());
     }
 
     public function categories()

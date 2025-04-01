@@ -61,7 +61,7 @@ class RecipeController extends Controller
 
     public function showBySlug(string $slug)
     {
-        $recipe = Recipe::where('slug', $slug)->firstOrFail();
+        $recipe = Recipe::where('slug', $slug)->with(['favorites', 'ratings'])->firstOrFail();
         Gate::authorize('view', $recipe);
 
         return $recipe;

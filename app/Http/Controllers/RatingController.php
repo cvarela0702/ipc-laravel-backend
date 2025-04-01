@@ -33,6 +33,7 @@ class RatingController extends Controller
     public function store(StoreRatingRequest $request)
     {
         $validated = $request->validated();
+        $validated['user_id'] = auth()->user()->id;
         $rating = Rating::create($validated);
         $rating->recipe
             ->update(['ratings_count' => $rating->recipe->ratings_count + 1,
@@ -86,10 +87,12 @@ class RatingController extends Controller
         $rating = Rating::findorFail($id);
         Gate::authorize('delete', $rating);
         Rating::destroy($id);
+        $ratingsAvg = ($rating->recipe->ratings_count - 1) === 0 ? 0 : ($rating->recipe->ratings_sum - $rating->stars) / ($rating->recipe->ratings_count - 1);
+        $ratingsCount = ($rating->recipe->ratings_count - 1) < 0 ? 0 : $rating->recipe->ratings_count - 1;
         $rating->recipe->update([
-            'ratings_count' => $rating->recipe->ratings_count - 1,
+            'ratings_count' => $ratingsCount,
             'ratings_sum' => $rating->recipe->ratings_sum - $rating->stars,
-            'ratings_avg' => ($rating->recipe->ratings_sum - $rating->stars) / ($rating->recipe->ratings_count - 1),
+            'ratings_avg' => $ratingsAvg,
         ]);
 
         return response()->json(null, 204);

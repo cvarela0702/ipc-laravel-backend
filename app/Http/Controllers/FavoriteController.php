@@ -33,6 +33,7 @@ class FavoriteController extends Controller
     public function store(StoreFavoriteRequest $request)
     {
         $validated = $request->validated();
+        $validated['user_id'] = auth()->user()->id;
         $favorite = Favorite::create($validated);
         $favorite->recipe->update([
             'favorites_count' => $favorite->recipe->favorites_count + 1,
@@ -78,8 +79,9 @@ class FavoriteController extends Controller
     {
         $favorite = Favorite::findorFail($id);
         Gate::authorize('delete', $favorite);
+        $favoritesCount = ($favorite->recipe->favorites_count - 1) < 0 ? 0 : ($favorite->recipe->favorites_count - 1);
         $favorite->recipe->update([
-            'favorites_count' => $favorite->recipe->favorites_count - 1,
+            'favorites_count' => $favoritesCount,
         ]);
         Favorite::destroy($id);
 
