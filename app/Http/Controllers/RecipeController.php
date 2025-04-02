@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PutRecipeRequest;
 use App\Http\Requests\StoreRecipeRequest;
 use App\Http\Requests\UpdateRecipeRequest;
 use App\Models\Category;
@@ -69,7 +70,7 @@ class RecipeController extends Controller
 
     public function showBySlug(string $slug)
     {
-        $recipe = Recipe::where('slug', $slug)->with(['favorites', 'ratings'])->firstOrFail();
+        $recipe = Recipe::where('slug', $slug)->with(['favorites', 'ratings', 'categories'])->firstOrFail();
         Gate::authorize('view', $recipe);
 
         return $recipe;
@@ -99,6 +100,15 @@ class RecipeController extends Controller
     {
         $validated = $request->validated();
         $recipe = Recipe::findOrFail($id);
+        $recipe->update($validated);
+
+        return response()->json($validated, 200);
+    }
+
+    public function updateBySlug(PutRecipeRequest $request, string $slug)
+    {
+        $validated = $request->validated();
+        $recipe = Recipe::where('slug', $slug)->firstOrFail();
         $recipe->update($validated);
 
         return response()->json($validated, 200);

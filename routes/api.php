@@ -19,6 +19,7 @@ Route::get('questions/search', [QuestionController::class, 'search'])->middlewar
 Route::get('categories/search', [CategoryController::class, 'search'])->middleware('auth:sanctum');
 
 Route::get('/recipes/slug/{slug}', [RecipeController::class, 'showBySlug'])->middleware('auth:sanctum');
+Route::put('/recipes/slug/{slug}', [RecipeController::class, 'updateBySlug'])->middleware('auth:sanctum');
 Route::get('/recipes/category-slug/{slug}', [RecipeController::class, 'showByCategorySlug'])->middleware('auth:sanctum');
 
 Route::apiResource('recipes', RecipeController::class)->middleware('auth:sanctum');
