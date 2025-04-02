@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRecipeRequest;
 use App\Http\Requests\UpdateRecipeRequest;
+use App\Models\Category;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -43,9 +44,16 @@ class RecipeController extends Controller
     public function store(StoreRecipeRequest $request)
     {
         $validated = $request->validated();
-        $recipe = Recipe::create($validated);
 
-        return response()->json($recipe, 201);
+        if ($validated['categories']) {
+            // load categories from ids from request
+            $categories = $validated['categories'];
+            unset($validated['categories']);
+        }
+
+        Recipe::create($validated)->categories()->attach($categories);
+
+        return response()->json($validated, 201);
     }
 
     /**

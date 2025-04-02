@@ -41,6 +41,7 @@ class StoreRecipeRequest extends FormRequest
             'cook_time_minutes' => 'required|integer',
             'video_url' => 'sometimes|string',
             'calories' => 'required|integer',
+            'categories' => 'sometimes|array',
         ];
     }
 }

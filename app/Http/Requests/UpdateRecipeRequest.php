@@ -34,8 +34,8 @@ class UpdateRecipeRequest extends FormRequest
             'instructions' => 'sometimes|string',
             'user_id' => 'sometimes|exists:users,id',
             // 'category_ids' => 'required|array|exists:categories,id',
-            'image_url' => 'sometimes|image',
-            'slug' => 'sometimes|string|unique:recipes,slug',
+            'image_url' => 'sometimes|string',
+            // 'slug' => 'sometimes|string|unique:recipes,slug',
             'servings' => 'sometimes|integer',
             'prep_time_hours' => 'sometimes|integer',
             'prep_time_minutes' => 'sometimes|integer',
@@ -43,6 +43,7 @@ class UpdateRecipeRequest extends FormRequest
             'cook_time_minutes' => 'sometimes|integer',
             'video_url' => 'sometimes|string',
             'calories' => 'sometimes|integer',
+            'categories' => 'sometimes|array',
         ];
     }
 }
