@@ -20,6 +20,7 @@ Route::get('categories/search', [CategoryController::class, 'search'])->middlewa
 
 Route::get('/recipes/slug/{slug}', [RecipeController::class, 'showBySlug'])->middleware('auth:sanctum');
 Route::put('/recipes/slug/{slug}', [RecipeController::class, 'updateBySlug'])->middleware('auth:sanctum');
+Route::delete('/recipes/slug/{slug}', [RecipeController::class, 'destroyBySlug'])->middleware('auth:sanctum');
 Route::get('/recipes/category-slug/{slug}', [RecipeController::class, 'showByCategorySlug'])->middleware('auth:sanctum');
 
 Route::apiResource('recipes', RecipeController::class)->middleware('auth:sanctum');

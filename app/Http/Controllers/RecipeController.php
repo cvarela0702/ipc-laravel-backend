@@ -125,4 +125,13 @@ class RecipeController extends Controller
 
         return response()->json(null, 204);
     }
+
+    public function destroyBySlug(string $slug)
+    {
+        $recipe = Recipe::where('slug', $slug)->firstOrFail();
+        Gate::authorize('delete', $recipe);
+        Recipe::destroy($recipe->id);
+
+        return response()->json(null, 204);
+    }
 }
