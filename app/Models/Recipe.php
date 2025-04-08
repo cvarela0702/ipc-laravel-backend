@@ -52,6 +52,7 @@ class Recipe extends Model
             'cooking_time' => $this->cook_time_hours.':'.$this->cook_time_minutes,
             'favorites_count' => $this->favorites_count,
             'ratings_count' => $this->ratings_count,
+            'comments_count' => $this->comments_count,
             'ratings_avg' => $this->ratings_avg,
             'servings' => $this->servings,
             'calories' => $this->calories,
@@ -67,7 +68,7 @@ class Recipe extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class)->where('parent_id', null)->limit(10);
     }
 
     public function ratings()

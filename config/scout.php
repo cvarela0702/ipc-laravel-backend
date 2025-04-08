@@ -154,6 +154,10 @@ return [
                 'filterableAttributes' => ['id', 'name', 'description'],
                 'sortableAttributes' => ['name', 'created_at'],
             ],
+            'comments' => [
+                'filterableAttributes' => ['id', 'content'],
+                'sortableAttributes' => ['created_at'],
+            ],
         ],
     ],
 

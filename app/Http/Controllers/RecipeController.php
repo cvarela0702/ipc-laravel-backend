@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PutRecipeRequest;
 use App\Http\Requests\StoreRecipeRequest;
 use App\Http\Requests\UpdateRecipeRequest;
-use App\Models\Category;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;

@@ -22,6 +22,9 @@ Route::put('/recipes/slug/{slug}', [RecipeController::class, 'updateBySlug'])->m
 Route::delete('/recipes/slug/{slug}', [RecipeController::class, 'destroyBySlug'])->middleware('auth:sanctum');
 Route::get('/recipes/category-slug/{slug}', [RecipeController::class, 'showByCategorySlug'])->middleware('auth:sanctum');
 
+Route::get('/comments/recipe-slug/{slug}', [CommentController::class, 'showByRecipeSlug'])->middleware('auth:sanctum');
+Route::get('/comments/{id}/replies', [CommentController::class, 'showReplies'])->middleware('auth:sanctum');
+
 Route::apiResource('recipes', RecipeController::class)->middleware('auth:sanctum');
 Route::apiResource('comments', CommentController::class)->middleware('auth:sanctum');
 Route::apiResource('ratings', RatingController::class)->middleware('auth:sanctum');

@@ -18,6 +18,7 @@ class SampleDataSeeder extends Seeder
             RecipeSeeder::class,
             FavoritesSeeder::class,
             RatingsSeeder::class,
+            CommentsSeeder::class,
         ]);
     }
 }

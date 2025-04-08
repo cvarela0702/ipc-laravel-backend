@@ -25,9 +25,9 @@ class StoreCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|exists:users,id',
             'recipe_id' => 'required|exists:recipes,id',
             'content' => 'required|string',
+            'parent_id' => 'nullable|exists:comments,id',
         ];
     }
 }

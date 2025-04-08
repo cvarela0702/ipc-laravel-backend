@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class CommentController extends Controller
@@ -16,6 +15,7 @@ class CommentController extends Controller
     public function index()
     {
         Gate::authorize('viewAny', Comment::class);
+
         return Comment::all();
     }
 
@@ -33,7 +33,25 @@ class CommentController extends Controller
     public function store(StoreCommentRequest $request)
     {
         $validated = $request->validated();
+
+        // validate that users cannot reply to replies
+        if (isset($validated['parent_id'])) {
+            $parentComment = Comment::find($validated['parent_id']);
+            if ($parentComment && $parentComment->parent_id) {
+                return response()->json(['error' => 'Cannot reply to a reply', 'parent_id' => 'Invalid'], 422);
+            }
+        }
+        $validated['user_id'] = auth()->user()->id;
+
         $comment = Comment::create($validated);
+        $comment->recipe
+            ->update(['comments_count' => $comment->recipe->comments_count + 1]);
+
+        if ($comment->parent_id) {
+            $parentComment = Comment::find($comment->parent_id);
+            $parentComment->update(['replies_count' => $parentComment->replies_count + 1]);
+        }
+
         return response()->json($comment, 201);
     }
 
@@ -44,6 +62,7 @@ class CommentController extends Controller
     {
         $comment = Comment::findorFail($id);
         Gate::authorize('view', $comment);
+
         return $comment;
     }
 
@@ -63,6 +82,7 @@ class CommentController extends Controller
         $validated = $request->validated();
         $comment = Comment::findorFail($id);
         $comment->update($validated);
+
         return response()->json($comment, 200);
     }
 
@@ -74,6 +94,38 @@ class CommentController extends Controller
         $comment = Comment::findorFail($id);
         Gate::authorize('delete', $comment);
         Comment::destroy($id);
+        $comment->recipe
+            ->update(['comments_count' => $comment->recipe->comments_count - 1]);
+
+        if ($comment->parent_id) {
+            $parentComment = Comment::find($comment->parent_id);
+            $parentComment->update(['replies_count' => $parentComment->replies_count - 1]);
+        }
+
         return response()->json(null, 204);
+    }
+
+    /** show by recipe slug, including pagination for load more functionality in the frontend */
+    public function showByRecipeSlug(string $slug, int $page = 1, int $perPage = 10)
+    {
+        $comments = Comment::whereHas('recipe', function ($query) use ($slug) {
+            $query->where('slug', $slug)->where('parent_id', null);
+        })->with(['replies', 'users'])->paginate($perPage, ['*'], 'page', $page);
+
+        return response()->json($comments);
+    }
+
+    /**
+     * show replies for a specific comment
+     */
+    public function showReplies(string $id, int $page = 1, int $perPage = 10)
+    {
+        // validate that the comment exists
+        $comment = Comment::findorFail($id);
+        Gate::authorize('view', $comment);
+
+        $replies = Comment::where('parent_id', $id)->with('users')->paginate($perPage, ['*'], 'page', $page);
+
+        return response()->json($replies);
     }
 }

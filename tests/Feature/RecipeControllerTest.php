@@ -25,6 +25,7 @@ class RecipeControllerTest extends TestCase
     public function test_it_can_create_a_recipe(): void
     {
         $user = User::factory()->create();
+        $category = Category::factory()->create(['slug' => 'test-category']);
         $data = [
             'user_id' => $user->id,
             'title' => 'Test Recipe',
@@ -40,10 +41,12 @@ class RecipeControllerTest extends TestCase
             'cook_time_minutes' => 30,
             'video_url' => 'https://example.com/video.mp4',
             'slug' => 'test-recipe',
+            'categories' => [$category->id]
         ];
 
         $response = $this->actingAs($user)->postJson('/api/recipes', $data);
 
+        unset($data['categories']);
         $response->assertStatus(201)
             ->assertJsonFragment($data);
 

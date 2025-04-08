@@ -33,7 +33,7 @@ class CommentControllerTest extends TestCase
             'content' => 'Test Comment',
         ];
 
-        $response = $this->actingAs(User::factory()->create())->postJson('/api/comments', $data);
+        $response = $this->actingAs($user)->postJson('/api/comments', $data);
 
         $response->assertStatus(201)
             ->assertJsonFragment($data);
@@ -88,7 +88,7 @@ class CommentControllerTest extends TestCase
         $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
     }
 
-    public function test_user_cannot_delete_own_comment()
+    public function test_user_cannot_delete_other_comment()
     {
         $user = User::factory()->create();
         $comment = Comment::factory()->create();
@@ -96,5 +96,41 @@ class CommentControllerTest extends TestCase
         $response = $this->actingAs($user)->deleteJson("/api/comments/{$comment->id}");
 
         $response->assertStatus(403);
+    }
+
+    public function test_user_can_reply_to_other_user_comments()
+    {
+        $user = User::factory()->create();
+        $parentComment = Comment::factory()->create();
+        $data = [
+            'user_id' => $user->id,
+            'recipe_id' => $parentComment->recipe_id,
+            'content' => 'Test Reply',
+            'parent_id' => $parentComment->id,
+        ];
+
+        $response = $this->actingAs($user)->postJson('/api/comments', $data);
+
+        $response->assertStatus(201)
+            ->assertJsonFragment($data);
+
+        $this->assertDatabaseHas('comments', $data);
+    }
+
+    public function test_user_get_error_when_trying_to_reply_to_non_parent_comments()
+    {
+        $user = User::factory()->create();
+        $parent_comment = Comment::factory()->create(['parent_id' => null]);
+        $child_comment = Comment::factory()->create(['parent_id' => $parent_comment->id]);
+        $data = [
+            'user_id' => $user->id,
+            'recipe_id' => $child_comment->recipe_id,
+            'content' => 'Test Reply',
+            'parent_id' => $child_comment->id,
+        ];
+
+        $response = $this->actingAs($user)->postJson('/api/comments', $data);
+
+        $response->assertStatus(422);
     }
 }
