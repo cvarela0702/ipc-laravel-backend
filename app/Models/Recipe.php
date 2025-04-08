@@ -79,12 +79,6 @@ class Recipe extends Model
     {
         return $this->hasMany(Favorite::class)->where('user_id', auth()->id());
     }
-
-    public function questions()
-    {
-        return $this->hasMany(Question::class)->where('user_id', auth()->id());
-    }
-
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'category_recipe', 'recipe_id', 'category_id');

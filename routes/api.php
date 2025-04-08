@@ -15,7 +15,6 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::get('recipes/search', [RecipeController::class, 'search'])->middleware('auth:sanctum');
-Route::get('questions/search', [QuestionController::class, 'search'])->middleware('auth:sanctum');
 Route::get('categories/search', [CategoryController::class, 'search'])->middleware('auth:sanctum');
 
 Route::get('/recipes/slug/{slug}', [RecipeController::class, 'showBySlug'])->middleware('auth:sanctum');
@@ -27,6 +26,4 @@ Route::apiResource('recipes', RecipeController::class)->middleware('auth:sanctum
 Route::apiResource('comments', CommentController::class)->middleware('auth:sanctum');
 Route::apiResource('ratings', RatingController::class)->middleware('auth:sanctum');
 Route::apiResource('favorites', FavoriteController::class)->middleware('auth:sanctum');
-Route::apiResource('questions', QuestionController::class)->middleware('auth:sanctum');
-Route::apiResource('answers', AnswerController::class)->middleware('auth:sanctum');
 Route::apiResource('categories', CategoryController::class)->middleware('auth:sanctum');

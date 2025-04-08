@@ -154,10 +154,6 @@ return [
                 'filterableAttributes' => ['id', 'name', 'description'],
                 'sortableAttributes' => ['name', 'created_at'],
             ],
-            'questions' => [
-                'filterableAttributes' => ['id', 'title', 'question'],
-                'sortableAttributes' => ['title', 'question', 'created_at'],
-            ],
         ],
     ],
 
