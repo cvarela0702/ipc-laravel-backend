@@ -133,4 +133,25 @@ class CommentControllerTest extends TestCase
 
         $response->assertStatus(422);
     }
+
+    /**
+     * Test comments count increment on comment creation
+     */
+    public function test_comments_count_increment_on_comment_creation()
+    {
+        $user = User::factory()->create();
+        $recipe = Recipe::factory()->create();
+        $data = [
+            'user_id' => $user->id,
+            'recipe_id' => $recipe->id,
+            'content' => 'Test Comment',
+        ];
+
+        $this->actingAs($user)->postJson('/api/comments', $data);
+
+        $this->assertDatabaseHas('recipes', [
+            'id' => $recipe->id,
+            'comments_count' => 1,
+        ]);
+    }
 }

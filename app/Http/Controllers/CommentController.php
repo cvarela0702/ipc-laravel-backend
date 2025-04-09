@@ -94,8 +94,9 @@ class CommentController extends Controller
         $comment = Comment::findorFail($id);
         Gate::authorize('delete', $comment);
         Comment::destroy($id);
+        $commentsCount = ($comment->recipe->comments_count - 1) < 0 ? 0 : ($comment->recipe->comments_count - 1);
         $comment->recipe
-            ->update(['comments_count' => $comment->recipe->comments_count - 1]);
+            ->update(['comments_count' => $commentsCount]);
 
         if ($comment->parent_id) {
             $parentComment = Comment::find($comment->parent_id);

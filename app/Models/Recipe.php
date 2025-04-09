@@ -31,6 +31,7 @@ class Recipe extends Model
         'ratings_sum',
         'ratings_avg',
         'favorites_count',
+        'comments_count'
     ];
 
     public function toSearchableArray()
