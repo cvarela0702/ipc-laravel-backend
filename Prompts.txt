@@ -19,6 +19,8 @@ ______
 
 I want now to create resource controllers and migrations for the given models
 
+- response:
+
 ./vendor/bin/sail artisan make:migration create_users_table
 ./vendor/bin/sail artisan make:migration create_recipes_table
 ./vendor/bin/sail artisan make:migration create_comments_table
@@ -44,22 +46,57 @@ _____
 
 I want the recipes to have association with categories, the categories are a single way to categorize where the recipes belong to, examples of categories: Mexican, Italian, Vegan, Low carb. One recipe can belong to multiple categories and one category can have multiple recipes.
 
+- response:
+
+php artisan make:model Category -m
+php artisan make:migration create_category_recipe_table
+php artisan migrate
+
 ------
 
 I want to test what I have so far, to make sure that all operations are working as expected
 
+- response:
+
+php artisan make:test CategoryControllerTest
+php artisan test
+
 ------
 
 I got this error while running test: Class "Database\Factories\CategoryFactory" not found
+
+- response
+
+php artisan make:factory CategoryFactory --model=Category
+php artisan test
 
 -------
 
 give me the code to generate factories for all other models, and from now on, all command lines that consider "artisan", generate them as this instead:
 "./vendor/bin/sail artisan"
 
+- response:
+
+./vendor/bin/sail artisan make:factory UserFactory --model=User
+./vendor/bin/sail artisan make:factory RecipeFactory --model=Recipe
+./vendor/bin/sail artisan make:factory CommentFactory --model=Comment
+./vendor/bin/sail artisan make:factory RatingFactory --model=Rating
+./vendor/bin/sail artisan make:factory FavoriteFactory --model=Favorite
+./vendor/bin/sail artisan make:factory QuestionFactory --model=Question
+./vendor/bin/sail artisan make:factory AnswerFactory --model=Answer
+
 ------
 
 help me define the tests for all controllers except user and also ignore the ones that have tests already
+
+- response:
+
+./vendor/bin/sail artisan make:test RecipeControllerTest
+./vendor/bin/sail artisan make:test CommentControllerTest
+./vendor/bin/sail artisan make:test RatingControllerTest
+./vendor/bin/sail artisan make:test FavoriteControllerTest
+./vendor/bin/sail artisan make:test QuestionControllerTest
+./vendor/bin/sail artisan make:test AnswerControllerTest
 
 ------
 03-12-2025
@@ -68,10 +105,23 @@ I want to implement now the ability to search so the application can have the ab
 
 I'd like to implement this with laravel scout and meilisearch support instead
 
+- response:
+
+./vendor/bin/sail composer require laravel/scout meilisearch/meilisearch-php
+./vendor/bin/sail artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
+
+------
+
+Search is not working properly, I suspect that apiResource and get are clashing in functionality somehow
+
 ------
 03-15-2025
 
 now I want to add authorization to edit and delete operations, so it happens that only the users who created a particular record can edit it or delete it. No other user should be able to edit or delete records that were not created by that user.
+
+- response:
+
+./vendor/bin/sail artisan make:policy RecipePolicy --model=Recipe
 
 ------
 03-17-2025

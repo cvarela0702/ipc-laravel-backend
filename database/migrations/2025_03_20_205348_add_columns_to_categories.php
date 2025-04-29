@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->string('slug')->unique();
-            $table->string('description')->nullable();
-            $table->string('image');
+            $table->string('slug')->unique()->after('name');
+            $table->string('description')->nullable()->after('slug');
+            $table->string('image')->nullable()->after('description');
 
         });
     }

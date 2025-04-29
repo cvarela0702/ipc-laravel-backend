@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->foreignId('parent_id')->nullable()->constrained('comments')->onDelete('cascade');
-            $table->unsignedInteger('replies_count')->default(0);
+            $table->foreignId('parent_id')->after('content')->nullable()->constrained('comments')->onDelete('cascade');
+            $table->unsignedInteger('replies_count')->default(0)->after('parent_id');
             $table->index(['parent_id']);
             $table->index(['recipe_id']);
             $table->index(['user_id']);

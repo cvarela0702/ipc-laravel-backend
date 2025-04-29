@@ -12,15 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('recipes', function (Blueprint $table) {
-            $table->string('slug')->unique();
-            $table->string('image_url');
-            $table->string('video_url')->nullable();
-            $table->integer('servings')->default(2);
-            $table->integer('prep_time_hours')->default(0);
-            $table->integer('prep_time_minutes')->default(0);
-            $table->integer('cook_time_hours')->default(0);
-            $table->integer('cook_time_minutes')->default(0);
-            $table->integer('calories')->default(0);
+            $table->string('slug')->unique()->after('title');
+            $table->string('image_url')->nullable()->after('slug');
+            $table->string('video_url')->nullable()->nullable()->after('image_url');
+            $table->integer('servings')->default(2)->after('video_url');
+            $table->integer('prep_time_hours')->default(0)->after('servings');
+            $table->integer('prep_time_minutes')->default(0)->after('prep_time_hours');
+            $table->integer('cook_time_hours')->default(0)->after('prep_time_minutes');
+            $table->integer('cook_time_minutes')->default(0)->after('cook_time_hours');
+            $table->integer('calories')->default(0)->after('cook_time_minutes');
         });
     }
 

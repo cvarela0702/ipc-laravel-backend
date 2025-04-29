@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('recipes', function (Blueprint $table) {
-            $table->unsignedInteger('ratings_count')->default(0);
-            $table->unsignedInteger('ratings_sum')->default(0);
-            $table->float('ratings_avg', 3, 2)->default(0);
-            $table->unsignedInteger('favorites_count')->default(0);
+            $table->unsignedInteger('ratings_count')->default(0)->after('calories');
+            $table->unsignedInteger('ratings_sum')->default(0)->after('ratings_count');
+            $table->float('ratings_avg', 3, 2)->default(0)->after('ratings_sum');
+            $table->unsignedInteger('favorites_count')->default(0)->after('ratings_avg');
         });
     }
 

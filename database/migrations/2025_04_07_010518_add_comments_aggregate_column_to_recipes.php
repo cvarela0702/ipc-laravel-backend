@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('recipes', function (Blueprint $table) {
-            $table->unsignedInteger('comments_count')->default(0);
+            $table->unsignedInteger('comments_count')->default(0)->after('favorites_count');
         });
     }
 
