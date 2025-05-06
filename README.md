@@ -1,66 +1,187 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Worldwide Recipes API backend demo for IPC Berlin
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+- This is an API backend using [Laravel](https://laravel.com/docs/11.x/).
+- From laravel it uses:
+    - [Sail](https://laravel.com/docs/11.x/sail#main-content)
+    - [Sanctum](https://laravel.com/docs/11.x/sanctum#main-content)
+    - [Scout](https://laravel.com/docs/11.x/scout#main-content)
+    - [Tinker](https://laravel.com/docs/11.x/artisan#tinker)
 
-## About Laravel
+## Requirements
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Install [Docker desktop](https://www.docker.com/products/docker-desktop/)
+- Install [Postman](https://www.postman.com/downloads/)
+- IDEs
+    - Install [cursor](https://www.cursor.com/)
+        - Create an account with cursor
+        - Suggested extensions:
+            - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+            - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+            - [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+            - [SonarQube](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode)
+    - Install [PHPStorm](https://www.jetbrains.com/phpstorm/download/)
+        - Suggested plugins:
+            - [GitHub copilot](https://plugins.jetbrains.com/plugin/17718-github-copilot)
+            - [.env files](https://plugins.jetbrains.com/plugin/9525--env-files)
+            - [SonarQube](https://plugins.jetbrains.com/plugin/7973-sonarqube-for-ide)
+    - Alternatively, install [Visual Studio Code](https://code.visualstudio.com/Download)
+        - Suggested extensions:
+            - [GitHub Copilot](https://marketplace.visualstudio.com/items/?itemName=GitHub.copilot)
+            - [GitHub Copilot Chat](https://marketplace.visualstudio.com/items/?itemName=GitHub.copilot-chat)
+            - [Laravel](https://marketplace.visualstudio.com/items/?itemName=laravel.vscode-laravel)
+- Have a terminal
+- Clone repositories
+    - [API backend](https://github.com/cvarela0702/ipc-laravel-backend)
+    - [Customer frontend](https://github.com/cvarela0702/ipc-nextjs-frontend)
+- Have git installed locally
+- Have a GitHub account
+    - with GitHub copilot enabled
+- Have an [OpenAI key](https://auth.openai.com/log-in)
+- [Node 18.18](https://nodejs.org/en) or later
+- DB access
+    - Credentials:
+        - user: laravel
+        - password: password
+    - with client
+        - Mac / Linux
+            - [MyCli](https://www.mycli.net/)
+            - [Sequel Pro](https://sequelpro.com/)
+        - Windows / Mac / Linux
+            - [MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
+            - [phpMyAdmin](https://www.phpmyadmin.net/)
+            - [DBeaver](https://dbeaver.io/download/)
+    - with IDE configuration
+        - with [PHPStorm](https://www.jetbrains.com/phpstorm/download/)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Instructions
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Clone repo
 
-## Learning Laravel
+```bash
+git clone https://github.com/cvarela0702/ipc-laravel-backend
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Prepare docker in backend
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+cd ipc-laravel-backend
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Install laravel sail
 
-## Laravel Sponsors
+```bash
+docker run --rm \
+    --pull=always \
+    -v "$(pwd)":/opt \
+    -w /opt \
+    laravelsail/php84-composer:latest \
+    bash -c "composer install --ignore-platform-reqs && composer run post-root-package-install && php ./artisan key:generate --ansi && php ./artisan sail:install --with=mysql,redis,meilisearch,mailpit,selenium "
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- For the IPC only (it brings the application to the first commit)
 
-### Premium Partners
+```bash
+git checkout breeze
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- Build the docker images
 
-## Contributing
+```bash
+./vendor/bin/sail build --no-cache
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Configure cors
 
-## Code of Conduct
+```php
+// config/cors.php
+//...
+'allowed_origins' => [env('FRONTEND_URL', 'http://localhost:3000')],
+//...
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Configure .env file
 
-## Security Vulnerabilities
+```.env
+APP_URL=http://localhost:80
+FRONTEND_URL=http://localhost:3000
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Start the application (this is a watch like mode, leave this running and continue in another tab from your terminal for the rest of the instructions)
 
-## License
+```bash
+./vendor/bin/sail up
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Migrate the DB
+
+```bash
+./vendor/bin/sail artisan migrate
+```
+
+- checking versions
+
+```bash
+./vendor/bin/sail php --version
+./vendor/bin/sail artisan --version
+./vendor/bin/sail composer --version
+./vendor/bin/sail npm --version
+```
+
+- If you go to the browser to `http://localhost/` you should see something similar to:
+
+```json
+{"Laravel":"12.1.1"}
+```
+
+- Follow the instructions from [ipc-nextjs-frontend](https://github.com/cvarela0702/ipc-nextjs-frontend)
+
+## Important commands
+
+- Laravel migrate
+
+```bash
+./vendor/bin/sail artisan migrate
+```
+
+- Laravel migrate fresh
+
+```bash
+./vendor/bin/sail artisan migrate:fresh
+```
+
+- Laravel scout sync
+
+```bash
+./vendor/bin/sail artisan scout:sync-index-settings
+```
+
+- Laravel seed DB
+
+```bash
+./vendor/bin/sail artisan db:seed --class=SampleDataSeeder
+```
+
+- Laravel scout import models
+
+```bash
+./vendor/bin/sail artisan scout:import "App\Models\Recipe"
+```
+
+- Flush to clean if needed
+
+```bash
+./vendor/bin/sail artisan scout:flush "App\Models\Recipe"
+```
+
+
+- Laravel tests
+
+```bash
+./vendor/bin/sail artisan test
+```
+
+- DB access
+
+```bash
+mycli -usail laravel
+```
