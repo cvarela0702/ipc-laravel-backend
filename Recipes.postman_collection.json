@@ -1,0 +1,3384 @@
+{
+	"info": {
+		"_postman_id": "6bde45a5-a8d3-4e45-b233-7c7662cb0d27",
+		"name": "Recipes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1758474"
+	},
+	"item": [
+		{
+			"name": "REST",
+			"item": [
+				{
+					"name": "Recipes",
+					"item": [
+						{
+							"name": "All recipes",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost/api/recipes",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recipes"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								},
+								"description": "### GET /api/recipes\n\nThis endpoint retrieves a list of recipes.\n\n#### Request\n\nNo request body is required for this GET request.\n\n##### Headers\n\nNo specific headers are required for this request.\n\n##### Authorization\n\nNo authorization is required for this request.\n\n#### Response\n\nThe response for this request is a list of recipes in JSON format.\n\n##### Body\n\nThe response body contains an array of recipe objects, where each recipe object has the following properties:\n\n- `recipeId` (string)\n    \n- `name` (string)\n    \n- `description` (string)\n    \n- `ingredients` (array of strings)\n    \n- `instructions` (string)\n    \n\nExample response body:\n\n``` json\n[\n  {\n    \"recipeId\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"ingredients\": [\"string1\", \"string2\"],\n    \"instructions\": \"string\"\n  },\n  {\n    \"recipeId\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"ingredients\": [\"string1\", \"string2\"],\n    \"instructions\": \"string\"\n  }\n]\n\n ```\n\nThe response schema for the list of recipes can be defined as follows:\n\n``` json\n{\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"recipeId\": {\n        \"type\": \"string\"\n      },\n      \"name\": {\n        \"type\": \"string\"\n      },\n      \"description\": {\n        \"type\": \"string\"\n      },\n      \"ingredients\": {\n        \"type\": \"array\",\n        \"items\": {\n          \"type\": \"string\"\n        }\n      },\n      \"instructions\": {\n        \"type\": \"string\"\n      }\n    }\n  }\n}\n\n ```"
+							},
+							"response": []
+						},
+						{
+							"name": "Search recipe",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost/api/recipes/search?query=mexi",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recipes",
+										"search"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										},
+										{
+											"key": "query",
+											"value": "mexi"
+										}
+									]
+								},
+								"description": "This endpoint makes an HTTP GET request to localhost/api/recipes/search to search for recipes based on the provided query parameter. The query parameter \"query\" is used to specify the search term. The response of this request is documented as a JSON schema."
+							},
+							"response": []
+						},
+						{
+							"name": "Get recipe by id",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost/api/recipes/2",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recipes",
+										"2"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get recipe by slug",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost/api/recipes/slug/spaghetti-carbonara",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recipes",
+										"slug",
+										"spaghetti-carbonara"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get recipe by category slug",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost/api/recipes/category-slug/italian",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recipes",
+										"category-slug",
+										"italian"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete recipe by id",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost/api/recipes/7",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recipes",
+										"7"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete recipe by slug",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost/api/recipes/slug/from-postman",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recipes",
+										"slug",
+										"from-postman"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Save recipe",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": 1,\n    \"title\": \"From postman 4\",\n    \"description\": \"Test\",\n    \"ingredients\": \"one, dos, trois, vier\",\n    \"instructions\": \"cook and it will be ready\",\n    \"image_url\": \"http://localhost:3000/images/recipes/no-dish-placeholder.jpeg\",\n    \"slug\": \"from-postman-4\",\n    \"servings\": 4,\n    \"prep_time_hours\": 0,\n    \"prep_time_minutes\": 30,\n    \"cook_time_hours\": 1,\n    \"cook_time_minutes\": 0,\n    \"calories\": 500,\n    \"categories\": [1, 2]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/recipes",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recipes"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update recipe",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Origin",
+										"value": "http://localhost",
+										"type": "text"
+									},
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": 1,\n    \"title\": \"From postman\",\n    \"description\": \"Test\",\n    \"ingredients\": \"one, dos, trois, vier\",\n    \"instructions\": \"cook and it will be ready\",\n    \"image_url\": \"http://localhost:3000/images/recipes/no-dish-placeholder.jpeg\",\n    \"video_url\": \"http://localhost:3000/images/recipes/no-video-placeholder.mp4\",\n    \"slug\": \"from-postman\",\n    \"servings\": 4,\n    \"prep_time_hours\": 0,\n    \"prep_time_minutes\": 30,\n    \"cook_time_hours\": 1,\n    \"cook_time_minutes\": 0,\n    \"calories\": 500\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/recipes/11",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recipes",
+										"11"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update recipe by slug",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Origin",
+										"value": "http://localhost",
+										"type": "text"
+									},
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": 1,\n    \"title\": \"From postman\",\n    \"description\": \"Test\",\n    \"ingredients\": \"one, dos, trois, vier\",\n    \"instructions\": \"cook and it will be ready\",\n    \"image_url\": \"http://localhost:3000/images/recipes/no-dish-placeholder.jpeg\",\n    \"video_url\": \"http://localhost:3000/images/recipes/no-video-placeholder.mp4\",\n    \"slug\": \"from-postman\",\n    \"servings\": 4,\n    \"prep_time_hours\": 0,\n    \"prep_time_minutes\": 30,\n    \"cook_time_hours\": 1,\n    \"cook_time_minutes\": 0,\n    \"calories\": 500\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/recipes/slug/from-postman?XDEBUG_SESSION_START=PHPSTORM",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recipes",
+										"slug",
+										"from-postman"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Categories",
+					"item": [
+						{
+							"name": "All categories",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost/api/categories",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categories"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search category",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost/api/categories/search?query=mex",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categories",
+										"search"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										},
+										{
+											"key": "query",
+											"value": "mex"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get category by id",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost/api/categories/2",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categories",
+										"2"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete category by id",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost/api/categories/7?XDEBUG_SESSION_START=PHPSTORM",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categories",
+										"7"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Save category",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": 1,\n    \"title\": \"From postman\",\n    \"description\": \"Test\",\n    \"ingredients\": \"one, dos, trois, vier\",\n    \"instructions\": \"cook and it will be ready\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/categories",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categories"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update category",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Origin",
+										"value": "http://localhost",
+										"type": "text"
+									},
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": 1,\n    \"title\": \"From postman 5\",\n    \"description\": \"Test\",\n    \"ingredients\": \"one, dos, trois, vier\",\n    \"instructions\": \"cook and it will be ready\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/categories/10",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"categories",
+										"10"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Ratings",
+					"item": [
+						{
+							"name": "Set rating",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"recipe_id\": 10,\n    \"stars\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/ratings",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"ratings"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-XSRF-TOKEN",
+												"value": "{{XSRF-TOKEN}}",
+												"type": "text"
+											},
+											{
+												"key": "Origin",
+												"value": "http://localhost:3000",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"recipe_id\": 4,\n    \"stars\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost/api/ratings",
+											"host": [
+												"localhost"
+											],
+											"path": [
+												"api",
+												"ratings"
+											],
+											"query": [
+												{
+													"key": "XDEBUG_SESSION_START",
+													"value": "PHPSTORM",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.4.5"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 31 Mar 2025 22:38:03 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "XSRF-TOKEN=eyJpdiI6ImtkSFZJaDgyZFZVR09lOXRxQmhZelE9PSIsInZhbHVlIjoiclBrSUlZNjNJWC9lcCtUM1h1ZnYzdVhSemorenBBSnJpdUdXLzNkSnVZY3dXMTJiRDFBdzJMcE8zYXVla2RsZXJxaWQwSGZsKzVWR253MDJrakZKOU1VY3FHbktocmd0MlpDRXBuTnF6by9UZXNMcGlpdm9QUUtzaTA3bSs1UVQiLCJtYWMiOiJkN2JmNzk3YWM2MzNjMDJlYTIyMWJlYWRmNDQyODcyYmYzYTA0MTVmMmY4Y2YyNGQ0ZjhiMDc2YTExYzFhNmFhIiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:38:03 GMT; Max-Age=7200; path=/; samesite=lax"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6Ilo1QklaUWY1WDdENjVRVlI4VGpjVFE9PSIsInZhbHVlIjoiQllTa2w4blVuUXFndnVXU1Q5NWw0bDB6QlROeFRaK1Rpd3RnbExKd0Nha2NGcU9CdTdkckNCS3YySkt2N3FBeTBMWjRsSnk2YUlQZUhTK043MnFzYkpGSXNUMXBaaEpZbTIwWDhIaVdxZFhxelFVNTc2Q0hTYlUzaHhEdFQ0QkYiLCJtYWMiOiI0MmIzN2NmNTJmNTEwNTJhNDNlZTE1Yzg4YmRiYWE4YTk1NGZhNjcwMzhjMTI5NDVhYzBlYzg3MzAzMTI3MGQ1IiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:38:03 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"recipe_id\": 4,\n    \"stars\": 1,\n    \"user_id\": 11,\n    \"updated_at\": \"2025-03-31T22:38:03.000000Z\",\n    \"created_at\": \"2025-03-31T22:38:03.000000Z\",\n    \"id\": 4,\n    \"recipe\": {\n        \"id\": 4,\n        \"user_id\": 4,\n        \"title\": \"Chicken Alfredo\",\n        \"description\": \"An Italian pasta dish made with chicken in a creamy Alfredo sauce.\",\n        \"ingredients\": \"Chicken, pasta, cream, cheese\",\n        \"instructions\": \"Cook pasta. Cook chicken. Add cream and cheese.\",\n        \"created_at\": \"2025-03-31T21:30:05.000000Z\",\n        \"updated_at\": \"2025-03-31T22:38:03.000000Z\",\n        \"slug\": \"chicken-alfredo\",\n        \"image_url\": \"http://localhost:3000/images/recipes/chicken-alfredo.jpeg\",\n        \"video_url\": \"http://localhost:3000/videos/recipes/chicken-alfredo.mp4\",\n        \"servings\": 4,\n        \"prep_time_hours\": 0,\n        \"prep_time_minutes\": 15,\n        \"cook_time_hours\": 0,\n        \"cook_time_minutes\": 20,\n        \"calories\": 800,\n        \"ratings_count\": 1,\n        \"ratings_sum\": 0,\n        \"ratings_avg\": 1,\n        \"favorites_count\": 0,\n        \"categories\": [\n            {\n                \"id\": 2,\n                \"name\": \"Italian\",\n                \"created_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"updated_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"slug\": \"italian\",\n                \"description\": \"Authentic Italian dishes\",\n                \"image\": \"http://localhost:3000/images/categories/italian.svg\",\n                \"pivot\": {\n                    \"recipe_id\": 4,\n                    \"category_id\": 2\n                }\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Low Carb\",\n                \"created_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"updated_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"slug\": \"low-carb\",\n                \"description\": \"Low carbohydrate meals\",\n                \"image\": \"http://localhost:3000/images/categories/low-carb.svg\",\n                \"pivot\": {\n                    \"recipe_id\": 4,\n                    \"category_id\": 4\n                }\n            }\n        ]\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete rating",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost/api/ratings/8",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"ratings",
+										"8"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-XSRF-TOKEN",
+												"value": "{{XSRF-TOKEN}}",
+												"type": "text"
+											},
+											{
+												"key": "Origin",
+												"value": "http://localhost:3000",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"recipe_id\": 4,\n    \"stars\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost/api/ratings",
+											"host": [
+												"localhost"
+											],
+											"path": [
+												"api",
+												"ratings"
+											],
+											"query": [
+												{
+													"key": "XDEBUG_SESSION_START",
+													"value": "PHPSTORM",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.4.5"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 31 Mar 2025 22:38:03 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "XSRF-TOKEN=eyJpdiI6ImtkSFZJaDgyZFZVR09lOXRxQmhZelE9PSIsInZhbHVlIjoiclBrSUlZNjNJWC9lcCtUM1h1ZnYzdVhSemorenBBSnJpdUdXLzNkSnVZY3dXMTJiRDFBdzJMcE8zYXVla2RsZXJxaWQwSGZsKzVWR253MDJrakZKOU1VY3FHbktocmd0MlpDRXBuTnF6by9UZXNMcGlpdm9QUUtzaTA3bSs1UVQiLCJtYWMiOiJkN2JmNzk3YWM2MzNjMDJlYTIyMWJlYWRmNDQyODcyYmYzYTA0MTVmMmY4Y2YyNGQ0ZjhiMDc2YTExYzFhNmFhIiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:38:03 GMT; Max-Age=7200; path=/; samesite=lax"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6Ilo1QklaUWY1WDdENjVRVlI4VGpjVFE9PSIsInZhbHVlIjoiQllTa2w4blVuUXFndnVXU1Q5NWw0bDB6QlROeFRaK1Rpd3RnbExKd0Nha2NGcU9CdTdkckNCS3YySkt2N3FBeTBMWjRsSnk2YUlQZUhTK043MnFzYkpGSXNUMXBaaEpZbTIwWDhIaVdxZFhxelFVNTc2Q0hTYlUzaHhEdFQ0QkYiLCJtYWMiOiI0MmIzN2NmNTJmNTEwNTJhNDNlZTE1Yzg4YmRiYWE4YTk1NGZhNjcwMzhjMTI5NDVhYzBlYzg3MzAzMTI3MGQ1IiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:38:03 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"recipe_id\": 4,\n    \"stars\": 1,\n    \"user_id\": 11,\n    \"updated_at\": \"2025-03-31T22:38:03.000000Z\",\n    \"created_at\": \"2025-03-31T22:38:03.000000Z\",\n    \"id\": 4,\n    \"recipe\": {\n        \"id\": 4,\n        \"user_id\": 4,\n        \"title\": \"Chicken Alfredo\",\n        \"description\": \"An Italian pasta dish made with chicken in a creamy Alfredo sauce.\",\n        \"ingredients\": \"Chicken, pasta, cream, cheese\",\n        \"instructions\": \"Cook pasta. Cook chicken. Add cream and cheese.\",\n        \"created_at\": \"2025-03-31T21:30:05.000000Z\",\n        \"updated_at\": \"2025-03-31T22:38:03.000000Z\",\n        \"slug\": \"chicken-alfredo\",\n        \"image_url\": \"http://localhost:3000/images/recipes/chicken-alfredo.jpeg\",\n        \"video_url\": \"http://localhost:3000/videos/recipes/chicken-alfredo.mp4\",\n        \"servings\": 4,\n        \"prep_time_hours\": 0,\n        \"prep_time_minutes\": 15,\n        \"cook_time_hours\": 0,\n        \"cook_time_minutes\": 20,\n        \"calories\": 800,\n        \"ratings_count\": 1,\n        \"ratings_sum\": 0,\n        \"ratings_avg\": 1,\n        \"favorites_count\": 0,\n        \"categories\": [\n            {\n                \"id\": 2,\n                \"name\": \"Italian\",\n                \"created_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"updated_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"slug\": \"italian\",\n                \"description\": \"Authentic Italian dishes\",\n                \"image\": \"http://localhost:3000/images/categories/italian.svg\",\n                \"pivot\": {\n                    \"recipe_id\": 4,\n                    \"category_id\": 2\n                }\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Low Carb\",\n                \"created_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"updated_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"slug\": \"low-carb\",\n                \"description\": \"Low carbohydrate meals\",\n                \"image\": \"http://localhost:3000/images/categories/low-carb.svg\",\n                \"pivot\": {\n                    \"recipe_id\": 4,\n                    \"category_id\": 4\n                }\n            }\n        ]\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Edit rating",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"recipe_id\": 10,\n    \"stars\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/ratings/8?XDEBUG_SESSION_START=PHPSTORM",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"ratings",
+										"8"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "X-XSRF-TOKEN",
+												"value": "{{XSRF-TOKEN}}",
+												"type": "text"
+											},
+											{
+												"key": "Origin",
+												"value": "http://localhost:3000",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"recipe_id\": 4,\n    \"stars\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost/api/ratings/4",
+											"host": [
+												"localhost"
+											],
+											"path": [
+												"api",
+												"ratings",
+												"4"
+											],
+											"query": [
+												{
+													"key": "XDEBUG_SESSION_START",
+													"value": "PHPSTORM",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.4.5"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 31 Mar 2025 22:40:41 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "XSRF-TOKEN=eyJpdiI6InB5SXArRENZWjFIRldiSW5ONjBlR1E9PSIsInZhbHVlIjoiQlNobjJ2dWY5RkJvejl1OEsxZERteTVFVmpDNHA0bzFpQ3UxcHVwN1dITnJ6eU9TWlhFWG9XTmxpUDZEczY4REFvalBON05jajI5dmRlMGZoaExuQVlta3htdXFyUW9lbndCQ0I1czFhK0VielFBWTZFZDZwb3NEOG5QTVNLVDQiLCJtYWMiOiJiYTE3OTUwMzkyY2U0NjI5NjFlZGRhYzQ0M2IwOWE3N2M0ZTcyMGMxNWY4YWQxMjc4ZmY0YTBiNzIzNmY4MmQ1IiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:40:41 GMT; Max-Age=7200; path=/; samesite=lax"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6ImpJVDdPL0luSW9NQWoyWmV5NlJmQ2c9PSIsInZhbHVlIjoiUTdFWnFIakg1YWtpUVM4Vmc2WmJxSnhKbmZZWWFhSnJaU3pRQjRZUzZuSjQzZEhBdEQ1ZE84SC9ZdzNoYW94a2YzMkhXVmpBSnNjR3h0MldHSjVsaVZ3YWRzdHlTbmhnM29KV2xYbVdhYTdmcGtIVXZaeE1NMmxTU2Jmb0Y2T3AiLCJtYWMiOiI4NzhjOWY5ZmZlMmJjMTRiZTRkZGZhZGUxYjdlYjRiMWI2YzU5ZThkNGE2ODIxZWNiNDZkMmNlOWMyOGU3YTRjIiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:40:41 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 4,\n    \"user_id\": 11,\n    \"recipe_id\": 4,\n    \"stars\": 2,\n    \"created_at\": \"2025-03-31T22:38:03.000000Z\",\n    \"updated_at\": \"2025-03-31T22:40:41.000000Z\",\n    \"recipe\": {\n        \"id\": 4,\n        \"user_id\": 4,\n        \"title\": \"Chicken Alfredo\",\n        \"description\": \"An Italian pasta dish made with chicken in a creamy Alfredo sauce.\",\n        \"ingredients\": \"Chicken, pasta, cream, cheese\",\n        \"instructions\": \"Cook pasta. Cook chicken. Add cream and cheese.\",\n        \"created_at\": \"2025-03-31T21:30:05.000000Z\",\n        \"updated_at\": \"2025-03-31T22:40:41.000000Z\",\n        \"slug\": \"chicken-alfredo\",\n        \"image_url\": \"http://localhost:3000/images/recipes/chicken-alfredo.jpeg\",\n        \"video_url\": \"http://localhost:3000/videos/recipes/chicken-alfredo.mp4\",\n        \"servings\": 4,\n        \"prep_time_hours\": 0,\n        \"prep_time_minutes\": 15,\n        \"cook_time_hours\": 0,\n        \"cook_time_minutes\": 20,\n        \"calories\": 800,\n        \"ratings_count\": 1,\n        \"ratings_sum\": 0,\n        \"ratings_avg\": 0,\n        \"favorites_count\": 0,\n        \"categories\": [\n            {\n                \"id\": 2,\n                \"name\": \"Italian\",\n                \"created_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"updated_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"slug\": \"italian\",\n                \"description\": \"Authentic Italian dishes\",\n                \"image\": \"http://localhost:3000/images/categories/italian.svg\",\n                \"pivot\": {\n                    \"recipe_id\": 4,\n                    \"category_id\": 2\n                }\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Low Carb\",\n                \"created_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"updated_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"slug\": \"low-carb\",\n                \"description\": \"Low carbohydrate meals\",\n                \"image\": \"http://localhost:3000/images/categories/low-carb.svg\",\n                \"pivot\": {\n                    \"recipe_id\": 4,\n                    \"category_id\": 4\n                }\n            }\n        ]\n    }\n}"
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "X-XSRF-TOKEN",
+												"value": "{{XSRF-TOKEN}}",
+												"type": "text"
+											},
+											{
+												"key": "Origin",
+												"value": "http://localhost:3000",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"recipe_id\": 2,\n    \"stars\": 4\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost/api/ratings/2",
+											"host": [
+												"localhost"
+											],
+											"path": [
+												"api",
+												"ratings",
+												"2"
+											],
+											"query": [
+												{
+													"key": "XDEBUG_SESSION_START",
+													"value": "PHPSTORM",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.4.5"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 31 Mar 2025 22:45:43 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "XSRF-TOKEN=eyJpdiI6ImhVUmp3Vjd0Mk1xQW1Cb2xEMFF2NXc9PSIsInZhbHVlIjoiMEZUcHdEaTRrc1F0dzg0ZC9jOHVLcTl5SkI5T0RVL1FpTTJsdXZKSk11U1p2ZjVtUUxGd082OFIrVjdVM0xyWGNCODVyOGRmMnMzYzRwejIzYzdWZnF1bDFyRm9SUitDNXJ5VUJiSm9GZXlBZzRCMWU4UzBSMzUwM002ZG53RlIiLCJtYWMiOiJjOTBiMTQyZWMwNDIzNDk2ZDJiYTFkNTliZmY3NjcxZGVmMjcyZjRhMWViOWY3NzQ1ODJlZDAwMTNkMWYwZGU5IiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:45:43 GMT; Max-Age=7200; path=/; samesite=lax"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6Ikx4QWRsN0hLbE5tNVZYUUxFTjhjeWc9PSIsInZhbHVlIjoiZTBVdFJsT0JaSTFMSWxVS0Z2aWZqRkc5YWZQelpzMEhNbFVSSjdzeUJ1ck9tcG1XNTFQVlQ1S3k3V0EyR2UvRWhvb1B4d3FoYjRaWHRPMDQrNnZzcEZOMTZobEdTYmNIOWNiaXZIT0JqNFVRNzRYYXA0T044UE9sSHhGeFFUQ3MiLCJtYWMiOiJkOTgwNzEwNTIwMjk1YTVmNzRlNGIyZjY1MGFkYzliYTU1NzY0MjYwM2YxOGI4Y2MxZDc2ZWI0YjdkZmEyNGNmIiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:45:43 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"This action is unauthorized.\",\n    \"exception\": \"Symfony\\\\Component\\\\HttpKernel\\\\Exception\\\\AccessDeniedHttpException\",\n    \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php\",\n    \"line\": 640,\n    \"trace\": [\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php\",\n            \"line\": 584,\n            \"function\": \"prepareException\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Exceptions\\\\Handler\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php\",\n            \"line\": 51,\n            \"function\": \"render\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Exceptions\\\\Handler\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 172,\n            \"function\": \"handleException\",\n            \"class\": \"Illuminate\\\\Routing\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php\",\n            \"line\": 51,\n            \"function\": \"{closure:Illuminate\\\\Pipeline\\\\Pipeline::prepareDestination():168}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\SubstituteBindings\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php\",\n            \"line\": 64,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Auth\\\\Middleware\\\\Authenticate\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php\",\n            \"line\": 25,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 170,\n            \"function\": \"{closure:Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful::handle():24}\",\n            \"class\": \"Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/sanctum/src/Http/Middleware/AuthenticateSession.php\",\n            \"line\": 66,\n            \"function\": \"{closure:Illuminate\\\\Pipeline\\\\Pipeline::prepareDestination():168}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\AuthenticateSession\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php\",\n            \"line\": 88,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\VerifyCsrfToken\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php\",\n            \"line\": 121,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php\",\n            \"line\": 64,\n            \"function\": \"handleStatefulRequest\",\n            \"class\": \"Illuminate\\\\Session\\\\Middleware\\\\StartSession\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Session\\\\Middleware\\\\StartSession\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php\",\n            \"line\": 37,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Cookie\\\\Middleware\\\\AddQueuedCookiesToResponse\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php\",\n            \"line\": 75,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Cookie\\\\Middleware\\\\EncryptCookies\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php\",\n            \"line\": 60,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 191,\n            \"function\": \"{closure:Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful::frontendMiddleware():57}\",\n            \"class\": \"Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 127,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php\",\n            \"line\": 24,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 127,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php\",\n            \"line\": 807,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php\",\n            \"line\": 786,\n            \"function\": \"runRouteWithinStack\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php\",\n            \"line\": 750,\n            \"function\": \"runRoute\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php\",\n            \"line\": 739,\n            \"function\": \"dispatchToRoute\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php\",\n            \"line\": 201,\n            \"function\": \"dispatch\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 170,\n            \"function\": \"{closure:Illuminate\\\\Foundation\\\\Http\\\\Kernel::dispatchToRouter():198}\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php\",\n            \"line\": 21,\n            \"function\": \"{closure:Illuminate\\\\Pipeline\\\\Pipeline::prepareDestination():168}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php\",\n            \"line\": 31,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ConvertEmptyStringsToNull\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php\",\n            \"line\": 21,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php\",\n            \"line\": 51,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TrimStrings\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php\",\n            \"line\": 27,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\ValidatePostSize\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php\",\n            \"line\": 110,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\PreventRequestsDuringMaintenance\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php\",\n            \"line\": 62,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\HandleCors\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php\",\n            \"line\": 58,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\TrustProxies\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php\",\n            \"line\": 22,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\InvokeDeferredCallbacks\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php\",\n            \"line\": 26,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\ValidatePathEncoding\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 127,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php\",\n            \"line\": 176,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php\",\n            \"line\": 145,\n            \"function\": \"sendRequestThroughRouter\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php\",\n            \"line\": 1220,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/public/index.php\",\n            \"line\": 20,\n            \"function\": \"handleRequest\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Application\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php\",\n            \"line\": 23,\n            \"function\": \"require_once\"\n        }\n    ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Comments",
+					"item": [
+						{
+							"name": "Get comments",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost/api/comments/",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"comments",
+										""
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-XSRF-TOKEN",
+												"value": "{{XSRF-TOKEN}}",
+												"type": "text"
+											},
+											{
+												"key": "Origin",
+												"value": "http://localhost:3000",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"recipe_id\": 4,\n    \"stars\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost/api/ratings",
+											"host": [
+												"localhost"
+											],
+											"path": [
+												"api",
+												"ratings"
+											],
+											"query": [
+												{
+													"key": "XDEBUG_SESSION_START",
+													"value": "PHPSTORM",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.4.5"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 31 Mar 2025 22:38:03 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "XSRF-TOKEN=eyJpdiI6ImtkSFZJaDgyZFZVR09lOXRxQmhZelE9PSIsInZhbHVlIjoiclBrSUlZNjNJWC9lcCtUM1h1ZnYzdVhSemorenBBSnJpdUdXLzNkSnVZY3dXMTJiRDFBdzJMcE8zYXVla2RsZXJxaWQwSGZsKzVWR253MDJrakZKOU1VY3FHbktocmd0MlpDRXBuTnF6by9UZXNMcGlpdm9QUUtzaTA3bSs1UVQiLCJtYWMiOiJkN2JmNzk3YWM2MzNjMDJlYTIyMWJlYWRmNDQyODcyYmYzYTA0MTVmMmY4Y2YyNGQ0ZjhiMDc2YTExYzFhNmFhIiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:38:03 GMT; Max-Age=7200; path=/; samesite=lax"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6Ilo1QklaUWY1WDdENjVRVlI4VGpjVFE9PSIsInZhbHVlIjoiQllTa2w4blVuUXFndnVXU1Q5NWw0bDB6QlROeFRaK1Rpd3RnbExKd0Nha2NGcU9CdTdkckNCS3YySkt2N3FBeTBMWjRsSnk2YUlQZUhTK043MnFzYkpGSXNUMXBaaEpZbTIwWDhIaVdxZFhxelFVNTc2Q0hTYlUzaHhEdFQ0QkYiLCJtYWMiOiI0MmIzN2NmNTJmNTEwNTJhNDNlZTE1Yzg4YmRiYWE4YTk1NGZhNjcwMzhjMTI5NDVhYzBlYzg3MzAzMTI3MGQ1IiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:38:03 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"recipe_id\": 4,\n    \"stars\": 1,\n    \"user_id\": 11,\n    \"updated_at\": \"2025-03-31T22:38:03.000000Z\",\n    \"created_at\": \"2025-03-31T22:38:03.000000Z\",\n    \"id\": 4,\n    \"recipe\": {\n        \"id\": 4,\n        \"user_id\": 4,\n        \"title\": \"Chicken Alfredo\",\n        \"description\": \"An Italian pasta dish made with chicken in a creamy Alfredo sauce.\",\n        \"ingredients\": \"Chicken, pasta, cream, cheese\",\n        \"instructions\": \"Cook pasta. Cook chicken. Add cream and cheese.\",\n        \"created_at\": \"2025-03-31T21:30:05.000000Z\",\n        \"updated_at\": \"2025-03-31T22:38:03.000000Z\",\n        \"slug\": \"chicken-alfredo\",\n        \"image_url\": \"http://localhost:3000/images/recipes/chicken-alfredo.jpeg\",\n        \"video_url\": \"http://localhost:3000/videos/recipes/chicken-alfredo.mp4\",\n        \"servings\": 4,\n        \"prep_time_hours\": 0,\n        \"prep_time_minutes\": 15,\n        \"cook_time_hours\": 0,\n        \"cook_time_minutes\": 20,\n        \"calories\": 800,\n        \"ratings_count\": 1,\n        \"ratings_sum\": 0,\n        \"ratings_avg\": 1,\n        \"favorites_count\": 0,\n        \"categories\": [\n            {\n                \"id\": 2,\n                \"name\": \"Italian\",\n                \"created_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"updated_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"slug\": \"italian\",\n                \"description\": \"Authentic Italian dishes\",\n                \"image\": \"http://localhost:3000/images/categories/italian.svg\",\n                \"pivot\": {\n                    \"recipe_id\": 4,\n                    \"category_id\": 2\n                }\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Low Carb\",\n                \"created_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"updated_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"slug\": \"low-carb\",\n                \"description\": \"Low carbohydrate meals\",\n                \"image\": \"http://localhost:3000/images/categories/low-carb.svg\",\n                \"pivot\": {\n                    \"recipe_id\": 4,\n                    \"category_id\": 4\n                }\n            }\n        ]\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get replies",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost/api/comments/1/replies",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"comments",
+										"1",
+										"replies"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-XSRF-TOKEN",
+												"value": "{{XSRF-TOKEN}}",
+												"type": "text"
+											},
+											{
+												"key": "Origin",
+												"value": "http://localhost:3000",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"recipe_id\": 4,\n    \"stars\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost/api/ratings",
+											"host": [
+												"localhost"
+											],
+											"path": [
+												"api",
+												"ratings"
+											],
+											"query": [
+												{
+													"key": "XDEBUG_SESSION_START",
+													"value": "PHPSTORM",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.4.5"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 31 Mar 2025 22:38:03 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "XSRF-TOKEN=eyJpdiI6ImtkSFZJaDgyZFZVR09lOXRxQmhZelE9PSIsInZhbHVlIjoiclBrSUlZNjNJWC9lcCtUM1h1ZnYzdVhSemorenBBSnJpdUdXLzNkSnVZY3dXMTJiRDFBdzJMcE8zYXVla2RsZXJxaWQwSGZsKzVWR253MDJrakZKOU1VY3FHbktocmd0MlpDRXBuTnF6by9UZXNMcGlpdm9QUUtzaTA3bSs1UVQiLCJtYWMiOiJkN2JmNzk3YWM2MzNjMDJlYTIyMWJlYWRmNDQyODcyYmYzYTA0MTVmMmY4Y2YyNGQ0ZjhiMDc2YTExYzFhNmFhIiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:38:03 GMT; Max-Age=7200; path=/; samesite=lax"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6Ilo1QklaUWY1WDdENjVRVlI4VGpjVFE9PSIsInZhbHVlIjoiQllTa2w4blVuUXFndnVXU1Q5NWw0bDB6QlROeFRaK1Rpd3RnbExKd0Nha2NGcU9CdTdkckNCS3YySkt2N3FBeTBMWjRsSnk2YUlQZUhTK043MnFzYkpGSXNUMXBaaEpZbTIwWDhIaVdxZFhxelFVNTc2Q0hTYlUzaHhEdFQ0QkYiLCJtYWMiOiI0MmIzN2NmNTJmNTEwNTJhNDNlZTE1Yzg4YmRiYWE4YTk1NGZhNjcwMzhjMTI5NDVhYzBlYzg3MzAzMTI3MGQ1IiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:38:03 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"recipe_id\": 4,\n    \"stars\": 1,\n    \"user_id\": 11,\n    \"updated_at\": \"2025-03-31T22:38:03.000000Z\",\n    \"created_at\": \"2025-03-31T22:38:03.000000Z\",\n    \"id\": 4,\n    \"recipe\": {\n        \"id\": 4,\n        \"user_id\": 4,\n        \"title\": \"Chicken Alfredo\",\n        \"description\": \"An Italian pasta dish made with chicken in a creamy Alfredo sauce.\",\n        \"ingredients\": \"Chicken, pasta, cream, cheese\",\n        \"instructions\": \"Cook pasta. Cook chicken. Add cream and cheese.\",\n        \"created_at\": \"2025-03-31T21:30:05.000000Z\",\n        \"updated_at\": \"2025-03-31T22:38:03.000000Z\",\n        \"slug\": \"chicken-alfredo\",\n        \"image_url\": \"http://localhost:3000/images/recipes/chicken-alfredo.jpeg\",\n        \"video_url\": \"http://localhost:3000/videos/recipes/chicken-alfredo.mp4\",\n        \"servings\": 4,\n        \"prep_time_hours\": 0,\n        \"prep_time_minutes\": 15,\n        \"cook_time_hours\": 0,\n        \"cook_time_minutes\": 20,\n        \"calories\": 800,\n        \"ratings_count\": 1,\n        \"ratings_sum\": 0,\n        \"ratings_avg\": 1,\n        \"favorites_count\": 0,\n        \"categories\": [\n            {\n                \"id\": 2,\n                \"name\": \"Italian\",\n                \"created_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"updated_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"slug\": \"italian\",\n                \"description\": \"Authentic Italian dishes\",\n                \"image\": \"http://localhost:3000/images/categories/italian.svg\",\n                \"pivot\": {\n                    \"recipe_id\": 4,\n                    \"category_id\": 2\n                }\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Low Carb\",\n                \"created_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"updated_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"slug\": \"low-carb\",\n                \"description\": \"Low carbohydrate meals\",\n                \"image\": \"http://localhost:3000/images/categories/low-carb.svg\",\n                \"pivot\": {\n                    \"recipe_id\": 4,\n                    \"category_id\": 4\n                }\n            }\n        ]\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get comments by recipe slug",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost/api/comments/recipe-slug/spaghetti-carbonara",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"comments",
+										"recipe-slug",
+										"spaghetti-carbonara"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-XSRF-TOKEN",
+												"value": "{{XSRF-TOKEN}}",
+												"type": "text"
+											},
+											{
+												"key": "Origin",
+												"value": "http://localhost:3000",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"recipe_id\": 4,\n    \"stars\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost/api/ratings",
+											"host": [
+												"localhost"
+											],
+											"path": [
+												"api",
+												"ratings"
+											],
+											"query": [
+												{
+													"key": "XDEBUG_SESSION_START",
+													"value": "PHPSTORM",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.4.5"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 31 Mar 2025 22:38:03 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "XSRF-TOKEN=eyJpdiI6ImtkSFZJaDgyZFZVR09lOXRxQmhZelE9PSIsInZhbHVlIjoiclBrSUlZNjNJWC9lcCtUM1h1ZnYzdVhSemorenBBSnJpdUdXLzNkSnVZY3dXMTJiRDFBdzJMcE8zYXVla2RsZXJxaWQwSGZsKzVWR253MDJrakZKOU1VY3FHbktocmd0MlpDRXBuTnF6by9UZXNMcGlpdm9QUUtzaTA3bSs1UVQiLCJtYWMiOiJkN2JmNzk3YWM2MzNjMDJlYTIyMWJlYWRmNDQyODcyYmYzYTA0MTVmMmY4Y2YyNGQ0ZjhiMDc2YTExYzFhNmFhIiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:38:03 GMT; Max-Age=7200; path=/; samesite=lax"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6Ilo1QklaUWY1WDdENjVRVlI4VGpjVFE9PSIsInZhbHVlIjoiQllTa2w4blVuUXFndnVXU1Q5NWw0bDB6QlROeFRaK1Rpd3RnbExKd0Nha2NGcU9CdTdkckNCS3YySkt2N3FBeTBMWjRsSnk2YUlQZUhTK043MnFzYkpGSXNUMXBaaEpZbTIwWDhIaVdxZFhxelFVNTc2Q0hTYlUzaHhEdFQ0QkYiLCJtYWMiOiI0MmIzN2NmNTJmNTEwNTJhNDNlZTE1Yzg4YmRiYWE4YTk1NGZhNjcwMzhjMTI5NDVhYzBlYzg3MzAzMTI3MGQ1IiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:38:03 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"recipe_id\": 4,\n    \"stars\": 1,\n    \"user_id\": 11,\n    \"updated_at\": \"2025-03-31T22:38:03.000000Z\",\n    \"created_at\": \"2025-03-31T22:38:03.000000Z\",\n    \"id\": 4,\n    \"recipe\": {\n        \"id\": 4,\n        \"user_id\": 4,\n        \"title\": \"Chicken Alfredo\",\n        \"description\": \"An Italian pasta dish made with chicken in a creamy Alfredo sauce.\",\n        \"ingredients\": \"Chicken, pasta, cream, cheese\",\n        \"instructions\": \"Cook pasta. Cook chicken. Add cream and cheese.\",\n        \"created_at\": \"2025-03-31T21:30:05.000000Z\",\n        \"updated_at\": \"2025-03-31T22:38:03.000000Z\",\n        \"slug\": \"chicken-alfredo\",\n        \"image_url\": \"http://localhost:3000/images/recipes/chicken-alfredo.jpeg\",\n        \"video_url\": \"http://localhost:3000/videos/recipes/chicken-alfredo.mp4\",\n        \"servings\": 4,\n        \"prep_time_hours\": 0,\n        \"prep_time_minutes\": 15,\n        \"cook_time_hours\": 0,\n        \"cook_time_minutes\": 20,\n        \"calories\": 800,\n        \"ratings_count\": 1,\n        \"ratings_sum\": 0,\n        \"ratings_avg\": 1,\n        \"favorites_count\": 0,\n        \"categories\": [\n            {\n                \"id\": 2,\n                \"name\": \"Italian\",\n                \"created_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"updated_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"slug\": \"italian\",\n                \"description\": \"Authentic Italian dishes\",\n                \"image\": \"http://localhost:3000/images/categories/italian.svg\",\n                \"pivot\": {\n                    \"recipe_id\": 4,\n                    \"category_id\": 2\n                }\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Low Carb\",\n                \"created_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"updated_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"slug\": \"low-carb\",\n                \"description\": \"Low carbohydrate meals\",\n                \"image\": \"http://localhost:3000/images/categories/low-carb.svg\",\n                \"pivot\": {\n                    \"recipe_id\": 4,\n                    \"category_id\": 4\n                }\n            }\n        ]\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Create comment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"recipe_id\": 1,\n    \"content\": \"Test from postman\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/comments?XDEBUG_SESSION_START=PHPSTORM",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"comments"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-XSRF-TOKEN",
+												"value": "{{XSRF-TOKEN}}",
+												"type": "text"
+											},
+											{
+												"key": "Origin",
+												"value": "http://localhost:3000",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"recipe_id\": 4,\n    \"stars\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost/api/ratings",
+											"host": [
+												"localhost"
+											],
+											"path": [
+												"api",
+												"ratings"
+											],
+											"query": [
+												{
+													"key": "XDEBUG_SESSION_START",
+													"value": "PHPSTORM",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.4.5"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 31 Mar 2025 22:38:03 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "XSRF-TOKEN=eyJpdiI6ImtkSFZJaDgyZFZVR09lOXRxQmhZelE9PSIsInZhbHVlIjoiclBrSUlZNjNJWC9lcCtUM1h1ZnYzdVhSemorenBBSnJpdUdXLzNkSnVZY3dXMTJiRDFBdzJMcE8zYXVla2RsZXJxaWQwSGZsKzVWR253MDJrakZKOU1VY3FHbktocmd0MlpDRXBuTnF6by9UZXNMcGlpdm9QUUtzaTA3bSs1UVQiLCJtYWMiOiJkN2JmNzk3YWM2MzNjMDJlYTIyMWJlYWRmNDQyODcyYmYzYTA0MTVmMmY4Y2YyNGQ0ZjhiMDc2YTExYzFhNmFhIiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:38:03 GMT; Max-Age=7200; path=/; samesite=lax"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6Ilo1QklaUWY1WDdENjVRVlI4VGpjVFE9PSIsInZhbHVlIjoiQllTa2w4blVuUXFndnVXU1Q5NWw0bDB6QlROeFRaK1Rpd3RnbExKd0Nha2NGcU9CdTdkckNCS3YySkt2N3FBeTBMWjRsSnk2YUlQZUhTK043MnFzYkpGSXNUMXBaaEpZbTIwWDhIaVdxZFhxelFVNTc2Q0hTYlUzaHhEdFQ0QkYiLCJtYWMiOiI0MmIzN2NmNTJmNTEwNTJhNDNlZTE1Yzg4YmRiYWE4YTk1NGZhNjcwMzhjMTI5NDVhYzBlYzg3MzAzMTI3MGQ1IiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:38:03 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"recipe_id\": 4,\n    \"stars\": 1,\n    \"user_id\": 11,\n    \"updated_at\": \"2025-03-31T22:38:03.000000Z\",\n    \"created_at\": \"2025-03-31T22:38:03.000000Z\",\n    \"id\": 4,\n    \"recipe\": {\n        \"id\": 4,\n        \"user_id\": 4,\n        \"title\": \"Chicken Alfredo\",\n        \"description\": \"An Italian pasta dish made with chicken in a creamy Alfredo sauce.\",\n        \"ingredients\": \"Chicken, pasta, cream, cheese\",\n        \"instructions\": \"Cook pasta. Cook chicken. Add cream and cheese.\",\n        \"created_at\": \"2025-03-31T21:30:05.000000Z\",\n        \"updated_at\": \"2025-03-31T22:38:03.000000Z\",\n        \"slug\": \"chicken-alfredo\",\n        \"image_url\": \"http://localhost:3000/images/recipes/chicken-alfredo.jpeg\",\n        \"video_url\": \"http://localhost:3000/videos/recipes/chicken-alfredo.mp4\",\n        \"servings\": 4,\n        \"prep_time_hours\": 0,\n        \"prep_time_minutes\": 15,\n        \"cook_time_hours\": 0,\n        \"cook_time_minutes\": 20,\n        \"calories\": 800,\n        \"ratings_count\": 1,\n        \"ratings_sum\": 0,\n        \"ratings_avg\": 1,\n        \"favorites_count\": 0,\n        \"categories\": [\n            {\n                \"id\": 2,\n                \"name\": \"Italian\",\n                \"created_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"updated_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"slug\": \"italian\",\n                \"description\": \"Authentic Italian dishes\",\n                \"image\": \"http://localhost:3000/images/categories/italian.svg\",\n                \"pivot\": {\n                    \"recipe_id\": 4,\n                    \"category_id\": 2\n                }\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Low Carb\",\n                \"created_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"updated_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"slug\": \"low-carb\",\n                \"description\": \"Low carbohydrate meals\",\n                \"image\": \"http://localhost:3000/images/categories/low-carb.svg\",\n                \"pivot\": {\n                    \"recipe_id\": 4,\n                    \"category_id\": 4\n                }\n            }\n        ]\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete comment",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost/api/comments/17",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"comments",
+										"17"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-XSRF-TOKEN",
+												"value": "{{XSRF-TOKEN}}",
+												"type": "text"
+											},
+											{
+												"key": "Origin",
+												"value": "http://localhost:3000",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"recipe_id\": 4,\n    \"stars\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost/api/ratings",
+											"host": [
+												"localhost"
+											],
+											"path": [
+												"api",
+												"ratings"
+											],
+											"query": [
+												{
+													"key": "XDEBUG_SESSION_START",
+													"value": "PHPSTORM",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.4.5"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 31 Mar 2025 22:38:03 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "XSRF-TOKEN=eyJpdiI6ImtkSFZJaDgyZFZVR09lOXRxQmhZelE9PSIsInZhbHVlIjoiclBrSUlZNjNJWC9lcCtUM1h1ZnYzdVhSemorenBBSnJpdUdXLzNkSnVZY3dXMTJiRDFBdzJMcE8zYXVla2RsZXJxaWQwSGZsKzVWR253MDJrakZKOU1VY3FHbktocmd0MlpDRXBuTnF6by9UZXNMcGlpdm9QUUtzaTA3bSs1UVQiLCJtYWMiOiJkN2JmNzk3YWM2MzNjMDJlYTIyMWJlYWRmNDQyODcyYmYzYTA0MTVmMmY4Y2YyNGQ0ZjhiMDc2YTExYzFhNmFhIiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:38:03 GMT; Max-Age=7200; path=/; samesite=lax"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6Ilo1QklaUWY1WDdENjVRVlI4VGpjVFE9PSIsInZhbHVlIjoiQllTa2w4blVuUXFndnVXU1Q5NWw0bDB6QlROeFRaK1Rpd3RnbExKd0Nha2NGcU9CdTdkckNCS3YySkt2N3FBeTBMWjRsSnk2YUlQZUhTK043MnFzYkpGSXNUMXBaaEpZbTIwWDhIaVdxZFhxelFVNTc2Q0hTYlUzaHhEdFQ0QkYiLCJtYWMiOiI0MmIzN2NmNTJmNTEwNTJhNDNlZTE1Yzg4YmRiYWE4YTk1NGZhNjcwMzhjMTI5NDVhYzBlYzg3MzAzMTI3MGQ1IiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:38:03 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"recipe_id\": 4,\n    \"stars\": 1,\n    \"user_id\": 11,\n    \"updated_at\": \"2025-03-31T22:38:03.000000Z\",\n    \"created_at\": \"2025-03-31T22:38:03.000000Z\",\n    \"id\": 4,\n    \"recipe\": {\n        \"id\": 4,\n        \"user_id\": 4,\n        \"title\": \"Chicken Alfredo\",\n        \"description\": \"An Italian pasta dish made with chicken in a creamy Alfredo sauce.\",\n        \"ingredients\": \"Chicken, pasta, cream, cheese\",\n        \"instructions\": \"Cook pasta. Cook chicken. Add cream and cheese.\",\n        \"created_at\": \"2025-03-31T21:30:05.000000Z\",\n        \"updated_at\": \"2025-03-31T22:38:03.000000Z\",\n        \"slug\": \"chicken-alfredo\",\n        \"image_url\": \"http://localhost:3000/images/recipes/chicken-alfredo.jpeg\",\n        \"video_url\": \"http://localhost:3000/videos/recipes/chicken-alfredo.mp4\",\n        \"servings\": 4,\n        \"prep_time_hours\": 0,\n        \"prep_time_minutes\": 15,\n        \"cook_time_hours\": 0,\n        \"cook_time_minutes\": 20,\n        \"calories\": 800,\n        \"ratings_count\": 1,\n        \"ratings_sum\": 0,\n        \"ratings_avg\": 1,\n        \"favorites_count\": 0,\n        \"categories\": [\n            {\n                \"id\": 2,\n                \"name\": \"Italian\",\n                \"created_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"updated_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"slug\": \"italian\",\n                \"description\": \"Authentic Italian dishes\",\n                \"image\": \"http://localhost:3000/images/categories/italian.svg\",\n                \"pivot\": {\n                    \"recipe_id\": 4,\n                    \"category_id\": 2\n                }\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Low Carb\",\n                \"created_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"updated_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"slug\": \"low-carb\",\n                \"description\": \"Low carbohydrate meals\",\n                \"image\": \"http://localhost:3000/images/categories/low-carb.svg\",\n                \"pivot\": {\n                    \"recipe_id\": 4,\n                    \"category_id\": 4\n                }\n            }\n        ]\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Update comment",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"recipe_id\": 1,\n    \"content\": \"I meant no\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/comments/17",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"comments",
+										"17"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "X-XSRF-TOKEN",
+												"value": "{{XSRF-TOKEN}}",
+												"type": "text"
+											},
+											{
+												"key": "Origin",
+												"value": "http://localhost:3000",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"recipe_id\": 4,\n    \"stars\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost/api/ratings/4",
+											"host": [
+												"localhost"
+											],
+											"path": [
+												"api",
+												"ratings",
+												"4"
+											],
+											"query": [
+												{
+													"key": "XDEBUG_SESSION_START",
+													"value": "PHPSTORM",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.4.5"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 31 Mar 2025 22:40:41 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "XSRF-TOKEN=eyJpdiI6InB5SXArRENZWjFIRldiSW5ONjBlR1E9PSIsInZhbHVlIjoiQlNobjJ2dWY5RkJvejl1OEsxZERteTVFVmpDNHA0bzFpQ3UxcHVwN1dITnJ6eU9TWlhFWG9XTmxpUDZEczY4REFvalBON05jajI5dmRlMGZoaExuQVlta3htdXFyUW9lbndCQ0I1czFhK0VielFBWTZFZDZwb3NEOG5QTVNLVDQiLCJtYWMiOiJiYTE3OTUwMzkyY2U0NjI5NjFlZGRhYzQ0M2IwOWE3N2M0ZTcyMGMxNWY4YWQxMjc4ZmY0YTBiNzIzNmY4MmQ1IiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:40:41 GMT; Max-Age=7200; path=/; samesite=lax"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6ImpJVDdPL0luSW9NQWoyWmV5NlJmQ2c9PSIsInZhbHVlIjoiUTdFWnFIakg1YWtpUVM4Vmc2WmJxSnhKbmZZWWFhSnJaU3pRQjRZUzZuSjQzZEhBdEQ1ZE84SC9ZdzNoYW94a2YzMkhXVmpBSnNjR3h0MldHSjVsaVZ3YWRzdHlTbmhnM29KV2xYbVdhYTdmcGtIVXZaeE1NMmxTU2Jmb0Y2T3AiLCJtYWMiOiI4NzhjOWY5ZmZlMmJjMTRiZTRkZGZhZGUxYjdlYjRiMWI2YzU5ZThkNGE2ODIxZWNiNDZkMmNlOWMyOGU3YTRjIiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:40:41 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 4,\n    \"user_id\": 11,\n    \"recipe_id\": 4,\n    \"stars\": 2,\n    \"created_at\": \"2025-03-31T22:38:03.000000Z\",\n    \"updated_at\": \"2025-03-31T22:40:41.000000Z\",\n    \"recipe\": {\n        \"id\": 4,\n        \"user_id\": 4,\n        \"title\": \"Chicken Alfredo\",\n        \"description\": \"An Italian pasta dish made with chicken in a creamy Alfredo sauce.\",\n        \"ingredients\": \"Chicken, pasta, cream, cheese\",\n        \"instructions\": \"Cook pasta. Cook chicken. Add cream and cheese.\",\n        \"created_at\": \"2025-03-31T21:30:05.000000Z\",\n        \"updated_at\": \"2025-03-31T22:40:41.000000Z\",\n        \"slug\": \"chicken-alfredo\",\n        \"image_url\": \"http://localhost:3000/images/recipes/chicken-alfredo.jpeg\",\n        \"video_url\": \"http://localhost:3000/videos/recipes/chicken-alfredo.mp4\",\n        \"servings\": 4,\n        \"prep_time_hours\": 0,\n        \"prep_time_minutes\": 15,\n        \"cook_time_hours\": 0,\n        \"cook_time_minutes\": 20,\n        \"calories\": 800,\n        \"ratings_count\": 1,\n        \"ratings_sum\": 0,\n        \"ratings_avg\": 0,\n        \"favorites_count\": 0,\n        \"categories\": [\n            {\n                \"id\": 2,\n                \"name\": \"Italian\",\n                \"created_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"updated_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"slug\": \"italian\",\n                \"description\": \"Authentic Italian dishes\",\n                \"image\": \"http://localhost:3000/images/categories/italian.svg\",\n                \"pivot\": {\n                    \"recipe_id\": 4,\n                    \"category_id\": 2\n                }\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Low Carb\",\n                \"created_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"updated_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"slug\": \"low-carb\",\n                \"description\": \"Low carbohydrate meals\",\n                \"image\": \"http://localhost:3000/images/categories/low-carb.svg\",\n                \"pivot\": {\n                    \"recipe_id\": 4,\n                    \"category_id\": 4\n                }\n            }\n        ]\n    }\n}"
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "X-XSRF-TOKEN",
+												"value": "{{XSRF-TOKEN}}",
+												"type": "text"
+											},
+											{
+												"key": "Origin",
+												"value": "http://localhost:3000",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"recipe_id\": 2,\n    \"stars\": 4\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost/api/ratings/2",
+											"host": [
+												"localhost"
+											],
+											"path": [
+												"api",
+												"ratings",
+												"2"
+											],
+											"query": [
+												{
+													"key": "XDEBUG_SESSION_START",
+													"value": "PHPSTORM",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.4.5"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 31 Mar 2025 22:45:43 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "XSRF-TOKEN=eyJpdiI6ImhVUmp3Vjd0Mk1xQW1Cb2xEMFF2NXc9PSIsInZhbHVlIjoiMEZUcHdEaTRrc1F0dzg0ZC9jOHVLcTl5SkI5T0RVL1FpTTJsdXZKSk11U1p2ZjVtUUxGd082OFIrVjdVM0xyWGNCODVyOGRmMnMzYzRwejIzYzdWZnF1bDFyRm9SUitDNXJ5VUJiSm9GZXlBZzRCMWU4UzBSMzUwM002ZG53RlIiLCJtYWMiOiJjOTBiMTQyZWMwNDIzNDk2ZDJiYTFkNTliZmY3NjcxZGVmMjcyZjRhMWViOWY3NzQ1ODJlZDAwMTNkMWYwZGU5IiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:45:43 GMT; Max-Age=7200; path=/; samesite=lax"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6Ikx4QWRsN0hLbE5tNVZYUUxFTjhjeWc9PSIsInZhbHVlIjoiZTBVdFJsT0JaSTFMSWxVS0Z2aWZqRkc5YWZQelpzMEhNbFVSSjdzeUJ1ck9tcG1XNTFQVlQ1S3k3V0EyR2UvRWhvb1B4d3FoYjRaWHRPMDQrNnZzcEZOMTZobEdTYmNIOWNiaXZIT0JqNFVRNzRYYXA0T044UE9sSHhGeFFUQ3MiLCJtYWMiOiJkOTgwNzEwNTIwMjk1YTVmNzRlNGIyZjY1MGFkYzliYTU1NzY0MjYwM2YxOGI4Y2MxZDc2ZWI0YjdkZmEyNGNmIiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:45:43 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"This action is unauthorized.\",\n    \"exception\": \"Symfony\\\\Component\\\\HttpKernel\\\\Exception\\\\AccessDeniedHttpException\",\n    \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php\",\n    \"line\": 640,\n    \"trace\": [\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php\",\n            \"line\": 584,\n            \"function\": \"prepareException\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Exceptions\\\\Handler\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php\",\n            \"line\": 51,\n            \"function\": \"render\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Exceptions\\\\Handler\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 172,\n            \"function\": \"handleException\",\n            \"class\": \"Illuminate\\\\Routing\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php\",\n            \"line\": 51,\n            \"function\": \"{closure:Illuminate\\\\Pipeline\\\\Pipeline::prepareDestination():168}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\SubstituteBindings\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php\",\n            \"line\": 64,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Auth\\\\Middleware\\\\Authenticate\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php\",\n            \"line\": 25,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 170,\n            \"function\": \"{closure:Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful::handle():24}\",\n            \"class\": \"Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/sanctum/src/Http/Middleware/AuthenticateSession.php\",\n            \"line\": 66,\n            \"function\": \"{closure:Illuminate\\\\Pipeline\\\\Pipeline::prepareDestination():168}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\AuthenticateSession\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php\",\n            \"line\": 88,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\VerifyCsrfToken\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php\",\n            \"line\": 121,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php\",\n            \"line\": 64,\n            \"function\": \"handleStatefulRequest\",\n            \"class\": \"Illuminate\\\\Session\\\\Middleware\\\\StartSession\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Session\\\\Middleware\\\\StartSession\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php\",\n            \"line\": 37,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Cookie\\\\Middleware\\\\AddQueuedCookiesToResponse\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php\",\n            \"line\": 75,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Cookie\\\\Middleware\\\\EncryptCookies\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php\",\n            \"line\": 60,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 191,\n            \"function\": \"{closure:Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful::frontendMiddleware():57}\",\n            \"class\": \"Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 127,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php\",\n            \"line\": 24,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 127,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php\",\n            \"line\": 807,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php\",\n            \"line\": 786,\n            \"function\": \"runRouteWithinStack\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php\",\n            \"line\": 750,\n            \"function\": \"runRoute\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php\",\n            \"line\": 739,\n            \"function\": \"dispatchToRoute\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php\",\n            \"line\": 201,\n            \"function\": \"dispatch\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 170,\n            \"function\": \"{closure:Illuminate\\\\Foundation\\\\Http\\\\Kernel::dispatchToRouter():198}\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php\",\n            \"line\": 21,\n            \"function\": \"{closure:Illuminate\\\\Pipeline\\\\Pipeline::prepareDestination():168}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php\",\n            \"line\": 31,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ConvertEmptyStringsToNull\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php\",\n            \"line\": 21,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php\",\n            \"line\": 51,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TrimStrings\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php\",\n            \"line\": 27,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\ValidatePostSize\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php\",\n            \"line\": 110,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\PreventRequestsDuringMaintenance\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php\",\n            \"line\": 62,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\HandleCors\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php\",\n            \"line\": 58,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\TrustProxies\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php\",\n            \"line\": 22,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\InvokeDeferredCallbacks\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php\",\n            \"line\": 26,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\ValidatePathEncoding\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 127,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php\",\n            \"line\": 176,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php\",\n            \"line\": 145,\n            \"function\": \"sendRequestThroughRouter\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php\",\n            \"line\": 1220,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/public/index.php\",\n            \"line\": 20,\n            \"function\": \"handleRequest\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Application\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php\",\n            \"line\": 23,\n            \"function\": \"require_once\"\n        }\n    ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Favorites",
+					"item": [
+						{
+							"name": "Flag favorite",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"recipe_id\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/favorites",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"favorites"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-XSRF-TOKEN",
+												"value": "{{XSRF-TOKEN}}",
+												"type": "text"
+											},
+											{
+												"key": "Origin",
+												"value": "http://localhost:3000",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"recipe_id\": 3\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost/api/favorites",
+											"host": [
+												"localhost"
+											],
+											"path": [
+												"api",
+												"favorites"
+											],
+											"query": [
+												{
+													"key": "XDEBUG_SESSION_START",
+													"value": "PHPSTORM",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.4.5"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 31 Mar 2025 22:21:12 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "XSRF-TOKEN=eyJpdiI6Ik1LUkE1VXFBaWhEbnQ3QWhjVkt5TXc9PSIsInZhbHVlIjoiVjRERm92Yi9HbWpTWnV2TklJZFU0d1pOZWtjbWV2MlVsdDh6ZUxJeER4YzFyaU9pdlRuUXp6ZncxajI0RFk2cTdPUjFURFdBVC9uZXFLU3ltWW5VTVI3M2JBTjZ5cjFzN1drUCtScVdWWHJjeVQ2eW1xNkxtYU83UnhDVGRxQ00iLCJtYWMiOiIzOWMyNTRkZWNiNGUzODc3ODBlODFmMDZjMzNhZjBlNGZjZjhkMWMzZjFiYTI0OGUzMDU1YjZlZTZjOTljZmM1IiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:21:12 GMT; Max-Age=7200; path=/; samesite=lax"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6InRjZGM4ZzFCMG9uYWcyaEZPU2NZUlE9PSIsInZhbHVlIjoiQTF5ZUNPMkxvb3prVjJsZTlRMkd5RFFIQzlMSzdIWGRnbWluL1kwb0U3S1lxdzFSMHBBNkxtQVJERTgwUEowMGZxUkdqSXRWZmxJZ1NwS2xoRUNoeTgyMXFvWUVsUlUzUDc5cm5XSUVaemNTd1d4VDJobjR3REJQRFpxdnE4V24iLCJtYWMiOiI1MTRkYmY1YjkwNzdhMDA3ZjE0ZjkxODQyYWZiYmIwNjM2Y2MzYmMwMmY4M2M0MWQ4ZWJhMTlmZDZmZDVhN2E1IiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:21:12 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"recipe_id\": 3,\n    \"user_id\": 11,\n    \"updated_at\": \"2025-03-31T22:21:11.000000Z\",\n    \"created_at\": \"2025-03-31T22:21:11.000000Z\",\n    \"id\": 3,\n    \"recipe\": {\n        \"id\": 3,\n        \"user_id\": 3,\n        \"title\": \"Beef Stroganoff\",\n        \"description\": \"A Russian dish made with beef in a sour cream sauce.\",\n        \"ingredients\": \"Beef, mushrooms, onions, sour cream\",\n        \"instructions\": \"Cook beef. Cook mushrooms and onions. Add sour cream.\",\n        \"created_at\": \"2025-03-31T21:30:05.000000Z\",\n        \"updated_at\": \"2025-03-31T22:21:11.000000Z\",\n        \"slug\": \"beef-stroganoff\",\n        \"image_url\": \"http://localhost:3000/images/recipes/beef-stroganoff.jpeg\",\n        \"video_url\": \"http://localhost:3000/videos/recipes/beef-stroganoff.mp4\",\n        \"servings\": 4,\n        \"prep_time_hours\": 0,\n        \"prep_time_minutes\": 15,\n        \"cook_time_hours\": 0,\n        \"cook_time_minutes\": 30,\n        \"calories\": 700,\n        \"ratings_count\": 0,\n        \"ratings_sum\": 0,\n        \"ratings_avg\": 0,\n        \"favorites_count\": 1,\n        \"categories\": [\n            {\n                \"id\": 4,\n                \"name\": \"Low Carb\",\n                \"created_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"updated_at\": \"2025-03-31T21:29:52.000000Z\",\n                \"slug\": \"low-carb\",\n                \"description\": \"Low carbohydrate meals\",\n                \"image\": \"http://localhost:3000/images/categories/low-carb.svg\",\n                \"pivot\": {\n                    \"recipe_id\": 3,\n                    \"category_id\": 4\n                }\n            }\n        ]\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Unflag Favorite",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Origin",
+										"value": "http://localhost:3000",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{XSRF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost/api/favorites/8",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"favorites",
+										"8"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Origin",
+												"value": "http://localhost:3000",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-XSRF-TOKEN",
+												"value": "{{XSRF-TOKEN}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "localhost/api/favorites/2",
+											"host": [
+												"localhost"
+											],
+											"path": [
+												"api",
+												"favorites",
+												"2"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.4.5"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 31 Mar 2025 22:31:12 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "XSRF-TOKEN=eyJpdiI6IjQvNmcrR1NoZ3lFb25jc2o4WXpQbkE9PSIsInZhbHVlIjoickhQZDN2WWhmVXpZc3YxZGdDOWpaS2JFVVUyQjVWdG9WRTQyK1FQSS9oeVdxMmVNWHAvVVp6YktrM2U4aWptaHh1SXRLUjIxazZpVFpDYldRY0kyeXdKZW8xZW85MTAwNm1YdHgzYllyNUpjTzBTZjNHVHNIbi9mQ3lDWitVSmkiLCJtYWMiOiIzYTgyNjg3NjhmNTllNDA5MTBmZDI0NDA5YjliNjFhY2QxZjEyMzYwNGY4ODc4MTAyODZlYjVlZTQ3OGJjOTYwIiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:31:12 GMT; Max-Age=7200; path=/; samesite=lax"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6IllPY0VLSkNEN2VzN3BCS2lMTE90Rmc9PSIsInZhbHVlIjoiQmxNUGdMeDdvTnA0SUhud2lrVFVzUmdwajFCQzhHKys2dE9PbWZ4OGFQWUlNS3VXVzVNZTNxd1RlcS9CUHJUVU9rTE81eHJwREZVTEdXMFZxSzVUS3RKWTZSNEgwOTMwa0pPZDlxQUFoaUI0U3VnMjU5Y09RSjM1TGNIWXlDdjMiLCJtYWMiOiI0ZWQyMmQ0OWM5NGE1ZGIwMGY3MjYyMDUyY2U3NjAwM2ZlNWM5ZjY3OGFkMmFlNTg5ZTkyZjMxNjJmOWE2NDk2IiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:31:12 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"This action is unauthorized.\",\n    \"exception\": \"Symfony\\\\Component\\\\HttpKernel\\\\Exception\\\\AccessDeniedHttpException\",\n    \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php\",\n    \"line\": 640,\n    \"trace\": [\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php\",\n            \"line\": 584,\n            \"function\": \"prepareException\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Exceptions\\\\Handler\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php\",\n            \"line\": 51,\n            \"function\": \"render\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Exceptions\\\\Handler\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 172,\n            \"function\": \"handleException\",\n            \"class\": \"Illuminate\\\\Routing\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php\",\n            \"line\": 51,\n            \"function\": \"{closure:Illuminate\\\\Pipeline\\\\Pipeline::prepareDestination():168}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\SubstituteBindings\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php\",\n            \"line\": 64,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Auth\\\\Middleware\\\\Authenticate\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php\",\n            \"line\": 25,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 170,\n            \"function\": \"{closure:Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful::handle():24}\",\n            \"class\": \"Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/sanctum/src/Http/Middleware/AuthenticateSession.php\",\n            \"line\": 66,\n            \"function\": \"{closure:Illuminate\\\\Pipeline\\\\Pipeline::prepareDestination():168}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\AuthenticateSession\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php\",\n            \"line\": 88,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\VerifyCsrfToken\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php\",\n            \"line\": 121,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php\",\n            \"line\": 64,\n            \"function\": \"handleStatefulRequest\",\n            \"class\": \"Illuminate\\\\Session\\\\Middleware\\\\StartSession\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Session\\\\Middleware\\\\StartSession\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php\",\n            \"line\": 37,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Cookie\\\\Middleware\\\\AddQueuedCookiesToResponse\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php\",\n            \"line\": 75,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Cookie\\\\Middleware\\\\EncryptCookies\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php\",\n            \"line\": 60,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 191,\n            \"function\": \"{closure:Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful::frontendMiddleware():57}\",\n            \"class\": \"Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 127,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php\",\n            \"line\": 24,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 127,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php\",\n            \"line\": 807,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php\",\n            \"line\": 786,\n            \"function\": \"runRouteWithinStack\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php\",\n            \"line\": 750,\n            \"function\": \"runRoute\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php\",\n            \"line\": 739,\n            \"function\": \"dispatchToRoute\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php\",\n            \"line\": 201,\n            \"function\": \"dispatch\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 170,\n            \"function\": \"{closure:Illuminate\\\\Foundation\\\\Http\\\\Kernel::dispatchToRouter():198}\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php\",\n            \"line\": 21,\n            \"function\": \"{closure:Illuminate\\\\Pipeline\\\\Pipeline::prepareDestination():168}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php\",\n            \"line\": 31,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ConvertEmptyStringsToNull\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php\",\n            \"line\": 21,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php\",\n            \"line\": 51,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TrimStrings\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php\",\n            \"line\": 27,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\ValidatePostSize\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php\",\n            \"line\": 110,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\PreventRequestsDuringMaintenance\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php\",\n            \"line\": 62,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\HandleCors\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php\",\n            \"line\": 58,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\TrustProxies\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php\",\n            \"line\": 22,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\InvokeDeferredCallbacks\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php\",\n            \"line\": 26,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 209,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\ValidatePathEncoding\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php\",\n            \"line\": 127,\n            \"function\": \"{closure:{closure:Illuminate\\\\Pipeline\\\\Pipeline::carry():184}:185}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php\",\n            \"line\": 176,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php\",\n            \"line\": 145,\n            \"function\": \"sendRequestThroughRouter\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php\",\n            \"line\": 1220,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/public/index.php\",\n            \"line\": 20,\n            \"function\": \"handleRequest\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Application\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"/var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php\",\n            \"line\": 23,\n            \"function\": \"require_once\"\n        }\n    ]\n}"
+								},
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Origin",
+												"value": "http://localhost:3000",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-XSRF-TOKEN",
+												"value": "{{XSRF-TOKEN}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "localhost/api/favorites/2",
+											"host": [
+												"localhost"
+											],
+											"path": [
+												"api",
+												"favorites",
+												"2"
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.4.5"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 31 Mar 2025 22:34:36 GMT"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "XSRF-TOKEN=eyJpdiI6ImdneDUwM1FJQ0xNQ0Fuc2NLMnpZM1E9PSIsInZhbHVlIjoiWGFCS1pXZ0VsVmpJditreVR6V3ViTHpKWW1YdG9LcnlZV2ZmRFIvRnQ0d0JmRFBUKzd2K09Lb3BUaDFWajkwaWdWYzVOUUcwMGtJMDJoYnBPdXdsaVJSMGwvbkVEL3VJYmJzK2xzeHBzdFY4Uzg2WllZbko3WHp3UlZWME9CWkciLCJtYWMiOiI1Mzc4YzRhZTAzMzI2OTBiYTMwN2FlODkwYmY4ZjUzMzdiNjZkY2FhMzkyMjhkYTViOTYwNDM2OTUwZTZjNThkIiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:34:36 GMT; Max-Age=7200; path=/; samesite=lax"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6IklaYzJvWmZ6dW84YVNRcGFLdFVGTWc9PSIsInZhbHVlIjoiOW16SnVPRS8vRFREZFhyUmY1anRMTldvakRhT2hXWGJsYTlsNVRjVWxlTHkrQVVlaGIzMlVyYU5wbDdhN1ltcG5RNEY2cFlpc3Y4d1JtS002SVlXSjZ0em5aZ1hjQURBZ3MvYWVhd0ZxOW5QZHBOTW43dmJFQk5tM1JWZjB0OXIiLCJtYWMiOiJkYzU5YjQ0OTY5YzA3ODFiM2ZjOWNlMGMzOGE4ODliYjc4YjdkNDQ5NmQ5NWYwOThmNjZiOWIyZTZjZmM4MmE0IiwidGFnIjoiIn0%3D; expires=Tue, 01 Apr 2025 00:34:36 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+										}
+									],
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Options localhost",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "OPTIONS",
+						"header": [],
+						"url": {
+							"raw": "http://localhost",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const token = pm.cookies.get(\"XSRF-TOKEN\")",
+									"pm.collectionVariables.set(\"XSRF-TOKEN\", token)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "http://localhost:3000"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{XSRF-TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"{{frontent_user}}\",\"password\":\"{{frontend_password}}\",\"remember\":false}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CSRF cookie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/*",
+									"const xsrfToken = pm.response.headers.get(\"Set-cookie\");//pm.cookies.get('XSRF-TOKEN');",
+									"const laravelSession = pm.cookies.get('laravel_session')",
+									"",
+									"console.log(xsrfToken)",
+									"console.log(laravelSession)",
+									"",
+									"pm.collectionVariables.set(\"XSRF-TOKEN\", xsrfToken);",
+									"pm.collectionVariables.set(\"laravel_session\", laravelSession);",
+									"*/",
+									"",
+									"const token = pm.cookies.get(\"XSRF-TOKEN\")",
+									"pm.collectionVariables.set(\"XSRF-TOKEN\", token)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/sanctum/csrf-cookie",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"sanctum",
+								"csrf-cookie"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "Origin",
+								"value": "http://localhost:3000"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{XSRF-TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MeiliSearch",
+			"item": [
+				{
+					"name": "Get indexes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:7700/indexes",
+							"host": [
+								"localhost"
+							],
+							"port": "7700",
+							"path": [
+								"indexes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get keys",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:7700/keys",
+							"host": [
+								"localhost"
+							],
+							"port": "7700",
+							"path": [
+								"keys"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Index by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:7700/indexes/:indexId",
+							"host": [
+								"localhost"
+							],
+							"port": "7700",
+							"path": [
+								"indexes",
+								":indexId"
+							],
+							"variable": [
+								{
+									"key": "indexId",
+									"value": "recipes"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search in recipes",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"q\": \"\",\n    \"facets\": [\n        \"preparation_time\", \"categories\"\n    ],\n    \"attributesToHighlight\": [\"title\", \"description\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:7700/indexes/recipes/search",
+							"host": [
+								"localhost"
+							],
+							"port": "7700",
+							"path": [
+								"indexes",
+								"recipes",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search in recipes with GET",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:7700/indexes/recipes/search?q=ita",
+							"host": [
+								"localhost"
+							],
+							"port": "7700",
+							"path": [
+								"indexes",
+								"recipes",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "ita"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Index searchable settings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:7700/indexes/recipes/settings/searchable-attributes",
+							"host": [
+								"localhost"
+							],
+							"port": "7700",
+							"path": [
+								"indexes",
+								"recipes",
+								"settings",
+								"searchable-attributes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Index filterable settings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:7700/indexes/recipes/settings/filterable-attributes",
+							"host": [
+								"localhost"
+							],
+							"port": "7700",
+							"path": [
+								"indexes",
+								"recipes",
+								"settings",
+								"filterable-attributes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Index filterable settings Copy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:7700/indexes/recipes/settings/sortable-attributes",
+							"host": [
+								"localhost"
+							],
+							"port": "7700",
+							"path": [
+								"indexes",
+								"recipes",
+								"settings",
+								"sortable-attributes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Index settings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:7700/indexes/recipes/settings/",
+							"host": [
+								"localhost"
+							],
+							"port": "7700",
+							"path": [
+								"indexes",
+								"recipes",
+								"settings",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{meilisearch-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:7700/indexes/:indexId",
+							"host": [
+								"localhost"
+							],
+							"port": "7700",
+							"path": [
+								"indexes",
+								":indexId"
+							],
+							"variable": [
+								{
+									"key": "indexId",
+									"value": "testing_recipes"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{meilisearch-token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "AI",
+			"item": [
+				{
+					"name": "Generate Image",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en-US,en;q=0.9,es;q=0.8"
+							},
+							{
+								"key": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "DNT",
+								"value": "1"
+							},
+							{
+								"key": "Origin",
+								"value": "http://localhost:3000"
+							},
+							{
+								"key": "Pragma",
+								"value": "no-cache"
+							},
+							{
+								"key": "Referer",
+								"value": "http://localhost:3000/"
+							},
+							{
+								"key": "Sec-Fetch-Dest",
+								"value": "empty"
+							},
+							{
+								"key": "Sec-Fetch-Mode",
+								"value": "cors"
+							},
+							{
+								"key": "Sec-Fetch-Site",
+								"value": "same-site"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{XSRF-TOKEN}}"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"macOS\""
+							},
+							{
+								"key": "Cookie",
+								"value": "__session=eyJ1c2VySWQiOiJjbGozOHFmYm4wMDAwNDh6Mm5iZWRjeGRrIn0%3D.x%2FLg93oxM%2BBq2Oagmv1FTd8bWgSPBetn7aZ5tfe5hqk; authjs.csrf-token=d9d1daf5fae460bff4763c8059a777494c4c15e9c8cf2e61845959946f20be00%7Cc1579169b560bcb6b2c658fd6db94430cb9b3791b07a9e21ee35d44b7c7358db; authjs.callback-url=http%3A%2F%2Flocalhost%3A3002; NEXT_LOCALE=es; XSRF-TOKEN=eyJpdiI6ImI2R28wZ1grbDRXenhBNDBCTlFxRGc9PSIsInZhbHVlIjoiUjN6MFI2MEpJdlZDR0Y5bnFGdGlkWnFiRUt0bjBubDIwVUZWTVUzbmlESDEvRG5zN3g0YUdwcTNqY1EvZERtVXFhZnlIOC9SaVAxcXBMc2paWnphbnhZejI4RnJWREtUZjF3Szc0bGxkbTVOQXN5MnBlSzdNUk9EalFxZFRua2kiLCJtYWMiOiI2OTMyNDhjOWViNmM5ZTIzYzM0OTJiMDhmMmI0Yjk2NWU0ZjY0YTA1ODA4YWQ1YjAzYjUyNTRiYjE0NWU0OGFlIiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6ImRmOEh3QW1DNDBJUlVvT0QvazViS3c9PSIsInZhbHVlIjoiWm9VOHJ5Z0IzUG94OVI3NzIvRmVtSjVuRytSc2xya3hKTHNnRG1wdmpZVEswT0RHQmV6N3QweCs3ZmkzakxUWkRhZzRFWW1PRkFIWStGUnJsNndrZmI3L1RSM0ZxRHp4VVk5M2RVTG5xN3ZoNVU2UXdSMlRrOHg0eVJ1QzdWSFEiLCJtYWMiOiIxZDk4NWY3YzhkMWFhYzlmNDc2ODdlZGRhYzk3N2Y2ZTFjNTYwYjViNTc2NGFiOTc3YjQyZjllMzBkZDA5ZTI2IiwidGFnIjoiIn0%3D"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"title\":\"White rice\",\"description\":\"This is a white rice plate that is perfect for when we're in a rush, but still want a delicious plate.\",\"ingredients\":\"1 cup of rice\\n1 cup of water\\n1 cup of peas\\n1 carrot\\n1 garlic\\nSalt\\nVegetable oil\\n1/4 onion\",\"instructions\":\"Cut the carrot in small pieces\\nHeat a pan with oil\\nheat the onion and the garlic until brown\\nHeat the rice with water in the microwave for 1 minute\\nFilter the water and rice\\nAdd the rice to the heated pan and let it there until it's brown\\nmix it\\nonce brown, add water until all rice is covered\\nadd the carrot and the peas\\nadd salt\\nleave it there boiling until the rice is visible and the water is consumed\",\"categories\":\"Mexican, Low Carb\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/recipes/generate-image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"recipes",
+								"generate-image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate image",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en-US,en;q=0.9,es;q=0.8"
+							},
+							{
+								"key": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "DNT",
+								"value": "1"
+							},
+							{
+								"key": "Origin",
+								"value": "http://localhost:3000"
+							},
+							{
+								"key": "Pragma",
+								"value": "no-cache"
+							},
+							{
+								"key": "Referer",
+								"value": "http://localhost:3000/"
+							},
+							{
+								"key": "Sec-Fetch-Dest",
+								"value": "empty"
+							},
+							{
+								"key": "Sec-Fetch-Mode",
+								"value": "cors"
+							},
+							{
+								"key": "Sec-Fetch-Site",
+								"value": "same-site"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{XSRF-TOKEN}}"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"macOS\""
+							},
+							{
+								"key": "Cookie",
+								"value": "__session=eyJ1c2VySWQiOiJjbGozOHFmYm4wMDAwNDh6Mm5iZWRjeGRrIn0%3D.x%2FLg93oxM%2BBq2Oagmv1FTd8bWgSPBetn7aZ5tfe5hqk; authjs.csrf-token=d9d1daf5fae460bff4763c8059a777494c4c15e9c8cf2e61845959946f20be00%7Cc1579169b560bcb6b2c658fd6db94430cb9b3791b07a9e21ee35d44b7c7358db; authjs.callback-url=http%3A%2F%2Flocalhost%3A3002; NEXT_LOCALE=es; XSRF-TOKEN=eyJpdiI6ImpTOUdjM0oyWkgrUnl4enBFY2NTTXc9PSIsInZhbHVlIjoiVWphQ3Vxc0RrWW5oMW12T0YrUTJpMDZ0clhYM3BwSzR0MERBVFA0Mjl2V3B4ZEFxemFLZzE0YzQ1SHFKQ043enYwc0l1WE1PWkt3dDJjYmROcHVSQmJCSjlodFZDUERVYkdETm16WWJqcUJpWDlUak1FeW9zejVncHNEWGxGcnQiLCJtYWMiOiIwNzZkMWVlMjJiM2NkYmUzNDRlY2U2MDZkMjAxYmMxMDliNjY2NDNkMDUzYjIwMmRhZDFkMmVmOTdlNDBiZjE0IiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6Ikp6ZG9wYXd1QU15bWJDN3NWWEN2Z0E9PSIsInZhbHVlIjoiVVlpc1QvQVEzYkNVekN0SW5lKzdhSFhVZndaSCtSTllwL2N5VmRhM3ltbnBmZlQwekNWUU9QcE9MRWxScC84OTZpek82MnFXZUU2SVJ6elZBUjB5bFZMQ3E5K1duL1dBNC8wWHd6Smo5bmFVRW5qQjQwZ01BZ1JQSDdoa3M2UmUiLCJtYWMiOiJiNzMzMzBjOWIwOTJlNDI5MTk0YjUyYzIwMDBkZGQzZTE5ZGQ0N2M0OGQzMzcwOGFlNGE0NGEwZWZiZmI0ODYzIiwidGFnIjoiIn0%3D"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Mexican spaghetti\",\n    \"description\": \"This a mexican spaghetti version that adds the real mexican flavor.\",\n    \"ingredients\": \"1 package spaghetti\\n3 tomatoes\\n1/2 onion\\nWater\\n1 Garlic\\nSalt\\nSour cream\",\n    \"instructions\": \"Put water to boil with salt\\nPut the spaghetti after the water boils for 10 minutes\\nPut the tomatoes, water, sour cream in the blender\\nPour the mix in the pan with the spaghetti\",\n    \"categories\": \"Mexican, Italian, Low Carb\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/recipes/generate-image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"recipes",
+								"generate-image"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "XSRF-TOKEN",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "laravel_session",
+			"value": ""
+		},
+		{
+			"key": "meilisearch-token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "frontent_user",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "frontend_password",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
