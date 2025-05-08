@@ -19,6 +19,7 @@
             - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
             - [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
             - [SonarQube](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode)
+            - [GitHub actions](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions)
     - Install [PHPStorm](https://www.jetbrains.com/phpstorm/download/)
         - Suggested plugins:
             - [GitHub copilot](https://plugins.jetbrains.com/plugin/17718-github-copilot)
@@ -34,6 +35,8 @@
     - [API backend](https://github.com/cvarela0702/ipc-laravel-backend)
     - [Customer frontend](https://github.com/cvarela0702/ipc-nextjs-frontend)
 - Have git installed locally
+- Have an account with [miro](https://miro.com/)
+- Have an account with [sonarqube](https://www.sonarsource.com/products/sonarcloud/signup-free/)
 - Have a GitHub account
     - with GitHub copilot enabled
 - Have an [OpenAI key](https://auth.openai.com/log-in)
@@ -79,6 +82,8 @@ docker run --rm \
 ```
 
 - For the IPC only (it brings the application to the first commit)
+    - Copy the postman collection from `Recipes.postman_collection.json` and import it in your postman
+    - Go to the first commit
 
 ```bash
 git checkout breeze
