@@ -35,6 +35,7 @@
     - [API backend](https://github.com/cvarela0702/ipc-laravel-backend)
     - [Customer frontend](https://github.com/cvarela0702/ipc-nextjs-frontend)
 - Have git installed locally
+- Install [act](https://nektosact.com/) to run GitHub actions locally
 - Have an account with [miro](https://miro.com/)
 - Have an account with [sonarqube](https://www.sonarsource.com/products/sonarcloud/signup-free/)
 - Have a GitHub account
@@ -79,6 +80,12 @@ docker run --rm \
     -w /opt \
     laravelsail/php84-composer:latest \
     bash -c "composer install --ignore-platform-reqs && composer run post-root-package-install && php ./artisan key:generate --ansi && php ./artisan sail:install --with=mysql,redis,meilisearch,mailpit,selenium "
+```
+
+- Run GitHub actions locally
+
+```bash
+act
 ```
 
 - For the IPC only (it brings the application to the first commit)
