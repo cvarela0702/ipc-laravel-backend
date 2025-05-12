@@ -91,7 +91,9 @@ class RecipeControllerTest extends TestCase
         Recipe::factory()->create(['title' => 'Test Recipe', 'user_id' => $user->id]);
         Recipe::factory()->create(['title' => 'Another Recipe', 'user_id' => $user->id]);
 
-        $response = $this->actingAs($user)->getJson('/api/recipes/search?query=test');
+        $this->assertDatabaseCount('recipes', 2);
+        sleep(5); // Wait for the recipes to be indexed in Meilisearch
+        $response = $this->actingAs($user)->getJson('/api/recipes/search?query=Test');
 
         $response->assertStatus(200)
             ->assertJsonCount(1)

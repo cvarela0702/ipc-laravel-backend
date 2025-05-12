@@ -185,8 +185,11 @@ I want to have the association for the recipes to their different categories fro
 associations are not being persisted in the DB when using attach method
 
 -----
-05-08-2025
+05-07-2025
 I'd like to incorportate github actions for this project, is this something that you can help with? Consider that this is a project written in PHP with laravel
 
 this project uses mysql, not sqlite, how does that affect the github actions?
 
+-----
+05-08-2025
+I got this error when github actions ran the tests: "Could not resolve host: meilisearch"

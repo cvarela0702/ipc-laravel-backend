@@ -28,14 +28,48 @@ jobs:
           --health-timeout=5s
           --health-retries=3
 
+      meilisearch:
+        image: getmeili/meilisearch:latest
+        ports:
+          - 7700:7700
+        options: >-
+          --health-cmd="curl http://localhost:7700/health || exit 1"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
     steps:
+
+      - name: Create additional databases
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: testing
+          MYSQL_USER: sail
+          MYSQL_PASSWORD: password
+        run: |
+          docker exec $(docker ps -q --filter "ancestor=mysql:8.0") \
+          mysql -uroot -proot -e "CREATE DATABASE testing;"
+
+      - name: Grant privileges to sail user
+        run: |
+          docker exec $(docker ps -q --filter "ancestor=mysql:8.0") \
+          mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON *.* TO 'sail'@'%'; FLUSH PRIVILEGES;"
+
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            composer-
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.4' # Adjust the PHP version as per your project
+          php-version: '8.4'
           extensions: mbstring, bcmath, pdo_mysql
           ini-values: post_max_size=256M, upload_max_filesize=256M
           coverage: none
@@ -52,10 +86,10 @@ jobs:
       - name: Sail installation
         run: php artisan sail:install --with=mysql,redis,meilisearch,mailpit,selenium
 
-      - name: Wait for MySQL to be ready
+      - name: Wait for MySQL and Meilisearch to be ready
         run: |
           for i in {1..10}; do
-            if mysqladmin ping -h 127.0.0.1 -u laravel -ppassword --silent; then
+            if mysqladmin ping -h 127.0.0.1 -u laravel -ppassword --silent && curl http://localhost:7700/health; then
               break
             fi
             sleep 5
@@ -71,14 +105,49 @@ jobs:
           DB_PASSWORD: password
         run: php artisan migrate --force
 
-      - name: Run tests
+      - name: Sync indexes
         env:
+          SCOUT_DRIVER: meilisearch
+          MEILISEARCH_HOST: http://localhost:7700
+        run: php artisan scout:sync-index-settings
+
+      - name: Sync indexes tests
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: testing
+          MYSQL_USER: sail
+          MYSQL_PASSWORD: password
+          APP_ENV: testing
           DB_CONNECTION: mysql
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
-          DB_DATABASE: laravel
           DB_USERNAME: sail
+          DB_DATABASE: testing
           DB_PASSWORD: password
+          SCOUT_PREFIX: testing_
+          SCOUT_DRIVER: meilisearch
+          MEILISEARCH_HOST: http://localhost:7700
+        run: php artisan scout:sync-index-settings
+
+      - name: Clear configuration
+        run: php artisan config:clear
+
+      - name: Run tests
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: testing
+          MYSQL_USER: sail
+          MYSQL_PASSWORD: password
+          APP_ENV: testing
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_USERNAME: sail
+          DB_DATABASE: testing
+          DB_PASSWORD: password
+          SCOUT_DRIVER: meilisearch
+          SCOUT_PREFIX: testing_
+          MEILISEARCH_HOST: http://localhost:7700
         run: php artisan test
 
       - name: Run Laravel pint
