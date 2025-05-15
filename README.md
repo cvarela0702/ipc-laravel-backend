@@ -85,11 +85,11 @@ docker run --rm \
 - Run GitHub actions locally
 
 ```bash
-act
+act -P ubuntu-latest=shivammathur/node:latest
 ```
 
-- For the IPC only (it brings the application to the first commit)
-    - Copy the postman collection from `Recipes.postman_collection.json` and import it in your postman
+- For the IPC only
+    - Copy the postman collection from `./Recipes.postman_collection.json` and import it in your postman
     - Go to the first commit
 
 ```bash
