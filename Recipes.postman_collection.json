@@ -14,6 +14,55 @@
 					"item": [
 						{
 							"name": "All recipes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Test for status code",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// Test for response time",
+											"pm.test(\"Response time is less than 200ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);",
+											"});",
+											"",
+											"// Test for response body schema",
+											"pm.test(\"Response has valid schema for list of recipes\", function () {",
+											"    const schema = {",
+											"        \"type\": \"array\",",
+											"        \"items\": {",
+											"            \"type\": \"object\",",
+											"            \"properties\": {",
+											"                \"recipeId\": {",
+											"                    \"type\": \"string\"",
+											"                },",
+											"                \"name\": {",
+											"                    \"type\": \"string\"",
+											"                },",
+											"                \"description\": {",
+											"                    \"type\": \"string\"",
+											"                },",
+											"                \"ingredients\": {",
+											"                    \"type\": \"string\"",
+											"                },",
+											"                \"instructions\": {",
+											"                    \"type\": \"string\"",
+											"                }",
+											"            }",
+											"        }",
+											"    };",
+											"    pm.response.to.have.jsonSchema(schema);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
 							"request": {
 								"auth": {
 									"type": "noauth"
@@ -177,7 +226,7 @@
 									}
 								],
 								"url": {
-									"raw": "localhost/api/recipes/slug/spaghetti-carbonara",
+									"raw": "localhost/api/recipes/slug/chicken-fajitas",
 									"host": [
 										"localhost"
 									],
@@ -185,7 +234,7 @@
 										"api",
 										"recipes",
 										"slug",
-										"spaghetti-carbonara"
+										"chicken-fajitas"
 									],
 									"query": [
 										{
@@ -223,7 +272,7 @@
 									}
 								],
 								"url": {
-									"raw": "localhost/api/recipes/category-slug/italian",
+									"raw": "localhost/api/recipes/category-slug/mexican",
 									"host": [
 										"localhost"
 									],
@@ -231,7 +280,7 @@
 										"api",
 										"recipes",
 										"category-slug",
-										"italian"
+										"mexican"
 									],
 									"query": [
 										{
@@ -269,14 +318,14 @@
 									}
 								],
 								"url": {
-									"raw": "localhost/api/recipes/7",
+									"raw": "localhost/api/recipes/1",
 									"host": [
 										"localhost"
 									],
 									"path": [
 										"api",
 										"recipes",
-										"7"
+										"1"
 									],
 									"query": [
 										{
@@ -414,7 +463,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"user_id\": 1,\n    \"title\": \"From postman\",\n    \"description\": \"Test\",\n    \"ingredients\": \"one, dos, trois, vier\",\n    \"instructions\": \"cook and it will be ready\",\n    \"image_url\": \"http://localhost:3000/images/recipes/no-dish-placeholder.jpeg\",\n    \"video_url\": \"http://localhost:3000/images/recipes/no-video-placeholder.mp4\",\n    \"slug\": \"from-postman\",\n    \"servings\": 4,\n    \"prep_time_hours\": 0,\n    \"prep_time_minutes\": 30,\n    \"cook_time_hours\": 1,\n    \"cook_time_minutes\": 0,\n    \"calories\": 500\n}",
+									"raw": "{\n    \"user_id\": 1,\n    \"title\": \"From postmany\",\n    \"description\": \"Test\",\n    \"ingredients\": \"one, dos, trois, vier\",\n    \"instructions\": \"cook and it will be ready\",\n    \"image_url\": \"http://localhost:3000/images/recipes/no-dish-placeholder.jpeg\",\n    \"video_url\": \"http://localhost:3000/images/recipes/no-video-placeholder.mp4\",\n    \"slug\": \"from-postman\",\n    \"servings\": 4,\n    \"prep_time_hours\": 0,\n    \"prep_time_minutes\": 30,\n    \"cook_time_hours\": 1,\n    \"cook_time_minutes\": 0,\n    \"calories\": 500\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -422,14 +471,14 @@
 									}
 								},
 								"url": {
-									"raw": "localhost/api/recipes/11",
+									"raw": "localhost/api/recipes/2",
 									"host": [
 										"localhost"
 									],
 									"path": [
 										"api",
 										"recipes",
-										"11"
+										"2"
 									],
 									"query": [
 										{
@@ -476,7 +525,7 @@
 									}
 								},
 								"url": {
-									"raw": "localhost/api/recipes/slug/from-postman?XDEBUG_SESSION_START=PHPSTORM",
+									"raw": "localhost/api/recipes/slug/from-postman",
 									"host": [
 										"localhost"
 									],
@@ -489,7 +538,8 @@
 									"query": [
 										{
 											"key": "XDEBUG_SESSION_START",
-											"value": "PHPSTORM"
+											"value": "PHPSTORM",
+											"disabled": true
 										}
 									]
 								}
@@ -619,14 +669,14 @@
 									}
 								],
 								"url": {
-									"raw": "localhost/api/categories/2",
+									"raw": "localhost/api/categories/1",
 									"host": [
 										"localhost"
 									],
 									"path": [
 										"api",
 										"categories",
-										"2"
+										"1"
 									],
 									"query": [
 										{
@@ -664,19 +714,20 @@
 									}
 								],
 								"url": {
-									"raw": "localhost/api/categories/7?XDEBUG_SESSION_START=PHPSTORM",
+									"raw": "localhost/api/categories/1",
 									"host": [
 										"localhost"
 									],
 									"path": [
 										"api",
 										"categories",
-										"7"
+										"1"
 									],
 									"query": [
 										{
 											"key": "XDEBUG_SESSION_START",
-											"value": "PHPSTORM"
+											"value": "PHPSTORM",
+											"disabled": true
 										}
 									]
 								}
@@ -709,7 +760,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"user_id\": 1,\n    \"title\": \"From postman\",\n    \"description\": \"Test\",\n    \"ingredients\": \"one, dos, trois, vier\",\n    \"instructions\": \"cook and it will be ready\"\n}",
+									"raw": "{\n    \"user_id\": 1,\n    \"name\": \"From postman\",\n    \"slug\": \"from-postman\",\n    \"description\": \"Test\",\n    \"ingredients\": \"one, dos, trois, vier\",\n    \"instructions\": \"cook and it will be ready\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1112,7 +1163,7 @@
 									}
 								},
 								"url": {
-									"raw": "localhost/api/ratings/8?XDEBUG_SESSION_START=PHPSTORM",
+									"raw": "localhost/api/ratings/8",
 									"host": [
 										"localhost"
 									],
@@ -1124,7 +1175,8 @@
 									"query": [
 										{
 											"key": "XDEBUG_SESSION_START",
-											"value": "PHPSTORM"
+											"value": "PHPSTORM",
+											"disabled": true
 										}
 									]
 								}
@@ -1781,7 +1833,7 @@
 									}
 								},
 								"url": {
-									"raw": "localhost/api/comments?XDEBUG_SESSION_START=PHPSTORM",
+									"raw": "localhost/api/comments",
 									"host": [
 										"localhost"
 									],
@@ -1792,7 +1844,8 @@
 									"query": [
 										{
 											"key": "XDEBUG_SESSION_START",
-											"value": "PHPSTORM"
+											"value": "PHPSTORM",
+											"disabled": true
 										}
 									]
 								}
@@ -2466,6 +2519,13 @@
 										"api",
 										"favorites",
 										"8"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION_START",
+											"value": "PHPSTORM",
+											"disabled": true
+										}
 									]
 								}
 							},
@@ -2645,6 +2705,13 @@
 							"protocol": "http",
 							"host": [
 								"localhost"
+							],
+							"query": [
+								{
+									"key": "XDEBUG_SESSION_START",
+									"value": "PHPSTORM",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -2716,6 +2783,13 @@
 							],
 							"path": [
 								"login"
+							],
+							"query": [
+								{
+									"key": "XDEBUG_SESSION_START",
+									"value": "PHPSTORM",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -2738,9 +2812,9 @@
 									"pm.collectionVariables.set(\"XSRF-TOKEN\", xsrfToken);",
 									"pm.collectionVariables.set(\"laravel_session\", laravelSession);",
 									"*/",
-									"",
 									"const token = pm.cookies.get(\"XSRF-TOKEN\")",
-									"pm.collectionVariables.set(\"XSRF-TOKEN\", token)"
+									"pm.collectionVariables.set(\"XSRF-TOKEN\", token)",
+									"pm.environment.set()"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -2762,6 +2836,13 @@
 							"path": [
 								"sanctum",
 								"csrf-cookie"
+							],
+							"query": [
+								{
+									"key": "XDEBUG_SESSION_START",
+									"value": "PHPSTORM",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -2816,6 +2897,25 @@
 							"port": "7700",
 							"path": [
 								"indexes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get task",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:7700/tasks/1237",
+							"host": [
+								"localhost"
+							],
+							"port": "7700",
+							"path": [
+								"tasks",
+								"1237"
 							]
 						}
 					},
@@ -2877,6 +2977,47 @@
 						],
 						"body": {
 							"mode": "raw",
+							"raw": "{\n    \"q\": \"\",\n    \"attributesToHighlight\": [\"title\", \"description\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:7700/indexes/:index/search",
+							"host": [
+								"localhost"
+							],
+							"port": "7700",
+							"path": [
+								"indexes",
+								":index",
+								"search"
+							],
+							"variable": [
+								{
+									"key": "index",
+									"value": "recipes"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search in recipes with facets",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
 							"raw": "{\n    \"q\": \"\",\n    \"facets\": [\n        \"preparation_time\", \"categories\"\n    ],\n    \"attributesToHighlight\": [\"title\", \"description\"]\n}",
 							"options": {
 								"raw": {
@@ -2885,15 +3026,21 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:7700/indexes/recipes/search",
+							"raw": "localhost:7700/indexes/:index/search",
 							"host": [
 								"localhost"
 							],
 							"port": "7700",
 							"path": [
 								"indexes",
-								"recipes",
+								":index",
 								"search"
+							],
+							"variable": [
+								{
+									"key": "index",
+									"value": "recipes"
+								}
 							]
 						}
 					},
@@ -2911,20 +3058,26 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:7700/indexes/recipes/search?q=ita",
+							"raw": "localhost:7700/indexes/:index/search?q=ita",
 							"host": [
 								"localhost"
 							],
 							"port": "7700",
 							"path": [
 								"indexes",
-								"recipes",
+								":index",
 								"search"
 							],
 							"query": [
 								{
 									"key": "q",
 									"value": "ita"
+								}
+							],
+							"variable": [
+								{
+									"key": "index",
+									"value": "recipes"
 								}
 							]
 						}
@@ -2943,16 +3096,22 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:7700/indexes/recipes/settings/searchable-attributes",
+							"raw": "localhost:7700/indexes/:index/settings/searchable-attributes",
 							"host": [
 								"localhost"
 							],
 							"port": "7700",
 							"path": [
 								"indexes",
-								"recipes",
+								":index",
 								"settings",
 								"searchable-attributes"
+							],
+							"variable": [
+								{
+									"key": "index",
+									"value": "recipes"
+								}
 							]
 						}
 					},
@@ -2970,23 +3129,29 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:7700/indexes/recipes/settings/filterable-attributes",
+							"raw": "localhost:7700/indexes/:index/settings/filterable-attributes",
 							"host": [
 								"localhost"
 							],
 							"port": "7700",
 							"path": [
 								"indexes",
-								"recipes",
+								":index",
 								"settings",
 								"filterable-attributes"
+							],
+							"variable": [
+								{
+									"key": "index",
+									"value": "recipes"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Get Index filterable settings Copy",
+					"name": "Get Index sortable settings",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -2997,16 +3162,22 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:7700/indexes/recipes/settings/sortable-attributes",
+							"raw": "localhost:7700/indexes/:index/settings/sortable-attributes",
 							"host": [
 								"localhost"
 							],
 							"port": "7700",
 							"path": [
 								"indexes",
-								"recipes",
+								":index",
 								"settings",
 								"sortable-attributes"
+							],
+							"variable": [
+								{
+									"key": "index",
+									"value": "recipes"
+								}
 							]
 						}
 					},
@@ -3024,16 +3195,22 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:7700/indexes/recipes/settings/",
+							"raw": "localhost:7700/indexes/:index/settings/",
 							"host": [
 								"localhost"
 							],
 							"port": "7700",
 							"path": [
 								"indexes",
-								"recipes",
+								":index",
 								"settings",
 								""
+							],
+							"variable": [
+								{
+									"key": "index",
+									"value": "recipes"
+								}
 							]
 						}
 					},
@@ -3067,10 +3244,88 @@
 							"variable": [
 								{
 									"key": "indexId",
-									"value": "testing_recipes"
+									"value": "recipes"
 								}
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create embedder",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"recipes-openai\": {\n  \t\"source\": \"openAi\",\n    \"model\": \"text-embedding-3-small\",\n    \"apiKey\": \"{{openai_api_key}}\",\n    \"documentTemplate\": \"A recipe named '{{ doc.title }}', whose description is '{{ doc.description }}', and it's prepared with '{{ doc.ingredients }}'\"\n  }\n}"
+						},
+						"url": {
+							"raw": "localhost:7700/indexes/:index/settings/embedders",
+							"host": [
+								"localhost"
+							],
+							"port": "7700",
+							"path": [
+								"indexes",
+								":index",
+								"settings",
+								"embedders"
+							],
+							"variable": [
+								{
+									"key": "index",
+									"value": "recipes"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AI powered search",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"q\": \"spicy\",\n    \"hybrid\": {\n      \"embedder\": \"recipes-openai\"\n    }\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:7700/indexes/:index/search",
+							"host": [
+								"localhost"
+							],
+							"port": "7700",
+							"path": [
+								"indexes",
+								":index",
+								"search"
+							],
+							"variable": [
+								{
+									"key": "index",
+									"value": "recipes"
+								}
+							]
+						},
+						"description": "Generated from cURL: curl \\\n  -X POST 'MEILISEARCH_URL/indexes/kitchenware/search' \\\n  -H 'content-type: application/json' \\\n  --data-binary '{\n    \"q\": \"kitchen utensils made of wood\",\n    \"hybrid\": {\n      \"embedder\": \"products-openai\"\n    }\n  }'"
 					},
 					"response": []
 				}
@@ -3379,6 +3634,11 @@
 			"key": "frontend_password",
 			"value": "",
 			"type": "string"
+		},
+		{
+			"value": "",
+			"type": "string",
+			"disabled": true
 		}
 	]
 }

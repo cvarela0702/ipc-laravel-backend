@@ -51,7 +51,18 @@ class RecipeController extends Controller
             unset($validated['categories']);
         }
 
-        Recipe::create($validated)->categories()->attach($categories);
+        // Recipe::create($validated)->categories()->attach($categories);
+        // 1. Create recipe
+        $recipe = Recipe::create($validated);
+
+        // 2. Attach categories
+        $recipe->categories()->attach($categories ?? []);
+
+        // 3. Refresh relationships
+        $recipe->load('categories');
+
+        // 4. Force re-index
+        $recipe->searchable();
 
         return response()->json($validated, 201);
     }

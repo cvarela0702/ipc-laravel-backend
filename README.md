@@ -38,6 +38,7 @@
 - Install [act](https://nektosact.com/) to run GitHub actions locally
 - Have an account with [miro](https://miro.com/)
 - Have an account with [sonarqube](https://www.sonarsource.com/products/sonarcloud/signup-free/)
+- Have an account with [pixabay](https://pixabay.com/)
 - Have a GitHub account
     - with GitHub copilot enabled
 - Have an [OpenAI key](https://auth.openai.com/log-in)
