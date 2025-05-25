@@ -91,6 +91,7 @@ act -P ubuntu-latest=shivammathur/node:latest
 
 - For the IPC only
     - Copy the postman collection from `./Recipes.postman_collection.json` and import it in your postman
+    - Copy the `RefinedPrompts.md` to somewhere else in your local machine
     - Go to the first commit
 
 ```bash
