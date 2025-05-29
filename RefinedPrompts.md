@@ -25,10 +25,14 @@ The operations that users are capable of doing are:
     - Reply to comments in recipes
 what are the models that should be created to meet those requirements?
 
+### Verification
+
+- Make sure the field for comments is called `comment` and not `content`
+- Make sure the field for ratings is called `rating` and not `star`
+
 ## skeleton
 
 I want now to create resource controllers and migrations for the given models
-
 Add all needed fields, indexes, and everything that's needed in the migration file based on the model information
 
 ### Verification
@@ -36,13 +40,11 @@ Add all needed fields, indexes, and everything that's needed in the migration fi
 - Make sure the following is in the response and they are run in the terminal
 
 ```bash
-./vendor/bin/sail artisan make:migration create_users_table
 ./vendor/bin/sail artisan make:migration create_recipes_table
 ./vendor/bin/sail artisan make:migration create_comments_table
 ./vendor/bin/sail artisan make:migration create_ratings_table
 ./vendor/bin/sail artisan make:migration create_favorites_table
 
-./vendor/bin/sail artisan make:controller UserController --resource
 ./vendor/bin/sail artisan make:controller RecipeController --resource
 ./vendor/bin/sail artisan make:controller CommentController --resource
 ./vendor/bin/sail artisan make:controller RatingController --resource
@@ -89,11 +91,19 @@ One recipe can belong to multiple categories and one category can have multiple 
 - I want to test what I have so far, to make sure that all operations are working as expected
 - help me create the tests for all controllers except user and also ignore the ones that have tests already
 - Please consider the factories that exist too
+  - create factories for all models (except user)
 
 ### Verification
 
+- Make sure factories are created for all models
 - Make sure `use RefreshDatabase;` is used
+- Make sure models use `use HasFactory;`
+- Make sure user_id is in the fillable array for all models and in the migrations
+- Make sure all paths are in `api.php` file
+- Make sure ingredients field is not an array anywhere
+- Make sure user_id is present in the validation for recipes, comments, ratings and favorites
 - Make sure phpunit.xml is properly configured
+
 
 ```php
 <php>
@@ -124,6 +134,20 @@ I want to implement now the ability to search so the application can have the ab
 
 ### Verification
 
+- Make sure this is installed:
+
+```bash
+./vendor/bin/sail composer require laravel/scout
+./vendor/bin/sail composer require meilisearch/meilisearch-php
+```
+
+- MAke sure this is run:
+
+```bash
+./vendor/bin/sail artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
+```
+
+- Use useSearchable trait in the Recipe model
 - Only for Recipe model
 - Configure scout.php file
 
@@ -139,14 +163,6 @@ I want to implement now the ability to search so the application can have the ab
             'filterableAttributes' => ['id', 'title', 'description'],
             'sortableAttributes' => ['title', 'description', 'created_at'],
         ],
-        'categories' => [
-            'filterableAttributes' => ['id', 'name'],
-            'sortableAttributes' => ['name', 'created_at'],
-        ],
-        'questions' => [
-            'filterableAttributes' => ['id', 'title', 'question'],
-            'sortableAttributes' => ['title', 'question', 'created_at'],
-        ],
     ],
 ],
 ```
@@ -155,6 +171,13 @@ I want to implement now the ability to search so the application can have the ab
 
 ```xml
 <env name="SCOUT_PREFIX" value="testing_"/>
+```
+
+- Add a test case in the controller for recipes
+- Make sure to run the tests after this
+
+```bash
+./vendor/bin/sail artisan test
 ```
 
 ## debugging-with-custom-docker
@@ -173,8 +196,8 @@ I want to implement now the ability to search so the application can have the ab
 - Add this to php.ini:
 
 ```ini
-+[xdebug]
-+xdebug.mode=${XDEBUG_MODE}
+[xdebug]
+xdebug.mode=${XDEBUG_MODE}
 ```
 
 - Add the following to .env:
@@ -186,7 +209,7 @@ SAIL_XDEBUG_MODE=develop,debug,coverage
 - Build docker images by running:
 
 ```bash
-./vendor/bin/sail build –no-cache
+./vendor/bin/sail build --no-cache
 ```
 
 - Configure bindings in PHPStorm: [your_repo_dir] -> /var/www/html
@@ -200,21 +223,27 @@ Take into consideration the Recipe model and apply the changes to the recipe con
 ### Verification
 
 Make sure:
+- Authorization uses `Gate::authorize` from `use Illuminate\Support\Facades\Gate;` (not `$this->authorize`)
 - Policies are created
 - There's no need to have an AuthServiceProvider
 - Authorization logic is in policies for operations
 - The names of the operations are the methods in the policies (update, delete)
 - Apply authorization in controllers
 - Tests are added
+- If tests fail, put "actingAs($user)"
+- Debug if something fails
+- Categories are not created / updated by customer users
+- Make sure the policies are generated for the other models too (comments, ratings, favorites), for example:
+
+```bash
+./vendor/bin/sail artisan make:policy RatingPolicy --model=Rating
+```
+
 - Run the tests
 
 ```bash
 ./vendor/bin/sail artisan test
 ```
-
-- If tests fail, put "actingAs($user)"
-- Debug if something fails
-- Categories are not created / updated by customer users
 
 ## validations
 
@@ -230,7 +259,7 @@ I want to add validation to the operations of the controllers for all the models
 
 ** Do verification first **
 
-I want to add an attribute to the categories, an image, that is required.
+I want to add an attribute to the categories, an image_url, that is required.
 I want to consider any other attributes that I need for the category.
 
 ### Verification
@@ -247,7 +276,7 @@ I want the seeder to generate real records based on those real values for recipe
 Put this as the images in the seeder:
 
 ```php
-'image' => 'http://localhost:3000/images/categories/'.Str::slug($category['name']).'.svg',
+'image' => 'http://localhost/images/categories/'.Str::slug($category['name']).'.svg',
 ```
 
 - Run the seeder
@@ -258,7 +287,7 @@ Put this as the images in the seeder:
 
 ## categories-images
 
-** For this go to pixabay.com and get the images instead **
+** For this go to https://pixabay.com and get the images instead **
 
 Categories images generation using gemini AI.
 generate an image for food category that refers to Appetizers. The image will be used in a web application.
@@ -266,7 +295,7 @@ The format has to be png or svg with transparent background. Small size.
 
 ### Verification
 
-Or go to pixabay.com to get one image instead
+Or go to https://pixabay.com to get one image instead
 
 ## recipe-more-fields
 
@@ -277,7 +306,16 @@ Add these fields to the recipes (all are numbers):
 - cook time minutes
 - servings
 - calories
+- image_url
+- slug
 Also generate a migration for them
+Make sure these files are considered:
+- Preparation time is `prep_*` for the fields (instead of `preparation_*`)
+- Model
+- migration
+- Controller for validation
+- Controller test
+- Factory
 
 ### Verification
 
@@ -305,8 +343,8 @@ Make sure these files are considered:
 I want now to create a seeder for recipes, but something that has real potential values for recipes.
 Consider all current existent fields for recipes.
 I want the seeder to generate real records based on those real values for recipes and fill their fields.
-For image_url fields, fill them with something like the following: "http://localhost/images/recipes/{slug}.jpeg"
-generate more records, to have at least eight records seeded. And also please include the associations to one or more categories
+For image_url fields, fill them with something like the following: `http://localhost/images/recipes/{slug}.jpeg`
+generate at least eight records. And also please include the associations to one or more categories
 
 ### Verification
 
@@ -314,13 +352,12 @@ Make sure:
 - At least eight records are created
 - User id is generated
 - Category ids are considered
+- Both category and recipe seeders are added to Database seeder
 - Run the migration with refresh
 
 ```bash
 ./vendor/bin/sail artisan migrate:fresh
 ```
-
-- Both category and recipe seeders are added to Database seeder
 - Run the seeder
 
 ```bash
@@ -339,14 +376,17 @@ Tests should be considered too
 ### Verification
 
 Make sure:
+- the fields are called `favorites_count`, `ratings_sum`, `ratings_count`, `ratings_avg`
+- fields exist in `toSearchableArray`
 - Tests have `actAsUser`
 - Creation records have `user_id` inside the post in the tests
 - The policies for favorites and ratings allow edition and deletions
-- the `rating_sum` and `rating_count` won't be less than 0
-- the `rating_avg` won't get division by 0
-- the `favorite_count` won't be less than 0
+- the `ratings_sum` and `ratings_count` won't be less than 0
+- the `ratings_avg` won't get division by 0
+- the `favorites_count` won't be less than 0
 - the new aggregate fields are present in the fillable attribute in the model
 - a migration is created with proper timestamp in filename
+- Make sure the tests don't have `assertEquals` for ratings and favorites
 - run migration
 
 ```bash
@@ -367,6 +407,9 @@ Given the fact that the slug is unique and the frontend would request categories
 ### Verification
 
 Make sure:
+- slug is in a migration
+- slug is in the fillable
+- slug is in the validation for store and update methods
 - tests are added too
 - route is added too
 - include "with" for ratings, favorites and comments
@@ -406,18 +449,22 @@ associations are not being persisted in the DB when using attach method
 Make sure:
 - categories are considered in Recipes controller
 - load categories in toSearch array in recipes
-- this is run in the recipe controller:
+- this is run in the recipe controller, store method
 
 ```php
-$recipe→searchable();
+// 3. Refresh relationships
+$recipe->load('categories');
+
+// 4. Force re-index
+$recipe->searchable();
 ```
 
 - associations between recipes and categories are good, with belongToMany and extra details)
-- All fields are returned in to search array, including: created_at (with timestamp), categories, image_url, preparation_time, cook_time, favorite_count, rating_count, rating_average, servings, calories
+- All fields are returned in to `toSearchableArray`, including: created_at (with timestamp), categories, image_url, preparation_time, cooking_time, favorites_count, ratings_count, ratings_avg, servings, calories
 - Configure scout to include
-    - Searchable attributes: title, description, ingredients, instructions
-    - filterable attributes: preparation_time, cooking_time, favorite_count, rating_count, rating_average, servings, calories, categories
-    - sortable attributes: title, created_at, favorite_count, rating_count, rating_average
+    - Searchable attributes: 'title', 'description', 'ingredients', 'instructions'
+    - filterable attributes: 'preparation_time', 'cooking_time', 'favorites_count', 'ratings_count', 'ratings_avg', 'servings', 'calories', 'categories'
+    - sortable attributes: 'title', 'created_at', 'favorites_count', 'ratings_count', 'ratings_avg'
     - default value for aggregated fields is 0 in the Recipe model
 - Run migrate fresh
 
@@ -453,19 +500,25 @@ Make sure:
 - user_id is used instead in the controllers when storing data for favorites and ratings:
 
 ```php
-$validated['user_id'] = auth()→user()→id;
+$validated['user_id'] = auth()->user()->id;
 ```
 
 - From recipes controller, ratings and favorites are not returned with:
 
 ```php
-->with(['favorites', 'ratings', ‘categories'])
+->with(['favorites', 'ratings', 'categories', 'comments'])
 ```
 
 - From recipes model, favorites and ratings just return records for current user by using:
 
 ```php
-->where('user_id', auth()→id());
+->where('user_id', auth()->id());
+```
+
+- Run tests
+
+```bash
+./vendor/bin/sail artisan test
 ```
 
 ## sample-data-seeder-setup
@@ -477,6 +530,7 @@ Please generate at least 7 records for each
 
 Make sure:
 - to include the seeders with the other ones for categories and recipes
+- unique records are saved in the seeders by verifying first if the record exists before saving it
 - to run seeder for ratings
 - to run seeder for favorites
 
@@ -496,7 +550,7 @@ Make sure:
 - The update and the update by slug are equal, the only difference should be the way it gets the original recipe
 - To add the route in the api.php file
 - To add a test case
-- To use sanctum middleware
+- To use sanctum middleware in the api.php file
 - Categories are in validation in the updateBySlug method
 
 ## delete-by-slug
@@ -531,28 +585,22 @@ Things to consider when adding this functionality:
 ### Verification
 
 Make sure:
-- `comments_count` is present in fillable and search array in recipe model
+- `comments_count` is present in fillable and `toSearchableArray` in recipe model
 - `comments_count` is updated in the seeder
 - `replies_count` is updated in the seeder
-- comments are filtered to return only parent comments:
-- 
+- comments are filtered to return only parent comments in the recipe model:
+
 ```php
-->where('parent_id', null)→limit(10);
+->where('parent_id', null)->limit(10);
 ```
 
 - Do not filter by user_id
 - aggregated field `comments_count` in recipe model is present
-- relationship in recipe model has this for comments:
-
-```php
-->where('user_id', auth()→id());
-```
-
 - Relationship in model for comments
 - In comments controller, the user_id is taken from session:
 
 ```php
-$validated['user_id'] = auth()→user()→id;
+$validated['user_id'] = auth()->user()->id;
 ```
 
 - show by recipe slug
